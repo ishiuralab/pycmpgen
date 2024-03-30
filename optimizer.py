@@ -5,8 +5,10 @@ import sys
 from docplex.mp.linear import LinearExpr
 from docplex.mp.model import Model
 
+
 class InfeasibleProblemError(RuntimeError):
     pass
+
 
 class Optimizer:
     def __init__(self, prob, objective=None):
@@ -39,12 +41,10 @@ class Optimizer:
         if data:
             print(data.objective_value, file=sys.stderr)
             sol = {
-                'stages': [
-                    [0 for _ in range(self.colnum)]
-                    for _ in range(self.stagenum + 1)],
+                'stages': [[0 for _ in range(self.colnum)] for _ in range(self.stagenum + 1)],
                 'gpcusage': [
-                    [[0 for _ in range(len(self.gpclist))]
-                     for _ in range(self.colnum)] for _ in range(self.stagenum)]
+                    [[0 for _ in range(len(self.gpclist))] for _ in range(self.colnum)] for _ in range(self.stagenum)
+                ],
             }
             for stg in range(self.stagenum + 1):
                 for col in range(self.colnum):
@@ -52,8 +52,7 @@ class Optimizer:
             for stg in range(self.stagenum):
                 for col in range(self.colnum):
                     for idx, gpc in enumerate(self.gpclist):
-                        sol['gpcusage'][stg][col][idx] = \
-                            round(self.gpcusage[stg][col][idx].solution_value)
+                        sol['gpcusage'][stg][col][idx] = round(self.gpcusage[stg][col][idx].solution_value)
             return sol
         else:
             raise InfeasibleProblemError('No solution found for the problem and configuration.')
@@ -61,13 +60,13 @@ class Optimizer:
     def init_variables(self):
         self.stages = []
         for stg in range(self.stagenum + 1):
-            self.stages.append(
-                self.model.integer_var_list(self.colnum, lb=0, ub=self.rowlimit, name=f's{stg}'))
+            self.stages.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.rowlimit, name=f's{stg}'))
         self.gpcusage = [[] for stg in range(self.stagenum)]
         for stg in range(self.stagenum):
             for col in range(self.colnum):
                 self.gpcusage[stg].append(
-                    self.model.integer_var_list(len(self.gpclist), lb=0, ub=self.gpclimit, name=f'g{stg}_{col}'))
+                    self.model.integer_var_list(len(self.gpclist), lb=0, ub=self.gpclimit, name=f'g{stg}_{col}')
+                )
 
     def add_constraint_src(self):
         for col in range(self.colnum):
@@ -110,21 +109,23 @@ class Optimizer:
                                 expr += self.gpcusage[stg][col][idx]
             self.model.minimize(expr)
 
+
 if __name__ == '__main__':
     import problem
     import compressor
     import json
-    #prob = problem.multiplier.Multiplier(16, 6, 1)
-    #prob = problem.multiplier.Multiplier(32, 6, 2)
-    #prob = problem.multiplier.Multiplier(64, 6, 3)
-    #prob = problem.multiplier.Multiplier(128, 6, 4)
-    #prob = problem.multiplier.Multiplier(256, 6, 5)
 
-    #prob = problem.popcounter.Popcounter(32, 2, 6)
-    #prob = problem.popcounter.Popcounter(1024, 6, 4)
-    #prob = problem.popcounter.Popcounter(2048, 6, 5)
-    #prob = problem.popcounter.Popcounter(4096, 6, 6)
-    #prob = problem.popcounter.Popcounter(8192, 6, 6)
+    # prob = problem.multiplier.Multiplier(16, 6, 1)
+    # prob = problem.multiplier.Multiplier(32, 6, 2)
+    # prob = problem.multiplier.Multiplier(64, 6, 3)
+    # prob = problem.multiplier.Multiplier(128, 6, 4)
+    # prob = problem.multiplier.Multiplier(256, 6, 5)
+
+    # prob = problem.popcounter.Popcounter(32, 2, 6)
+    # prob = problem.popcounter.Popcounter(1024, 6, 4)
+    # prob = problem.popcounter.Popcounter(2048, 6, 5)
+    # prob = problem.popcounter.Popcounter(4096, 6, 6)
+    # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
     prob = problem.neuron.Neuron(14, 2, 2)
     print(prob.get_dict())
@@ -136,4 +137,4 @@ if __name__ == '__main__':
     sol = opt.solve()
     comp = compressor.Compressor(prob.get_dict(), sol)
     print(json.dumps(comp.netlist))
-    print('PASS' if comp.randomtest(1<<10) else 'FAIL')
+    print('PASS' if comp.randomtest(1 << 10) else 'FAIL')

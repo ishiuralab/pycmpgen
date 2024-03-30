@@ -3,6 +3,7 @@
 import json
 from . import problem
 
+
 class Popcounter(problem.Problem):
     def __init__(self, size, dstlimit, stagenum):
         super().__init__()
@@ -13,6 +14,7 @@ class Popcounter(problem.Problem):
         self.gpclimit = size
         self.rowlimit = size
         self.validate()
+
 
 if __name__ == '__main__':
     sq = Popcounter(1024, 6, 4)

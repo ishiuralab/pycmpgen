@@ -3,6 +3,7 @@
 import json
 from . import problem
 
+
 class Square(problem.Problem):
     def __init__(self, size, dstlimit, stagenum):
         super().__init__()
@@ -14,6 +15,7 @@ class Square(problem.Problem):
         self.rowlimit = size
         self.validate()
 
+
 if __name__ == '__main__':
     sq = Square(32, 6, 4)
-    print(json.dumps(sq.get_dict()))    
+    print(json.dumps(sq.get_dict()))

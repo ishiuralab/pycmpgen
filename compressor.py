@@ -4,15 +4,19 @@ import copy
 import sys
 import random
 
+
 def int2bin(num, width):
     return [int(num & (1 << i) != 0) for i in range(width)]
+
 
 def emulate_gpc(gpc, srcbits):
     total = sum([sum(colbits) << place for place, colbits in enumerate(srcbits)])
     return [[c] for c in int2bin(total, len(gpc['dst']))]
 
+
 def indent(num):
-    return '   '*num
+    return '   ' * num
+
 
 class Compressor:
     def __init__(self, prob, sol):
@@ -53,7 +57,7 @@ class Compressor:
                                 if dststage[col + place] < self.stages[stg + 1][col + place]:
                                     dst[place][i] = (stg + 1, col + place, dststage[col + place])
                                     dststage[col + place] += 1
-                    netlist.append({'src':src, 'dst':dst, 'idx':idx})
+                    netlist.append({'src': src, 'dst': dst, 'idx': idx})
         return netlist, srcstage, dststage
 
     def build_stage_wire(self, stg, srcstage, dststage):
@@ -67,13 +71,12 @@ class Compressor:
                 src = [[(stg, col, i)]]
                 dst = [[(stg + 1, col, dststage[col])]]
                 dststage[col] += 1
-                netlist.append({'src':src, 'dst':dst, 'idx':wireidx})
+                netlist.append({'src': src, 'dst': dst, 'idx': wireidx})
         self.stages[stg + 1] = dststage
         return netlist
 
     def simulate(self, srcbits):
-        stagebits = [[[0 for _ in range(col)] for col in stage]
-                     for stage in self.stages]
+        stagebits = [[[0 for _ in range(col)] for col in stage] for stage in self.stages]
         stagebits[0] = srcbits
         for instance in self.netlist:
             src = instance['src']
@@ -119,7 +122,7 @@ class Compressor:
                 'stages': self.stages,
                 'gpcusage': self.gpcusage,
                 'netlist': self.netlist,
-            }
+            },
         }
 
     def gen_module(self, name='compressor'):
@@ -140,7 +143,7 @@ class Compressor:
             if rownum > 0:
                 outputargs.append(f'output wire [{rownum-1}:0] dst{col}')
         inputstr = f',\n{indent(2)}'.join(inputargs)
-        outputstr =f',\n{indent(2)}'.join(outputargs)
+        outputstr = f',\n{indent(2)}'.join(outputargs)
         return f'\n{indent(2)}{inputstr},\n{indent(2)}{outputstr}'
 
     def gen_wire_decralations(self, indentlevel=1):
@@ -186,11 +189,12 @@ class Compressor:
             dststr = f'{{{",".join(reversed(dstargs))}}}'
             code += indent(indentlevel) + f'{self.gpclist[instance["idx"]]["module"]} '
             code += f'gpc{index} (\n'
-            code += indent(indentlevel+1) + srcstr + ',\n'
-            code += indent(indentlevel+1) + dststr + '\n'
+            code += indent(indentlevel + 1) + srcstr + ',\n'
+            code += indent(indentlevel + 1) + dststr + '\n'
             code += indent(indentlevel) + ');\n'
         return code
-    
+
+
 if __name__ == '__main__':
     from problem.popcounter import Popcounter
     from problem.multiplier import Multiplier
@@ -198,12 +202,12 @@ if __name__ == '__main__':
     import json
 
     prob = Popcounter(1024, 6, 4)
-    #prob = Multiplier(128, 6, 4)
-    opt  = Optimizer(prob.get_dict(), objective=None)
-    sol  = opt.solve()
-    opt  = Optimizer(prob.get_dict(), objective='cost')
+    # prob = Multiplier(128, 6, 4)
+    opt = Optimizer(prob.get_dict(), objective=None)
+    sol = opt.solve()
+    opt = Optimizer(prob.get_dict(), objective='cost')
     opt.add_mip_start(sol)
-    sol  = opt.solve(timelimit=1200)
+    sol = opt.solve(timelimit=1200)
     comp = Compressor(prob.get_dict(), sol)
-    print('PASS' if comp.randomtest(1<<10) else 'FAIL', file=sys.stderr)
+    print('PASS' if comp.randomtest(1 << 10) else 'FAIL', file=sys.stderr)
     print(comp.gen_module())
