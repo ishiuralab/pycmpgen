@@ -5,8 +5,8 @@ from . import problem
 
 
 class Popcounter(problem.Problem):
-    def __init__(self, size, dstlimit, stagenum):
-        super().__init__()
+    def __init__(self, size, dstlimit, stagenum, gpclist=problem.default_gpclist):
+        super().__init__(gpclist)
         self.stagenum = stagenum
         self.colnum = size.bit_length()
         self.src = [size] + [0] * (self.colnum - 1)

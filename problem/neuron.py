@@ -4,8 +4,8 @@ from . import problem
 
 
 class Neuron(problem.Problem):
-    def __init__(self, size, dstlimit, stagenum):
-        super().__init__()
+    def __init__(self, size, dstlimit, stagenum, gpclist=problem.default_gpclist):
+        super().__init__(gpclist)
         self.stagenum = stagenum
         self.colnum = size.bit_length()
         self.src = [0 for _ in range(self.colnum)]
