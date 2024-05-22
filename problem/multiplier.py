@@ -5,8 +5,8 @@ from . import problem
 
 
 class Multiplier(problem.Problem):
-    def __init__(self, size, dstlimit, stagenum):
-        super().__init__()
+    def __init__(self, size, dstlimit, stagenum, gpclist=problem.default_gpclist):
+        super().__init__(gpclist)
         self.stagenum = stagenum
         self.colnum = (((1 << size) - 1) ** 2).bit_length()
         self.src = list(range(1, size + 1)) + list(range(size - 1, 0, -1)) + [0] * (self.colnum - (size * 2 - 1))

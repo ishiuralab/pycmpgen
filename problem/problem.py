@@ -26,9 +26,9 @@ default_gpclist = [
 
 
 class Problem:
-    def __init__(self):
+    def __init__(self, gpclist=default_gpclist):
         self.stagenum = 0
-        self.gpclist = default_gpclist
+        self.gpclist = gpclist
         self.colnum = 0
         self.src = []
         self.dst = []
