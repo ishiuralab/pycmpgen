@@ -17,9 +17,9 @@ def presolve(probname, probclass):
                 prob = probclass(size, 2, stage, gpclist)
                 try:
                     opt = Optimizer(prob.get_dict(), objective=None)
-                    sol = opt.solve(timelimit=10)
+                    sol = opt.solve(timelimit=7200)
                     end = time.time()
-                    with open(f'results/presolve_{name}_{probname}_{size}_{stage}.json', 'w') as f:
+                    with open(f'results/7200/presolve_{name}_{probname}_{size}_{stage}.json', 'w') as f:
                         print(
                             json.dumps({'problem': prob.get_dict(), 'solution': sol, 'time': end - begin}),
                             file=f
