@@ -10,6 +10,21 @@ class InfeasibleProblemError(RuntimeError):
     pass
 
 
+def extend_gpclist(sol, num):
+    stagenum = len(sol['gpcusage'])
+    colnum = len(sol['gpcusage'][0])
+    gpcnum = len(sol['gpcusage'][0][0])
+    gpcusage = [
+        [
+            [sol['gpcusage'][stg][col][idx] if idx < gpcnum else 0 for idx in range(gpcnum + num)]
+            for col in range(colnum)
+        ]
+        for stg in range(stagenum)
+    ]
+    stages = sol['stages'][:]
+    return {'stages': stages, 'gpcusage': gpcusage}
+
+
 class Optimizer:
     def __init__(self, prob, objective=None):
         for key, value in prob.items():
@@ -115,11 +130,14 @@ if __name__ == '__main__':
     import compressor
     import json
 
+    with open('gpclist/default.json', 'r') as f:
+        default = json.loads(f.read())
+
     with open('gpclist/noda_mt.json', 'r') as f:
-        gpclist = json.loads(f.read())
+        noda_mt = json.loads(f.read())
 
     # prob = problem.multiplier.Multiplier(16, 6, 1)
-    # prob = problem.multiplier.Multiplier(32, 6, 2)
+    prob = problem.multiplier.Multiplier(32, 6, 2, default)
     # prob = problem.multiplier.Multiplier(64, 6, 3)
     # prob = problem.multiplier.Multiplier(128, 6, 4)
     # prob = problem.multiplier.Multiplier(256, 6, 5)
@@ -130,14 +148,20 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
-    prob = problem.neuron.Neuron(14, 2, 2, gpclist)
+    # prob = problem.neuron.Neuron(14, 2, 2, default)
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
 
     opt = Optimizer(prob.get_dict(), objective='cost')
     opt.add_mip_start(sol)
-    sol = opt.solve()
+    sol = opt.solve(10)
+
+    prob = problem.multiplier.Multiplier(32, 6, 2, noda_mt)
+    opt = Optimizer(prob.get_dict(), objective='cost')
+    opt.add_mip_start(extend_gpclist(sol, len(noda_mt) - len(default)))
+    sol = opt.solve(10)
+    
     comp = compressor.Compressor(prob.get_dict(), sol)
     print(json.dumps(comp.netlist))
     print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
