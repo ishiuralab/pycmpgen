@@ -127,14 +127,15 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
-    prob = problem.neuron.Neuron(14, 2, 2)
+    # prob = problem.neuron.Neuron(14, 2, 2)
+    prob = problem.rectangle.Rectangle(128, 12, 2, 5)
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
 
     opt = Optimizer(prob.get_dict(), objective='cost')
     opt.add_mip_start(sol)
-    sol = opt.solve()
+    sol = opt.solve(120)
     comp = compressor.Compressor(prob.get_dict(), sol)
     print(json.dumps(comp.netlist))
     print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
