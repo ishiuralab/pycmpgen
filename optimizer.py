@@ -115,6 +115,9 @@ if __name__ == '__main__':
     import compressor
     import json
 
+    with open('gpclist/noda_mt.json', 'r') as f:
+        gpclist = json.loads(f.read())
+
     # prob = problem.multiplier.Multiplier(16, 6, 1)
     # prob = problem.multiplier.Multiplier(32, 6, 2)
     # prob = problem.multiplier.Multiplier(64, 6, 3)
@@ -127,8 +130,12 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
+
     # prob = problem.neuron.Neuron(14, 2, 2)
-    prob = problem.rectangle.Rectangle(128, 12, 2, 5)
+    prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
+
+    # prob = problem.neuron.Neuron(14, 2, 2, gpclist)
+
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()

@@ -203,9 +203,15 @@ if __name__ == '__main__':
     import json
 
 
+
     # prob = Popcounter(1024, 6, 4)
+    with open('gpclist/default.json', 'r') as f:
+        gpclist = json.loads(f.read())
+
+
+    # prob = Popcounter(1024, 6, 4, gpclist)
     # prob = Multiplier(128, 6, 4)
-    prob = Rectangle(16, 4, 2, 3)
+    prob = Rectangle(16, 4, 2, 3, gpclist)
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
     opt = Optimizer(prob.get_dict(), objective='cost')
