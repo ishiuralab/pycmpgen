@@ -3,6 +3,8 @@
 import sys
 import json
 import time
+import os
+import re
 
 from optimizer import Optimizer, InfeasibleProblemError
 import problem
@@ -29,6 +31,34 @@ def presolve(probname, probclass):
                 except InfeasibleProblemError:
                     print(f'size: {size}, stage: {stage}, time: {time.time() - begin:.3f}', file=sys.stderr)
 
+def optimize(filename):
+    with open(filename, 'r') as f:
+        presolve = json.loads(f.read())
+    prob = presolve['problem']
+    feasible = presolve['solution']
+    presolve_time = presolve['time']
+    opt = Optimizer(prob, objective='cost')
+    opt.add_mip_start(feasible)
+    begin = time.time()
+    optimized = opt.solve(timelimit=7200)
+    end = time.time()
+    return {
+        'problem': prob,
+        'solution': optimized,
+        'time': {
+            'presolve': presolve_time,
+            'optimize': end - begin
+        }
+    }
+
+def optimize_all(src, dst):
+    entries = sorted(os.listdir(src))
+    for entry in entries:
+        if match := re.match(r'^presolve_(.+\.json)$', entry):
+            optimized = optimize(f'{src}/{entry}')
+            basename = match.group(1)
+            with open(f'{dst}/optimized_{basename}', 'w') as f:
+                print(json.dumps(optimized), file=f)
+
 if __name__ == '__main__':
-    presolve(probname = 'multiplier', probclass = problem.multiplier.Multiplier)
-    presolve(probname = 'square', probclass = problem.square.Square)
+    optimize_all('./results/2116', './results/optimized2116')
