@@ -161,7 +161,7 @@ class Compressor:
                 code += f'{indent(indentlevel)}assign stage{0}_{col} = src{col};\n'
         for col, rownum in enumerate(self.stages[-1]):
             if rownum > 0:
-                code += f'{indent(indentlevel)}assign stage{self.stagenum}_{col} = dst{col};\n'
+                code += f'{indent(indentlevel)}assign dst{col} = stage{self.stagenum}_{col};\n'
         return code
 
     def gen_gpc_instantiations(self, indentlevel=1):
@@ -198,20 +198,25 @@ class Compressor:
 if __name__ == '__main__':
     from problem.popcounter import Popcounter
     from problem.multiplier import Multiplier
+    from problem.rectangle import Rectangle
     from optimizer import Optimizer
     import json
 
+
+
+    # prob = Popcounter(1024, 6, 4)
     with open('gpclist/default.json', 'r') as f:
         gpclist = json.loads(f.read())
 
 
-    prob = Popcounter(1024, 6, 4, gpclist)
+    # prob = Popcounter(1024, 6, 4, gpclist)
     # prob = Multiplier(128, 6, 4)
+    prob = Rectangle(16, 4, 2, 3, gpclist)
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
     opt = Optimizer(prob.get_dict(), objective='cost')
     opt.add_mip_start(sol)
-    sol = opt.solve(timelimit=1200)
+    sol = opt.solve(timelimit=120)
     comp = Compressor(prob.get_dict(), sol)
     print('PASS' if comp.randomtest(1 << 10) else 'FAIL', file=sys.stderr)
     print(comp.gen_module())
