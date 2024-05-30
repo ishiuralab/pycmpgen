@@ -114,11 +114,15 @@ if __name__ == '__main__':
     import problem
     import compressor
     import json
+    import time
 
-    with open('gpclist/noda_mt.json', 'r') as f:
+    with open('gpclist/noda_mt_2116.json', 'r') as f:
         gpclist = json.loads(f.read())
 
+    prob = problem.square.Square(23, 2, 3, gpclist)
+
     # prob = problem.multiplier.Multiplier(16, 6, 1)
+    # prob = problem.multiplier.Multiplier(26, 2, 3, gpclist)
     # prob = problem.multiplier.Multiplier(32, 6, 2)
     # prob = problem.multiplier.Multiplier(64, 6, 3)
     # prob = problem.multiplier.Multiplier(128, 6, 4)
@@ -130,14 +134,23 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
-    prob = problem.neuron.Neuron(14, 2, 2, gpclist)
+    # prob = problem.neuron.Neuron(14, 2, 2, gpclist)
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)
+    begin = time.time()
     sol = opt.solve()
+    end = time.time()
 
-    opt = Optimizer(prob.get_dict(), objective='cost')
-    opt.add_mip_start(sol)
-    sol = opt.solve()
-    comp = compressor.Compressor(prob.get_dict(), sol)
-    print(json.dumps(comp.netlist))
-    print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
+    with open('presolve_noda_mt_square_23_3.json', 'w') as f:
+        print(
+            json.dumps({'problem': prob.get_dict(), 'solution': sol, 'time': end - begin}),
+            file=f
+        )
+
+
+    # opt = Optimizer(prob.get_dict(), objective='cost')
+    # opt.add_mip_start(sol)
+    # sol = opt.solve()
+    # comp = compressor.Compressor(prob.get_dict(), sol)
+    # print(json.dumps(comp.netlist))
+    # print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
