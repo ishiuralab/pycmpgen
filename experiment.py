@@ -40,7 +40,7 @@ def optimize(filename):
     opt = Optimizer(prob, objective='cost')
     opt.add_mip_start(feasible)
     begin = time.time()
-    optimized = opt.solve(timelimit=7200)
+    optimized = opt.solve(timelimit=10)
     end = time.time()
     return {
         'problem': prob,
@@ -48,17 +48,16 @@ def optimize(filename):
         'time': {
             'presolve': presolve_time,
             'optimize': end - begin
-        }
+        },
+        'objective': opt.objective_value
     }
 
-def optimize_all(src, dst):
-    entries = sorted(os.listdir(src))
-    for entry in entries:
-        if match := re.match(r'^presolve_(.+\.json)$', entry):
-            optimized = optimize(f'{src}/{entry}')
-            basename = match.group(1)
-            with open(f'{dst}/optimized_{basename}', 'w') as f:
-                print(json.dumps(optimized), file=f)
+def optimize_helper(src):
+    if match := re.match(r'^results/2116/presolve_(.+\.json)$', src):
+        optimized = optimize(src)
+        basename = match.group(1)
+        with open(f'results/optimized2116/optimized_{basename}', 'w') as f:
+            print(json.dumps(optimized), file=f)
 
 if __name__ == '__main__':
-    optimize_all('./results/2116', './results/optimized2116')
+    optimize_helper(sys.argv[1])

@@ -40,6 +40,7 @@ class Optimizer:
         data = self.model.solve()
         if data:
             print(data.objective_value, file=sys.stderr)
+            self.objective_value = round(data.objective_value)
             sol = {
                 'stages': [[0 for _ in range(self.colnum)] for _ in range(self.stagenum + 1)],
                 'gpcusage': [
