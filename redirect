@@ -1,0 +1,4 @@
+for i in (cat rowcol)
+	echo $i | read -a rc
+	./compressor2_1test.py $rc[1] $rc[2]
+end
