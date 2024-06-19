@@ -3,29 +3,39 @@
 import sys
 import os
 import json
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from compressor import Compressor
 from problem.rectangle import Rectangle
-from optimizer import Optimizer
+from optimizer import Optimizer, InfeasibleProblemError
 from rowadder2_1gen import Rowadder2_1Gen
 
 
 class Compressor2_1:
-    def __init__(self, row, col, stage, gpclist=None):
+    def __init__(self, row, col, gpclist=None):
         self.row = row
         self.col = col
         self.dst_length = (row - 1).bit_length() + col
         self.module_name = f'compressor2_1_{self.row}_{self.col}'
         self.indent = '    '
-        prob = Rectangle(row, col, 2, stage, gpclist)
-        opt = Optimizer(prob.get_dict(), objective=None)
-        sol = opt.solve(timelimit=1000)
+        begin = time.time()
+        for stage in range(1, 10):
+            try:
+                prob = Rectangle(row, col, 2, stage, gpclist)
+                opt = Optimizer(prob.get_dict(), objective=None)
+                sol = opt.solve(timelimit=7200)
+            except InfeasibleProblemError:
+                pass
+        presolve_elapsed = time.time() - begin
+        begin = time.time()
         opt = Optimizer(prob.get_dict(), objective='cost')
         opt.add_mip_start(sol)
-        sol = opt.solve(timelimit=1800)
+        sol = opt.solve(timelimit=7200)
+        optimize_elapsed = time.time() - begin
         with open(f'comp2_1_{row}_{col}_{stage}.json', 'w') as f:
-            print(json.dumps({'problem': prob.get_dict(), 'solution': sol}),file=f)
+            print(json.dumps({'problem': prob.get_dict(), 'solution': sol, 
+                              'presolve':presolve_elapsed, 'optimize' : optimize_elapsed}),file=f)
         self.comp = Compressor(prob.get_dict(), sol)
         self.comp_outs = []
         for i, size in enumerate(self.comp.stages[-1]):

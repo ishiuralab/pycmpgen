@@ -152,17 +152,15 @@ if __name__=='__main__':
     import json
     from optimizer import InfeasibleProblemError
     import time
-    row, col, stage = map(int,sys.argv[1:4])
+    row, col = map(int,sys.argv[1:])
     seed_velue = 0
-    if len(sys.argv) > 4:
-        seed_velue = int(sys.argv[4])
     random.seed(seed_velue)
     with open('gpclist/default.json', 'r') as f:
         gpclist = json.loads(f.read())
-    comp2_1 = Compressor2_1(row, col, stage, gpclist)
+    comp2_1 = Compressor2_1(row, col, gpclist)
     comp2_1shift = Comp2_1Shiftregister(comp2_1)
     comp2_1t = Compressor2_1Test(comp2_1)
-    with open(f'comp2_1_{row}_{col}_{stage}.v', 'w') as f:
+    with open(f'comp2_1_{row}_{col}.v', 'w') as f:
         print(comp2_1shift.gen_module(),file=f)
         print(comp2_1.gen_module(),file=f)
         print(comp2_1t.gen_module(),file=f)
