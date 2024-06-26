@@ -1,0 +1,14 @@
+[
+    {"src": [3],          "dst": [1, 1],          "cost": 1, "module": "gpc3_2"},
+    {"src": [7],          "dst": [1, 1, 1],       "cost": 2, "module": "gpc7_3"},
+    {"src": [5, 1],       "dst": [1, 1, 1],       "cost": 2, "module": "gpc15_3"},
+    {"src": [4, 4],       "dst": [1, 1, 1, 1],    "cost": 3, "module": "gpc44_4"},
+    {"src": [7, 1 ,1],    "dst": [1, 1, 1, 1],    "cost": 3, "module": "gpc117_4"},
+    {"src": [6, 2, 1],    "dst": [1, 1, 1, 1],    "cost": 3, "module": "gpc126_4"},
+    {"src": [5, 3, 1],    "dst": [1, 1, 1, 1],    "cost": 3, "module": "gpc135_4"},
+    {"src": [5, 2, 4],    "dst": [1, 1, 1, 1, 1], "cost": 4, "module": "gpc425_5"},
+    {"src": [4, 4, 2, 1], "dst": [1, 1, 1, 1, 1], "cost": 4, "module": "gpc1244_5"},
+    {"src": [6, 1, 3, 1], "dst": [1, 1, 1, 1, 1], "cost": 4, "module": "gpc1316_5"},
+    {"src": [5, 2, 3, 1], "dst": [1, 1, 1, 1, 1], "cost": 4, "module": "gpc1325_5"},
+    {"src": [4, 3, 3, 1], "dst": [1, 1, 1, 1, 1], "cost": 4, "module": "gpc1334_5"}
+]
