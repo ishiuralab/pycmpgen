@@ -6,13 +6,14 @@ from docplex.mp.model import Model
 
 from optimizer import InfeasibleProblemError, Optimizer
 
+
 class ChainedOptimizer(Optimizer):
     def build_model(self, objective):
         self.model = Model(name='chained_optimizer')
         self.init_variables()
         self.add_constraint_src()
         self.add_constraint_dst()
-        self.add_constraint_chain_boundaries()
+        self.add_constraint_chains()
         self.add_constraint_gpc_input()
         self.add_constraint_gpc_output()
         self.add_objective(objective)
@@ -33,20 +34,17 @@ class ChainedOptimizer(Optimizer):
         for stg in range(self.stagenum):
             self.wireusage.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.rowlimit, name=f'w{stg}'))
 
-        self.chain_boundaries = []
+        self.chains = []
         for stg in range(self.stagenum):
-            self.chain_boundaries.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.gpclimit, name=f'b{stg}'))
+            self.chains.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.gpclimit, name=f'b{stg}'))
 
-    def add_constraint_chain_boundaries(self):
-        for stg in range(self.stagenum):
-            self.model.add_constraint(self.chain_boundaries[stg][0] == 0)
-
+    def add_constraint_chains(self):
         for stg in range(self.stagenum):
             for col in range(self.colnum):
                 expr = self.model.linear_expr()
                 for idx, gpc in enumerate(self.gpclist):
                     expr += self.gpcusage[stg][col][idx]
-                self.model.add_constraint(expr >= self.chain_boundaries[stg][col])
+                self.model.add_constraint(expr >= self.chains[stg][col])
 
         for stg in range(self.stagenum):
             for col in range(self.colnum):
@@ -55,14 +53,14 @@ class ChainedOptimizer(Optimizer):
                     gpcwidth = len(gpc['dst']) - 1
                     if col - gpcwidth >= 0:
                         expr += self.gpcusage[stg][col - gpcwidth][idx]
-                self.model.add_constraint(expr >= self.chain_boundaries[stg][col])
+                self.model.add_constraint(expr >= self.chains[stg][col])
 
     def add_constraint_gpc_input(self):
         for stg in range(self.stagenum):
             for col in range(self.colnum):
                 expr = self.model.linear_expr()
                 expr += self.wireusage[stg][col]
-                expr -= self.chain_boundaries[stg][col]
+                expr -= self.chains[stg][col]
                 for idx, gpc in enumerate(self.gpclist):
                     for c, row in enumerate(gpc['src']):
                         if col - c >= 0:
@@ -74,7 +72,7 @@ class ChainedOptimizer(Optimizer):
             for col in range(self.colnum):
                 expr = self.model.linear_expr()
                 expr += self.wireusage[stg][col]
-                expr -= self.chain_boundaries[stg][col]
+                expr -= self.chains[stg][col]
                 for idx, gpc in enumerate(self.gpclist):
                     for c, row in enumerate(gpc['dst']):
                         if col - c >= 0:
@@ -93,12 +91,8 @@ class ChainedOptimizer(Optimizer):
                 'gpcusage': [
                     [[0 for _ in range(len(self.gpclist))] for _ in range(self.colnum)] for _ in range(self.stagenum)
                 ],
-                'wireusage': [
-                    [0 for _ in range(self.colnum)] for _ in range(self.stagenum)
-                ],
-                'chain_boundaries': [
-                    [0 for _ in range(self.colnum)] for _ in range(self.stagenum)
-                ]
+                'wireusage': [[0 for _ in range(self.colnum)] for _ in range(self.stagenum)],
+                'chains': [[0 for _ in range(self.colnum)] for _ in range(self.stagenum)],
             }
             for stg in range(self.stagenum + 1):
                 for col in range(self.colnum):
@@ -112,10 +106,11 @@ class ChainedOptimizer(Optimizer):
                     sol['wireusage'][stg][col] = round(self.wireusage[stg][col].solution_value)
             for stg in range(self.stagenum):
                 for col in range(self.colnum):
-                    sol['chain_boundaries'][stg][col] = round(self.chain_boundaries[stg][col].solution_value)
+                    sol['chains'][stg][col] = round(self.chains[stg][col].solution_value)
             return sol
         else:
             raise InfeasibleProblemError('No solution found for the problem and configuration.')
+
 
 if __name__ == '__main__':
     import problem
@@ -123,16 +118,17 @@ if __name__ == '__main__':
     import json
 
     with open(f'gpclist/reduced.json') as f:
+        # with open(f'gpclist/reduced_conventional.json') as f:
         gpclist = json.loads(f.read())
 
-    prob = problem.multiplier.Multiplier(7, 1, 2, gpclist)
-    # prob = problem.rectangle.Rectangle(12, 32, 1, 3, gpclist)
+    # prob = problem.multiplier.Multiplier(7, 1, 2, gpclist)
+    # prob = problem.rectangle.Rectangle(12, 32, 2, 2, gpclist)
     # prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
     # prob = problem.multiplier.Multiplier(18, 2, 2, gpclist)
-    # prob = problem.multiplier.Multiplier(64, 2, 4, gpclist)
+    prob = problem.multiplier.Multiplier(54, 2, 3, gpclist)
     # prob = problem.multiplier.Multiplier(128, 6, 3, gpclist)
 
-    opt = ChainedOptimizer(prob.get_dict(), objective='cost')
+    opt = ChainedOptimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
     print(sol)
     for stg, stage in enumerate(sol['gpcusage']):
@@ -144,7 +140,7 @@ if __name__ == '__main__':
         for col, num in enumerate(stage):
             if num > 0:
                 print(stg, col, 'wire', num)
-    for stg, stage in enumerate(sol['chain_boundaries']):
+    for stg, stage in enumerate(sol['chains']):
         for col, num in enumerate(stage):
             if num > 0:
                 print(stg, col, 'chain', num)
