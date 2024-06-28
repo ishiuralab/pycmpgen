@@ -16,46 +16,29 @@ class ChainedCompressor(Compressor):
             self.build_stage(stg)
 
     def build_stage(self, stg):
-        gpcs = self.build_gpc_chains(stg)
-        print(gpcs)
+        stage_chains = self.build_gpc_chains(stg)
+        print(stage_chains)
 
     def build_gpc_chains(self, stg):
         gpcusage = copy.deepcopy(self.gpcusage[stg])
         chains = copy.deepcopy(self.chains[stg])
 
         def build_chain(start):
-            dp = [(i, 0, None) for i in range(self.colnum)]
-            que = deque([start])
-            upmost = start
-            while len(que):
-                src = que.popleft()
-                prev, plen, _ = dp[src]
-                for idx, gpc in enumerate(self.gpclist):
-                    if gpcusage[src][idx] > 0:
-                        width = len(gpc['dst'])
-                        dst = min(src + width - 1, self.colnum - 1)
-                        _, nplen, _ = dp[dst]
-                        if plen + 1 > nplen:
-                            dp[dst] = src, plen + 1, idx
-                            if chains[dst] > 0 and dst < self.colnum - 1:
-                                que.append(dst)
-                            else:
-                                upmost = max(upmost, dst)
-            if upmost == start:
-                _, _, idx = dp[upmost]
-                gpcusage[start][idx] -= 1
-                return None
-            upper = upmost
             path = []
-            idx = None
-            while upper != start:
-                lower, _, idx = dp[upper]
-                path.append(idx)
-                gpcusage[lower][idx] -= 1
-                chains[upper] -= 1
-                upper = lower
-            return start, path[::-1]
-
+            que = deque([start])
+            while que:
+                src = que.popleft()
+                for idx, num in enumerate(gpcusage[src]):
+                    if num > 0:
+                        path.append((src, self.gpclist[idx]['module']))
+                        gpcusage[src][idx] -= 1
+                        width = len(self.gpclist[idx]['dst']) - 1
+                        dst = min(self.colnum - 1, src + width)
+                        if chains[dst] > 0:
+                            chains[dst] -= 1
+                            que.append(dst)
+                        break
+            return path
         gpcs = []
         for col in range(self.colnum):
             while sum(gpcusage[col]) > 0:
