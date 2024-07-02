@@ -134,7 +134,6 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
-
     # prob = problem.neuron.Neuron(14, 2, 2)
     prob = problem.rectangle.Rectangle(4, 4, 2, 1, gpclist)
 
