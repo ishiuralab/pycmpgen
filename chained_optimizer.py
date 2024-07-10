@@ -4,11 +4,18 @@ import sys
 from docplex.mp.linear import LinearExpr
 from docplex.mp.model import Model
 
-from optimizer import InfeasibleProblemError, Optimizer
+from optimizer import InfeasibleProblemError, InvalidProblemError, Optimizer
 
 
 class ChainedOptimizer(Optimizer):
     def build_model(self, objective):
+        for gpc in self.gpclist:
+            if set(gpc['dst']) != {1} or len(gpc['src']) == len(gpc['dst']):
+                raise InvalidProblemError('GPC must be Carrychain-based')
+            if not gpc.get('spec', None):
+                raise InvalidProblemError(f'Circuit specification is required.')
+            if sum(num << col for col, num in enumerate(gpc['src'])).bit_length() == len(gpc['src']):
+                raise InvalidProblemError(f'Invalid GPC shape.')
         self.model = Model(name='chained_optimizer')
         self.init_variables()
         self.add_constraint_src()

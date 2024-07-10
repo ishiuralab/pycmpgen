@@ -10,6 +10,10 @@ class InfeasibleProblemError(RuntimeError):
     pass
 
 
+class InvalidProblemError(RuntimeError):
+    pass
+
+
 class Optimizer:
     def __init__(self, prob, objective=None):
         for key, value in prob.items():
