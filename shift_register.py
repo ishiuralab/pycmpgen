@@ -18,7 +18,10 @@ class ShiftRegister:
         return code
 
     def get_module_arguments(self):
-        args = ['input wire clk', 'input wire src']
+        args = ['input wire clk']
+        for col, num in enumerate(self.src):
+            if num > 0:
+                args += [f'input wire src{col}_']
         for col, num in enumerate(self.dst):
             if num > 0:
                 args += [f'output wire [{num - 1}:0] dst{col}']
@@ -40,7 +43,7 @@ class ShiftRegister:
             if num > 0:
                 args += [f'.dst{col}(dst{col})']
         arg = ', '.join(args)
-        return indent(level) + f'compressor comp({arg});\n'
+        return indent(level) + f'compressor compressor({arg});\n'
 
     def gen_initial_block(self, level):
         code = indent(level) + 'initial begin\n'
@@ -51,30 +54,28 @@ class ShiftRegister:
         return code
 
     def gen_always_block(self, level):
-        terms = []
+        code = indent(level) + 'always @(posedge clk) begin\n'
         for col, num in enumerate(self.src):
             if num > 0:
-                terms += [f'src{col}']
-        lhs = f'{{{", ".join(terms[::-1])}}}'
-        rhs = f'{{{", ".join(terms[::-1] + ["src"])}}}'
-        code = indent(level) + f'always @(posedge clk) begin\n'
-        code += indent(level + 1) + f'{lhs} <= {rhs};\n'
+                code += indent(level + 1) + f'src{col} <= {{src{col}, src{col}_}};\n'
         code += indent(level) + f'end\n'
         return code
 
 
 if __name__ == '__main__':
+    import json
     import problem
     from compressor import Compressor
     from optimizer import Optimizer
 
-    prob = problem.square.Square(54, 2, 5)
+
+    prob = problem.multiplier.Multiplier(32, 2, 4)
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve(1200)
 
-    opt = Optimizer(prob.get_dict(), objective='cost')
-    opt.add_mip_start(sol)
-    sol = opt.solve(1200)
+    # opt = Optimizer(prob.get_dict(), objective='cost')
+    # opt.add_mip_start(sol)
+    # sol = opt.solve(1200)
 
     comp = Compressor(prob.get_dict(), sol)
     print(comp.gen_module())
