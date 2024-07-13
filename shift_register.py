@@ -9,7 +9,9 @@ class ShiftRegister:
         self.name = name
 
     def gen_module(self):
-        code = f'module shift_register({self.get_module_arguments()});\n'
+        code = f'module shift_register(\n'
+        code += f'{self.get_module_arguments()}'
+        code += ');\n'
         code += self.gen_reg_declarations(1)
         code += self.gen_module_instantiation(1)
         code += self.gen_initial_block(1)
@@ -25,7 +27,7 @@ class ShiftRegister:
         for col, num in enumerate(self.dst):
             if num > 0:
                 args += [f'output wire [{num - 1}:0] dst{col}']
-        return ', '.join(args)
+        return indent(2) + f',\n{indent(2)}'.join(args)
 
     def gen_reg_declarations(self, level):
         code = ''
