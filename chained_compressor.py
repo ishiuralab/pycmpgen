@@ -236,7 +236,7 @@ class ChainedCompressor(Compressor):
                         code += indent(level) + f'wire dummy{stg + 1}_{col + c}_{idx};\n'
                         dstpack.append(f'dummy{stg + 1}_{col + c}_{idx}')
                 args.append(f'.dst({{{", ".join(dstpack[::-1])}}})')
-                argstr = f', \n{indent(level + 2)}'.join(args)
+                argstr = f',\n{indent(level + 2)}'.join(args)
                 code += (
                     indent(level)
                     + f'{self.get_gpcchain_name(srcshape, dstshape)} chain{stg}_{idx}(\n{indent(level + 2)}{argstr}\n{indent(level)});\n'
