@@ -14,6 +14,7 @@ class Testbench:
     def gen_module(self):
         code = f'module testbench();\n'
         code += self.gen_wire_reg_declarations(1)
+        code += self.gen_module_instantiation(1)
         code += self.gen_sum_assignments(1)
         code += self.gen_test_sequence(1)
         code += 'endmodule'
@@ -35,6 +36,18 @@ class Testbench:
         code += indent(level) + f'wire test;\n'
         return code
 
+    def gen_module_instantiation(self, level):
+        args = []
+        for col, num in enumerate(self.src):
+            if num > 0:
+                args += [f'.src{col}(src{col})']
+        for col, num in enumerate(self.dst):
+            if num > 0:
+                args += [f'.dst{col}(dst{col})']
+        code = indent(level) + f'{self.name} {self.name}(\n'
+        code += indent(level + 1) + f',\n{indent(level + 1)}'.join(args) +');\n'
+        return code
+
     def gen_sum_assignments(self, level):
         srcterms = []
         for col, num in enumerate(self.src):
@@ -44,7 +57,7 @@ class Testbench:
         dstterms = []
         for col, num in enumerate(self.dst):
             if num > 0:
-                terms = [f'src{col}[{i}]' for i in range(num)]
+                terms = [f'dst{col}[{i}]' for i in range(num)]
                 dstterms += [f'(({" + ".join(terms)})<<{col})']
         code = indent(level) + f'assign srcsum = {" + ".join(srcterms)};\n'
         code += indent(level) + f'assign dstsum = {" + ".join(dstterms)};\n'
