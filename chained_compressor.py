@@ -227,6 +227,8 @@ class ChainedCompressor(Compressor):
                             else:
                                 vacant = limit - (end - begin)
                                 args.append(f'.src{c}({{stage{stg}_{col + c}[{end - 1}:{begin}], {vacant}\'h0}})')
+                        else:
+                            args.append(f'.src{c}({limit}\'h0)')
                 dstpack = []
                 for c, interval in enumerate(chain['dst']):
                     if interval:
