@@ -2,8 +2,10 @@
 
 import random
 
+
 def indent(level):
     return '    ' * level
+
 
 class Testbench:
     def __init__(self, src, dst, name, iteration=100):
@@ -45,7 +47,7 @@ class Testbench:
             if num > 0:
                 args += [f'.dst{col}(dst{col})']
         code = indent(level) + f'{self.name} {self.name}(\n'
-        code += indent(level + 1) + f',\n{indent(level + 1)}'.join(args) +');\n'
+        code += indent(level + 1) + f',\n{indent(level + 1)}'.join(args) + ');\n'
         return code
 
     def gen_sum_assignments(self, level):
@@ -83,6 +85,7 @@ class Testbench:
         code += indent(level + 1) + '$finish();\n'
         code += indent(level) + f'end\n'
         return code
+
 
 if __name__ == '__main__':
     from compressor import Compressor
