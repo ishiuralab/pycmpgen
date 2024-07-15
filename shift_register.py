@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
+
 def indent(level):
     return '    ' * level
+
 
 class ShiftRegister:
     def __init__(self, src, dst, name):
@@ -44,7 +46,7 @@ class ShiftRegister:
         for col, num in enumerate(self.dst):
             if num > 0:
                 args += [f'.dst{col}(dst{col})']
-        arg = indent(level+2) + f',\n{indent(level+2)}'.join(args)
+        arg = indent(level + 2) + f',\n{indent(level+2)}'.join(args)
         return indent(level) + f'compressor compressor(\n{arg});\n'
 
     def gen_initial_block(self, level):
@@ -69,7 +71,6 @@ if __name__ == '__main__':
     import problem
     from compressor import Compressor
     from optimizer import Optimizer
-
 
     prob = problem.multiplier.Multiplier(32, 2, 4)
     opt = Optimizer(prob.get_dict(), objective=None)
