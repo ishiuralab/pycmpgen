@@ -44,8 +44,8 @@ class ShiftRegister:
         for col, num in enumerate(self.dst):
             if num > 0:
                 args += [f'.dst{col}(dst{col})']
-        arg = ', '.join(args)
-        return indent(level) + f'compressor compressor({arg});\n'
+        arg = indent(level+2) + f',\n{indent(level+2)}'.join(args)
+        return indent(level) + f'compressor compressor(\n{arg});\n'
 
     def gen_initial_block(self, level):
         code = indent(level) + 'initial begin\n'
