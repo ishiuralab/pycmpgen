@@ -72,7 +72,7 @@ class ChainedOptimizer(Optimizer):
                     for c, row in enumerate(gpc['src']):
                         if col - c >= 0:
                             expr += self.gpcusage[stg][col - c][idx] * row
-                self.model.add_constraint(expr >= self.stages[stg][col])
+                self.model.add_constraint(expr == self.stages[stg][col])
 
     def add_constraint_gpc_output(self):
         for stg in range(self.stagenum):
@@ -118,6 +118,101 @@ class ChainedOptimizer(Optimizer):
         else:
             raise InfeasibleProblemError('No solution found for the problem and configuration.')
 
+class ChainedOptimizerLsb7(Optimizer):
+    def build_model(self, objective):
+        for gpc in self.gpclist:
+            if set(gpc['dst']) != {1} or len(gpc['src']) == len(gpc['dst']):
+                raise InvalidProblemError('GPC must be Carrychain-based')
+            if not gpc.get('spec', None):
+                raise InvalidProblemError(f'Circuit specification is required.')
+            if sum(num << col for col, num in enumerate(gpc['src'])).bit_length() == len(gpc['src']):
+                raise InvalidProblemError(f'Invalid GPC shape.')
+        self.lsb7gpcs = []
+        self.non7gpcs = []
+        for gpc in self.gpclist:
+            if gpc['src'][0] == 7:
+                self.lsb7gpcs.append(gpc)
+            else:
+                self.non7gpcs.append(gpc)
+        self.model = Model(name='chained_optimizer')
+        self.init_variables()
+
+    def init_variables(self):
+        self.stages = []
+        for stg in range(self.stagenum + 1):
+            self.stages.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.rowlimit, name=f's{stg}'))
+
+        self.lsb7usage = [[] for stg in range(self.stagenum)]
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                self.lsb7usage[stg].append(
+                    self.model.integer_var_list(len(self.lsb7gpcs), lb=0, ub=self.lsb7gpcs, name=f'l{stg}_{col}')
+                )
+
+        self.non7usage = [[] for stg in range(self.stagenum)]
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                self.non7usage[stg].append(
+                    self.model.integer_var_list(len(self.non7gpcs), lb=0, ub=self.gpclimit, name=f'n{stg}_{col}')
+                )
+
+        self.wireusage = []
+        for stg in range(self.stagenum):
+            self.wireusage.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.rowlimit, name=f'w{stg}'))
+
+        self.chainusage = []
+        for stg in range(self.stagenum):
+            self.chainusage.append(self.model.integer_var_list(self.colnum, lb=0, ub=self.gpclimit, name=f'b{stg}'))
+
+        self.reduction = []
+        for stg in range(self.stagenum):
+            self.reduction.append(self.model.integer_var_list(self.column, lb=0, ub=self.gpclimit, name=f'r{stg}'))
+
+    def add_constraint_chains(self):
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                expr = self.model.linear_expr()
+                for idx, gpc in enumerate(self.lsb7gpcs):
+                    expr += self.non7usage[stg][col][idx]
+                for idx, gpc in enumerate(self.non7gpcs):
+                    expr += self.lsb7usage[stg][col][idx]
+                self.model.add_constraint(expr >= self.chainusage[stg][col])
+
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                expr = self.model.linear_expr()
+                for idx, gpc in enumerate(self.lsb7gpcs):
+                    gpcwidth = len(gpc['dst']) - 1
+                    if col - gpcwidth >= 0:
+                        expr += self.lsb7usage[stg][col - gpcwidth][idx]
+                for idx, gpc in enumerate(self.non7gpcs):
+                    gpcwidth = len(gpc['dst']) - 1
+                    if col - gpcwidth >= 0:
+                        expr += self.non7usage[stg][col - gpcwidth][idx]
+                self.model.add_constraint(expr >= self.chain[stg][col])
+
+    def add_constraint_input_reduction(self):
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                self.model_add_constraint(self.reduction[stg][col] >= self.chain[stg][col])
+                self.model_add_constraint(self.reduction[stg][col] >= self.lsb7usage[stg][col])
+
+    def add_constraint_gpc_input(self):
+        for stg in range(self.stagenum):
+            for col in range(self.colnum):
+                expr = self.model.linear_expr()
+                expr += self.wireusage[stg][col]
+                expr -= self.reduction[stg][col]
+                for idx, gpc in enumerate(self.lsb7gpcs):
+                    for c, row in enumerate(gpc['src']):
+                        if col - c >= 0:
+                            expr += self.lsb7usage[stg][col - c][idx] * row
+                for idx, gpc in enumerate(self.non7gpcs):
+                    for c, row in enumerate(gpc['src']):
+                        if col - c >= 0:
+                            expr += self.non7usage[stg][col - c][idx] * row
+                self.model.add_constraint(expr == self.stages[stg][col])
+
 
 if __name__ == '__main__':
     import problem
@@ -133,6 +228,8 @@ if __name__ == '__main__':
     # prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
     # prob = problem.multiplier.Multiplier(18, 2, 2, gpclist)
     prob = problem.multiplier.Multiplier(54, 2, 3, gpclist)
+    # prob = problem.multiplier.Multiplier(32, 1, 4, gpclist)
+    # prob = problem.square.Square(54, 1, 4, gpclist)
     # prob = problem.multiplier.Multiplier(128, 6, 3, gpclist)
 
     opt = ChainedOptimizer(prob.get_dict(), objective=None)
