@@ -347,7 +347,7 @@ if __name__ == '__main__':
     # prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
     # prob = problem.multiplier.Multiplier(18, 2, 2, gpclist)
     # prob = problem.multiplier.Multiplier(32, 1, 4, gpclist)
-    prob = problem.square.Square(6, 1, 2, gpclist)
+    prob = problem.square.Square(7, 1, 3, gpclist)
     # prob = problem.multiplier.Multiplier(128, 6, 3, gpclist)
 
     opt = ChainedOptimizerLsb7(prob.get_dict(), objective='cost')
@@ -356,7 +356,7 @@ if __name__ == '__main__':
     # opt.add_mip_start(sol)
     sol = opt.solve()
     for stg, stage in enumerate(sol['stages']):
-        print(f'{stg:2}|', ' '.join(map(str, stage)))
+        print(f'{stg:2}|', ' '.join(map(str, stage[::-1])))
     for stg, stage in enumerate(sol['gpcusage']):
         for col, column in enumerate(stage):
             for idx, num in enumerate(column):
@@ -370,3 +370,11 @@ if __name__ == '__main__':
         for col, num in enumerate(stage):
             if num > 0:
                 print(stg, col, 'chain', num)
+    for stg, stage in enumerate(sol['chainusage']):
+        for col, num in enumerate(stage):
+            if num > 0:
+                print(stg, col, 'chain', num)
+    for stg, stage in enumerate(sol['reduction']):
+        for col, num in enumerate(stage):
+            if num > 0:
+                print(stg, col, 'reduction', num)
