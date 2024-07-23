@@ -24,14 +24,14 @@ class Compressor2_1:
             try:
                 prob = Rectangle(row, col, 2, stage, gpclist)
                 opt = Optimizer(prob.get_dict(), objective=None)
-                sol = opt.solve(timelimit=7200)
+                sol = opt.solve(timelimit=10)
             except InfeasibleProblemError:
                 pass
         presolve_elapsed = time.time() - begin
         begin = time.time()
         opt = Optimizer(prob.get_dict(), objective='cost')
         opt.add_mip_start(sol)
-        sol = opt.solve(timelimit=7200)
+        sol = opt.solve(timelimit=10)
         optimize_elapsed = time.time() - begin
         with open(f'comp2_1_{row}_{col}_{stage}.json', 'w') as f:
             print(json.dumps({'problem': prob.get_dict(), 'solution': sol, 
@@ -55,7 +55,7 @@ class Compressor2_1:
         code += self.gen_wire_declarations(1)
         code += self.gen_compressor_instantiation(1)
         code += self.gen_rowadder2_1_instantiation(1)
-        code += self.gen_assignment(1)
+        # code += self.gen_assignment(1)
         code += 'endmodule\n'
         code += f'{self.comp.gen_module()}\n'
         code += f'{self.r2_1.gen_module()}\n'
@@ -63,9 +63,10 @@ class Compressor2_1:
 
     def get_module_arguments(self):
         args = []
-        for src in [f'src{i}' for i in range(self.row)]:
-            args.append(f'{self.indent}input [{self.col - 1}:0]{src}')
-        args.append(f'{self.indent}output [{self.dst_length - 1}:0]dst')
+        for src in [f'src{i}' for i in range(self.col)]:
+            args.append(f'{self.indent}input [{self.row - 1}:0]{src}')
+        for i in range(self.dst_length):
+            args.append(f'{self.indent}output dst{i}')
         return ',\n'.join(args)
 
     def gen_wire_declarations(self, level):
@@ -73,7 +74,6 @@ class Compressor2_1:
         for i, size in enumerate(self.comp.stages[-1]):
             if size > 0:
                 code += f'{self.indent * level}wire [{size - 1}:0] comp_out{i};\n'
-        code += f'{self.indent * level}wire [{self.r2_1.size}:0] out;\n'
         return code
 
     def gen_compressor_instantiation(self, level):
@@ -86,16 +86,16 @@ class Compressor2_1:
     def get_compressor_arguments(self, level):
         args = []
         for i in range(self.col):
-            args.append(f'{self.indent * level}.src{i}({{{self.get_compressor_sorces(i)}}})')
+            args.append(f'{self.indent * level}.src{i}(src{i})')
         for i, comp_out in enumerate(self.comp_outs):
             args.append(f'{self.indent * level}.dst{i}({comp_out})')
         return ',\n'.join(args)
 
-    def get_compressor_sorces(self, src_col):
-        args = []
-        for i in range(self.row)[::-1]:
-            args.append(f'src{i}[{src_col}]')
-        return ', '.join(args)
+    # def get_compressor_sorces(self, src_col):
+    #     args = []
+    #     for i in range(self.row)[::-1]:
+    #         args.append(f'src{i}[{src_col}]')
+    #     return ', '.join(args)
 
     def gen_rowadder2_1_instantiation(self, level):
         code = ''
@@ -108,7 +108,7 @@ class Compressor2_1:
         args = []
         args.append(f'{self.indent * level}.src0({{{self.get_rowadder2_1_sorces(0)}}})')
         args.append(f'{self.indent * level}.src1({{{self.get_rowadder2_1_sorces(1)}}})')
-        args.append(f'{self.indent * level}.dst0(out)')
+        args.append(f'{self.indent * level}.dst0({{{self.get_rowadder2_1_dsts()}}})')
         return ',\n'.join(args)
 
     def get_rowadder2_1_sorces(self, rownum):
@@ -123,10 +123,16 @@ class Compressor2_1:
                     args.append(f'comp_out{len(self.comp.stages[-1]) - i - 1}[{rownum}]')
         return ', '.join(args)
 
-    def gen_assignment(self, level):
-        code = ''
-        code += f'{self.indent * level}assign dst = out[{self.dst_length - 1}:0];\n'
-        return code
+    def get_rowadder2_1_dsts(self):
+        args = []
+        for i in range(self.dst_length):
+            args.append(f'dst{self.dst_length-1-i}')
+        return ', '.join(args)
+
+    # def gen_assignment(self, level):
+    #     code = ''
+    #     code += f'{self.indent * level}assign dst = out[{self.dst_length - 1}:0];\n'
+    #     return code
 
 if __name__ == '__main__':
     row, col, stage = map(int, sys.argv[1:4])
