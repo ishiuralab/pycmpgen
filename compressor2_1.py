@@ -25,6 +25,7 @@ class Compressor2_1:
                 prob = Rectangle(row, col, 2, stage, gpclist)
                 opt = Optimizer(prob.get_dict(), objective=None)
                 sol = opt.solve(timelimit=10)
+                break
             except InfeasibleProblemError:
                 pass
         presolve_elapsed = time.time() - begin
