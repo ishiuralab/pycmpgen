@@ -40,7 +40,7 @@ class ChainedCompressor(Compressor):
         stagebits[0] = srcstage
         for stg in range(self.stagenum):
             for chain in self.netlist[stg]:
-                col = chain['base']
+                col = chain['place']
                 summation = 0
                 for c, interval in enumerate(chain['src']):
                     if interval != None:
@@ -100,7 +100,7 @@ class ChainedCompressor(Compressor):
         dst_stage = [0 for _ in range(self.colnum)]
         netlist = []
         for lower, chain in chains:
-            chaingpc = {'base': lower, 'idxlist': chain, 'src': [], 'dst': []}
+            chaingpc = {'place': lower, 'idxlist': chain, 'src': [], 'dst': []}
             srcshape, dstshape = self.get_gpcchain_shape(chain)
 
             for col, num in enumerate(srcshape):
@@ -127,7 +127,7 @@ class ChainedCompressor(Compressor):
         for col, (limit, used) in enumerate(zip(src_limit, src_stage)):
             if limit > used:
                 wires.append(
-                    {'base': col, 'src': (used, limit), 'dst': (dst_stage[col], dst_stage[col] + limit - used)}
+                    {'place': col, 'src': (used, limit), 'dst': (dst_stage[col], dst_stage[col] + limit - used)}
                 )
                 dst_stage[col] += limit - used
         return dst_stage, netlist, wires
@@ -200,7 +200,7 @@ class ChainedCompressor(Compressor):
                 code += indent(level) + f'assign dst{col} = stage{self.stagenum}_{col};\n'
         for stg in range(self.stagenum):
             for wire in self.wires[stg]:
-                col = wire['base']
+                col = wire['place']
                 srcbegin, srcend = wire['src']
                 dstbegin, dstend = wire['dst']
                 code += (
@@ -213,7 +213,7 @@ class ChainedCompressor(Compressor):
         code = '\n'
         for stg in range(self.stagenum):
             for idx, chain in enumerate(self.netlist[stg]):
-                col = chain['base']
+                col = chain['place']
                 srcshape, dstshape = self.get_gpcchain_shape(chain['idxlist'])
                 args = []
                 for c, (limit, interval) in enumerate(zip(srcshape, chain['src'])):
@@ -386,17 +386,126 @@ class ChainedCompressorLsb7(Compressor):
                     stagebits[stg + 1][col][dst] = stagebits[stg][col][src]
         return stagebits[-1]
 
+    def gen_module(self, name='compressor'):
+        code = ''
+        specs = {}
+        for chains in self.netlist:
+            for chain in chains:
+                srcshape, dstshape = self.get_gpcchain_shape(chain['idxlist'])
+                name = self.get_gpcchain_name(srcshape, dstshape)
+                spec = self.get_gpcchain_spec(chain['idxlist'])
+                specs[name] = spec
+        for name, spec in specs.items():
+            code += GpcGenerator(spec).gen_module()
+            code += '\n'
+        inputs = [f'input [{num - 1}:0] src{col}' for col, num in enumerate(self.src) if num > 0]
+        outputs = [f'output [{num - 1}:0] dst{col}' for col, num in enumerate(self.dst) if num > 0]
+        args = '\n' + indent(2) + f',\n{indent(2)}'.join(inputs + outputs)
+        code += f'module compressor({args});\n'
+        code += self.gen_wire_declarations(1)
+        code += self.gen_assignments(1)
+        code += self.gen_gpcchain_instantiations(1)
+        code += 'endmodule'
+        return code
+
+    def get_gpcchain_name(self, srcshape, dstshape):
+        stripped = srcshape[: next((len(srcshape) - i for i, x in enumerate(srcshape[::-1]) if x != 0), len(srcshape))]
+        return 'gpc' + ''.join(map(str, stripped[::-1])) + f'_{len(dstshape)}'
+
+    def get_gpcchain_spec(self, idxlist):
+        srcshape, dstshape = self.get_gpcchain_shape(idxlist)
+
+        if self.gpclist[idxlist[0]]['src'][0] == 7:
+            spec = {'shape': srcshape, 'lut': [], 'cin': None}
+            offset = -1
+        else:
+            spec = {'shape': srcshape, 'lut': [], 'cin': 0}
+            offset = 0
+        for gpcidx in idxlist:
+            luts = []
+            for symm, asymm, ttable in self.gpclist[gpcidx]['spec']['lut']:
+                symm_ = [i + offset for i in symm]
+                asymm_ = None if asymm == None else asymm + offset
+                luts.append([symm_, asymm_, ttable])
+            spec['lut'] += luts
+            offset += sum(self.gpclist[gpcidx]['src']) - 1
+        return spec
+
+    def gen_wire_declarations(self, level=1):
+        code = '\n'
+        for stg, stage in enumerate(self.stages):
+            for col in range(self.colnum):
+                if stage[col] > 0:
+                    code += f'{indent(level)}wire [{stage[col] - 1}:0] stage{stg}_{col};\n'
+        return code
+
+    def gen_assignments(self, level=1):
+        code = '\n'
+        for col, num in enumerate(self.stages[0]):
+            if num > 0:
+                code += indent(level) + f'assign stage{0}_{col} = src{col};\n'
+        for col, num in enumerate(self.stages[-1]):
+            if num > 0:
+                code += indent(level) + f'assign dst{col} = stage{self.stagenum}_{col};\n'
+        for stg in range(self.stagenum):
+            for wire in self.wires[stg]:
+                col = wire['place']
+                srcbegin, srcend = wire['src']
+                dstbegin, dstend = wire['dst']
+                code += (
+                    indent(level)
+                    + f'assign stage{stg + 1}_{col}[{dstend - 1}:{dstbegin}] = stage{stg}_{col}[{srcend - 1}:{srcbegin}];\n'
+                )
+        return code
+
+    def gen_gpcchain_instantiations(self, level=1):
+        code = '\n'
+        for stg in range(self.stagenum):
+            for idx, chain in enumerate(self.netlist[stg]):
+                col = chain['place']
+                srcshape, dstshape = self.get_gpcchain_shape(chain['idxlist'])
+                args = []
+                for c, (limit, interval) in enumerate(zip(srcshape, chain['src'])):
+                    if limit > 0:
+                        if interval:
+                            begin, end = interval
+                            if end - begin == limit:
+                                args.append(f'.src{c}(stage{stg}_{col + c}[{end - 1}:{begin}])')
+                            elif end == begin:
+                                args.append(f'.src{c}({limit}\'h0)')
+                            else:
+                                vacant = limit - (end - begin)
+                                args.append(f'.src{c}({{stage{stg}_{col + c}[{end - 1}:{begin}], {vacant}\'h0}})')
+                        else:
+                            args.append(f'.src{c}({limit}\'h0)')
+                dstpack = []
+                for c, interval in enumerate(chain['dst']):
+                    if interval:
+                        begin, end = interval
+                        dstpack.append(f'stage{stg + 1}_{col + c}[{begin}]')
+                    else:
+                        code += indent(level) + f'wire dummy{stg + 1}_{col + c}_{idx};\n'
+                        dstpack.append(f'dummy{stg + 1}_{col + c}_{idx}')
+                args.append(f'.dst({{{", ".join(dstpack[::-1])}}})')
+                argstr = f',\n{indent(level + 2)}'.join(args)
+                code += (
+                    indent(level)
+                    + f'{self.get_gpcchain_name(srcshape, dstshape)} chain{stg}_{idx}(\n{indent(level + 2)}{argstr}\n{indent(level)});\n'
+                )
+        return code
+
 
 if __name__ == '__main__':
     import problem
     import json
 
-    with open('gpclist/reduced.json', 'r') as f:
+    with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
 
-    # prob = problem.multiplier.Multiplier(8, 1, 3, gpclist).get_dict()
-    prob = problem.square.Square(54, 1, 4, gpclist).get_dict()
+    prob = problem.multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
+    # prob = problem.square.Square(54, 1, 4, gpclist).get_dict()
     opt = ChainedOptimizer(prob, objective='cost')
-    sol = opt.solve(timelimit=120)
+    sol = opt.solve(timelimit=1200)
     comp = ChainedCompressorLsb7(prob, sol)
-    comp.randomtest()
+    # comp.randomtest()
+    print(comp.gen_module())
