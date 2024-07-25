@@ -6,7 +6,7 @@ import random
 from functools import reduce
 from collections import deque
 
-from chained_optimizer import ChainedOptimizer
+from chained_optimizer import ChainedOptimizer, ChainedOptimizerLsb7
 from compressor import int2bin, emulate_gpc, indent, Compressor
 from gpcgen import GpcGenerator
 
@@ -504,7 +504,7 @@ if __name__ == '__main__':
 
     prob = problem.multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
     # prob = problem.square.Square(54, 1, 4, gpclist).get_dict()
-    opt = ChainedOptimizer(prob, objective='cost')
+    opt = ChainedOptimizerLsb7(prob, objective='cost')
     sol = opt.solve(timelimit=1200)
     comp = ChainedCompressorLsb7(prob, sol)
     # comp.randomtest()
