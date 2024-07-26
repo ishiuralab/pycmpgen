@@ -1,0 +1,4 @@
+for i in (cat rowcol)
+	echo $i | read -a rc
+	./comp_test.py $rc[1] $rc[2]
+end
