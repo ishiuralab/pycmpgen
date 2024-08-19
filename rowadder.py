@@ -12,7 +12,7 @@ def indent(level):
 
 class RowAdderGen:
     def __init__(self, row, col):
-        assert row > 0
+        assert row > 2, 'if ROW equals to 2, rowadder2_1 should be used.'
         assert col > 0
         self.row = row
         self.col = col
@@ -214,13 +214,8 @@ class RowAdderGen:
                 else:
                     args += [f'.src{r}({wire}[{src_width - 1}:0])']
             for r, wire in enumerate(dst):
-                width = self.wires[wire]
-                if width < dst_width:
-                    code += f'wire [{dst_width - width - 1}:0] dummy{idx}_{r};\n'
-                    args += [f'.dst{r}({{dummy{idx}_{r}, {wire}}})']
-                else:
-                    assert width == dst_width
-                    args += [f'.dst{r}({wire})']
+                assert self.wires[wire] == dst_width
+                args += [f'.dst{r}({wire})']
             code += indent(level) + f'{name} rowadder_{idx}({", ".join(args)});\n'
         return code
 
