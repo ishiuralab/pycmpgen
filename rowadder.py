@@ -182,9 +182,14 @@ class RowAdderGen:
 
     def gen_wire_declarations(self, level):
         code = ''
-        for name, width in sorted(self.wires.items(), key=lambda x: x[0]):
-            if 'src' not in name:
-                code += indent(level) + f'wire [{width - 1}:0] {name};\n'
+        for name, idx, children, count in self.tree:
+            if name != 'src':
+                wire = f'internal{idx}'
+                width = self.wires[wire]
+                code += indent(level) + f'wire [{width - 1}:0] {wire};\n'
+        # for name, width in self.wires.items():
+        #     if 'src' not in name:
+        #         code += indent(level) + f'wire [{width - 1}:0] {name};\n'
         return code
 
     def gen_dst_assignment(self, level):
