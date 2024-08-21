@@ -2,7 +2,6 @@
 
 import json
 import random
-from collections import deque
 from gpcgen import GpcGenerator
 
 
