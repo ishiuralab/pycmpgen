@@ -11,7 +11,7 @@ def indent(level):
 
 class RowAdderGen:
     def __init__(self, row, col):
-        assert row > 2, 'if ROW equals to 2, rowadder2_1 should be used.'
+        assert row > 1
         assert col > 0
         self.row = row
         self.col = col
@@ -103,7 +103,7 @@ class RowAdderGen:
                     width = max(src_width, dst_width - 1)
                     self.modules += [
                         {
-                            'name': f'rowadder2_1_{width}',
+                            'name': f'rowadder2_1_{width}_',
                             'src_width': width,
                             'dst_width': width + 1,
                             'src': [
@@ -118,7 +118,7 @@ class RowAdderGen:
                         width = max(src_width, dst_width - 2)
                         self.modules += [
                             {
-                                'name': f'rowadder6_2_{width}',
+                                'name': f'rowadder6_2_{width}_',
                                 'src_width': width,
                                 'dst_width': width + 2,
                                 'src': [
@@ -137,12 +137,6 @@ class RowAdderGen:
                     self.wires[wire] = module['src_width']
             for wire in module['dst']:
                 self.wires[wire] = module['dst_width']
-
-        # for module in self.modules:
-        #     print(module)
-
-        # for wire, width in sorted(self.wires.items(), key=lambda x: x[0]):
-        #     print(wire, width)
 
     def gen_rowadders(self):
         module_set = set()
@@ -186,9 +180,6 @@ class RowAdderGen:
                 wire = f'internal{idx}'
                 width = self.wires[wire]
                 code += indent(level) + f'wire [{width - 1}:0] {wire};\n'
-        # for name, width in self.wires.items():
-        #     if 'src' not in name:
-        #         code += indent(level) + f'wire [{width - 1}:0] {name};\n'
         return code
 
     def gen_dst_assignment(self, level):
