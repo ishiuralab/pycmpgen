@@ -19,14 +19,17 @@ class GpcGenerator:
                 self.idx2wire += [(place, idx)]
         self.indent = '    '
 
-    def gen_module(self):
+    def gen_module(self, name=None):
         code = ''
-        code += f'module {self.get_module_name()}({self.get_module_arguments()});\n'
+        if name:
+            code += f'module {name}({self.get_module_arguments()});\n'
+        else:
+            code += f'module {self.get_module_name()}({self.get_module_arguments()});\n'
         code += self.gen_wire_declarations()
         code += self.gen_lut_instantiations()
         code += self.gen_carrychain_instantiation()
         code += self.gen_dst_assignment()
-        code += f'endmodule'
+        code += f'endmodule\n'
         return code
 
     def get_module_arguments(self):
@@ -151,7 +154,7 @@ class TestGenerator(GpcGenerator):
         code += self.gen_gpc_instantiation()
         code += self.gen_assignments()
         code += self.gen_initial_block()
-        code += f'endmodule'
+        code += f'endmodule\n'
         return code
 
     def gen_wire_reg_declarations(self, level=1):
