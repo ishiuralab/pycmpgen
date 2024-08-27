@@ -16,7 +16,7 @@ from problem.multiplier import Multiplier
 from problem.square import Square
 
 TIMELIMIT = 7200
-OUTPUTDIR = 'results/0827'
+OUTPUTDIR = 'results/0828'
 
 def indent(level):
     return '    ' * level
@@ -43,10 +43,10 @@ def test_default(size, probclass, probname):
         try:
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
+            presolve_elapsed_times += [time.time() - begin]
             break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
-        presolve_elapsed_times += [time.time() - begin]
 
     if not sol:
         with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
@@ -134,10 +134,10 @@ def test_cascading(size, probclass, probname):
         try:
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
+            presolve_elapsed_times += [time.time() - begin]
             break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
-        presolve_elapsed_times += [time.time() - begin]
 
     if not sol:
         with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
