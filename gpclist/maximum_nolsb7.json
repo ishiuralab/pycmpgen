@@ -1,5 +1,5 @@
 [
-    {"src":[1],"dst":[1],"cost":1,"module":"gpc1_1"},
+    {"src":[1],"dst":[1],"cost":0,"module":"gpc1_1"},
     {"src":[3],"dst":[1,1],"cost":1,"module":"gpc3_2"},
     {"src":[7],"dst":[1,1,1],"cost":1,"module":"gpc7_3"},
     {"src":[5,1],"dst":[1,1,1],"cost":1,"module":"gpc15_3"},
