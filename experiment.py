@@ -15,22 +15,33 @@ from testbench import Testbench
 from problem.multiplier import Multiplier
 from problem.square import Square
 
-TIMELIMIT = 10
+TIMELIMIT = 30
 OUTPUTDIR = 'results/0827'
 
 def indent(level):
     return '    ' * level
 
+try:
+    os.makedirs(OUTPUTDIR)
+except FileExistsError:
+    pass
+
+def is_optimum(time):
+    try:
+        return time < TIMELIMIT
+    except TypeError:
+        return all(tm < TIMELIMIT for tm in time)
+
 def test_default(size, probclass, probname):
     with open('gpclist/maximum_nolsb7.json', 'r') as f:
         gpclist = json.loads(f.read())
+    presolve_elapsed_times = []
     for stage in range(1, 10):
         prob = probclass(size, 2, stage, gpclist).get_dict()
         opt = Optimizer(prob, objective=None)
-        presolve_elapsed_times = []
         try:
             begin = time.time()
-            sol = opt.solve(TIMELIMIT)
+            sol, _ = opt.solve(TIMELIMIT)
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
             continue
@@ -38,9 +49,12 @@ def test_default(size, probclass, probname):
 
         opt = Optimizer(prob, objective='cost')
         optimize_begin = time.time()
-        sol = opt.solve(TIMELIMIT)
+        sol, cost = opt.solve(TIMELIMIT)
         optimize_elapsed = time.time() - optimize_begin
         break
+
+    with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
+        print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
 
     comp = Compressor(prob, sol)
 
@@ -66,6 +80,7 @@ def test_default(size, probclass, probname):
         [f'.dst{c}(compdst{c})' for c, num in enumerate(dst)]
     code += indent(1) + f'{name}_without_rowadder comp({", ".join(args)});\n'
     assert 0 not in dst
+
     args = []
     for c, num in enumerate(dst):
         if num == 2:
@@ -105,13 +120,13 @@ def test_default(size, probclass, probname):
 def test_cascading(size, probclass, probname):
     with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
+    presolve_elapsed_times = []
     for stage in range(1, 10):
         prob = probclass(size, 1, stage, gpclist).get_dict()
         opt = ChainedOptimizerLsb7(prob, objective=None)
-        presolve_elapsed_times = []
         try:
             begin = time.time()
-            sol = opt.solve(TIMELIMIT)
+            sol, _ = opt.solve(TIMELIMIT)
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
             continue
@@ -120,9 +135,12 @@ def test_cascading(size, probclass, probname):
         opt = ChainedOptimizerLsb7(prob, objective='cost')
 
         optimize_begin = time.time()
-        sol = opt.solve(TIMELIMIT)
+        sol, cost = opt.solve(TIMELIMIT)
         optimize_elapsed = time.time() - optimize_begin
         break
+
+    with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
+        print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
 
     comp = ChainedCompressorLsb7(prob, sol)
 
