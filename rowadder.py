@@ -152,16 +152,51 @@ class RowAdderGen:
                 code += RowAdder6_2Gen(width).gen_module(vinput=False, name=name) + '\n'
         return code
 
-    def gen_module(self, name=None):
+    def gen_module(self, colwise=False, name=None):
         code = self.gen_rowadders() + '\n'
-        if name:
-            code += f'module {name}'
+        if colwise:
+            code += self.gen_row2col_converter(name)
+            if name:
+                code += f'module {name}_rowwise'
+            else:
+                code += f'module rowadder{self.row}_1_{self.col}_rowwise'
         else:
-            code += f'module rowadder{self.row}_1_{self.col}'
+            if name:
+                code += f'module {name}'
+            else:
+                code += f'module rowadder{self.row}_1_{self.col}'
         code += f'({self.get_module_arguments()});\n'
         code += self.gen_wire_declarations(1)
         code += self.gen_dst_assignment(1)
         code += self.gen_rowadder_instantiations(1)
+        code += 'endmodule\n'
+        return code
+
+    def gen_row2col_converter(self, name):
+        code = ''
+        if name:
+            code += f'module {name}'
+        else:
+            code += f'module rowadder{self.row}_1_{self.col}'
+        args = []
+        for c in range(self.col):
+            args += [f'input [{self.row - 1}:0] src{c}']
+        width = (((1 << self.col) - 1) * self.row).bit_length()
+        for c in range(width):
+            args += [f'output dst{c}']
+        code += f'({", ".join(args)});\n'
+        module_args = []
+        for r in range(self.row):
+            terms = []
+            for c in range(self.col)[::-1]:
+                terms += [f'src{c}[{r}]']
+            module_args += [f'.src{r}({{{", ".join(terms)}}})']
+        terms = [f'dst{c}' for c in range(width)[::-1]]
+        module_args += [f'.dst0({{{", ".join(terms)}}})']
+        if name:
+            code += indent(1) + f'{name}_rowwise({", ".join(module_args)});\n'
+        else:
+            code += indent(1) + f'rowadder{self.row}_1_{self.col}_rowwise({", ".join(module_args)});\n'
         code += 'endmodule\n'
         return code
 
@@ -385,5 +420,5 @@ class RowAdder6_2Gen:
 
 if __name__ == '__main__':
     ra = RowAdderGen(8, 4)
-    print(ra.gen_module())
-    print(ra.gen_testbench())
+    print(ra.gen_module(colwise=True))
+    # print(ra.gen_testbench())
