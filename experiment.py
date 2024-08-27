@@ -15,7 +15,7 @@ from testbench import Testbench
 from problem.multiplier import Multiplier
 from problem.square import Square
 
-TIMELIMIT = 30
+TIMELIMIT = 7200
 OUTPUTDIR = 'results/0827'
 
 def indent(level):
@@ -36,22 +36,28 @@ def test_default(size, probclass, probname):
     with open('gpclist/maximum_nolsb7.json', 'r') as f:
         gpclist = json.loads(f.read())
     presolve_elapsed_times = []
+    sol = None
     for stage in range(1, 10):
         prob = probclass(size, 2, stage, gpclist).get_dict()
         opt = Optimizer(prob, objective=None)
         try:
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
+            break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
-            continue
         presolve_elapsed_times += [time.time() - begin]
 
-        opt = Optimizer(prob, objective='cost')
-        optimize_begin = time.time()
-        sol, cost = opt.solve(TIMELIMIT)
-        optimize_elapsed = time.time() - optimize_begin
-        break
+    if not sol:
+        with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
+            print(f'{size:2} solution not found', file=f)
+        return
+
+    opt = Optimizer(prob, objective='cost')
+    opt.add_mip_start(sol)
+    optimize_begin = time.time()
+    sol, cost = opt.solve(TIMELIMIT)
+    optimize_elapsed = time.time() - optimize_begin
 
     with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
@@ -121,23 +127,28 @@ def test_cascading(size, probclass, probname):
     with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
     presolve_elapsed_times = []
+    sol = None
     for stage in range(1, 10):
         prob = probclass(size, 1, stage, gpclist).get_dict()
         opt = ChainedOptimizerLsb7(prob, objective=None)
         try:
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
+            break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
-            continue
         presolve_elapsed_times += [time.time() - begin]
 
-        opt = ChainedOptimizerLsb7(prob, objective='cost')
+    if not sol:
+        with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
+            print(f'{size:2} solution not found', file=f)
+        return
+    opt = ChainedOptimizerLsb7(prob, objective='cost')
+    opt.add_mip_start(sol)
 
-        optimize_begin = time.time()
-        sol, cost = opt.solve(TIMELIMIT)
-        optimize_elapsed = time.time() - optimize_begin
-        break
+    optimize_begin = time.time()
+    sol, cost = opt.solve(TIMELIMIT)
+    optimize_elapsed = time.time() - optimize_begin
 
     with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
