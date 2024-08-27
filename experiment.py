@@ -94,6 +94,14 @@ def test_default(size, probclass, probname):
         print(f'{presolve_elapsed_times=}', file=f)
         print(f'{optimize_elapsed=}', file=f)
 
+    with open(f'{outputdir}/makefile', 'w') as f:
+        print(f'testbench: default_{probname}{size}_{stage}_testbench.v default_{probname}{size}_{stage}.v', file=f)
+        print(f'\tiverilog default_{probname}{size}_{stage}_testbench.v default_{probname}{size}_{stage}.v ../../../../gpclist/gpc/*.v ../../../../../xilinx-verilog-emulators/*.v -o testbench', file=f)
+        print(f'clean:', file=f)
+        print(f'\trm testbench', file=f)
+
+
+
 def test_cascading(size, probclass, probname):
     with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
@@ -140,9 +148,15 @@ def test_cascading(size, probclass, probname):
         print(f'{presolve_elapsed_times=}', file=f)
         print(f'{optimize_elapsed=}', file=f)
 
+    with open(f'{outputdir}/makefile', 'w') as f:
+        print(f'testbench: cascade_{probname}{size}_{stage}_testbench.v cascade_{probname}{size}_{stage}.v', file=f)
+        print(f'\tiverilog cascade_{probname}{size}_{stage}_testbench.v cascade_{probname}{size}_{stage}.v ../../../../../xilinx-verilog-emulators/*.v -o testbench', file=f)
+        print(f'clean:', file=f)
+        print(f'\trm testbench', file=f)
+
 if __name__ == '__main__':
     size = int(sys.argv[1])
     test_default(size, Multiplier, 'mul')
     test_cascading(size, Multiplier, 'mul')
-    test_default(size, Square, 'mul')
-    test_cascading(size, Square, 'mul')
+    test_default(size, Square, 'square')
+    test_cascading(size, Square, 'square')
