@@ -72,7 +72,7 @@ def test_default(size, probclass, probname):
 
     name = 'compressor'
     src = sol['stages'][0]
-    dst = sol['stages'][-1]
+    dst = [num for num in sol['stages'][-1] if num > 0]
 
     code = f'module {name}'
     args = [f'input [{num - 1}:0] src{c}' for c, num in enumerate(src) if num > 0]
@@ -85,6 +85,7 @@ def test_default(size, probclass, probname):
         [f'.src{c}(src{c})' for c, num in enumerate(src) if num > 0] + \
         [f'.dst{c}(compdst{c})' for c, num in enumerate(dst)]
     code += indent(1) + f'{name}_without_rowadder comp({", ".join(args)});\n'
+    print(dst)
     assert 0 not in dst
 
     args = []
