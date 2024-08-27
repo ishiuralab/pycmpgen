@@ -166,16 +166,16 @@ class ChainedCompressor(Compressor):
         for chains in self.netlist:
             for chain in chains:
                 srcshape, dstshape = self.get_gpcchain_shape(chain['idxlist'])
-                name = self.get_gpcchain_name(srcshape, dstshape)
+                chainname = self.get_gpcchain_name(srcshape, dstshape)
                 spec = self.get_gpcchain_spec(chain['idxlist'])
-                specs[name] = spec
-        for name, spec in specs.items():
+                specs[chainname] = spec
+        for chainname, spec in specs.items():
             code += GpcGenerator(spec).gen_module()
             code += '\n'
         inputs = [f'input [{num - 1}:0] src{col}' for col, num in enumerate(self.src) if num > 0]
         outputs = [f'output [{num - 1}:0] dst{col}' for col, num in enumerate(self.dst) if num > 0]
         args = '\n' + indent(2) + f',\n{indent(2)}'.join(inputs + outputs)
-        code += f'module compressor({args});\n'
+        code += f'module {name}({args});\n'
         code += self.gen_wire_declarations(1)
         code += self.gen_assignments(1)
         code += self.gen_gpcchain_instantiations(1)
