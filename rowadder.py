@@ -194,9 +194,9 @@ class RowAdderGen:
         terms = [f'dst{c}' for c in range(width)[::-1]]
         module_args += [f'.dst0({{{", ".join(terms)}}})']
         if name:
-            code += indent(1) + f'{name}_rowwise({", ".join(module_args)});\n'
+            code += indent(1) + f'{name}_rowwise ra({", ".join(module_args)});\n'
         else:
-            code += indent(1) + f'rowadder{self.row}_1_{self.col}_rowwise({", ".join(module_args)});\n'
+            code += indent(1) + f'rowadder{self.row}_1_{self.col}_rowwise ra({", ".join(module_args)});\n'
         code += 'endmodule\n'
         return code
 
@@ -248,8 +248,8 @@ class RowAdderGen:
                 args += [f'.dst{r}({wire})']
             code += indent(level) + f'{name} rowadder_{idx}({", ".join(args)});\n'
         return code
-
-    def gen_testbench(self):
+        
+    def gen_testbench(self, colwise=False):
         code = ''
         code += f'module testbench();\n'
         for r in range(self.row):
@@ -260,8 +260,16 @@ class RowAdderGen:
         code += indent(1) + f'wire test;\n'
         code += indent(1) + f'assign ans = {"+".join("src"+str(r) for r in range(self.row))};\n'
         code += indent(1) + 'assign test = ans == dst0;\n'
-        args = [f'.src{r}(src{r})' for r in range(self.row)] + ['.dst0(dst0)']
-        code += indent(1) + f'rowadder{self.row}_1_{self.col} ra({", ".join(args)});\n'
+        if colwise:
+            args = []
+            for c in range(self.col):
+                terms = [f'src{r}[{c}]' for r in range(self.row)]
+                args += [f'.src{c}({{{", ".join(terms)}}})']
+            args += [f'.dst{c}(dst0[{c}])' for c in range(dst_width)]
+            code += indent(1) + f'rowadder{self.row}_1_{self.col} ra({", ".join(args)});\n'
+        else:
+            args = [f'.src{r}(src{r})' for r in range(self.row)] + ['.dst0(dst0)']
+            code += indent(1) + f'rowadder{self.row}_1_{self.col} ra({", ".join(args)});\n'
         code += indent(1) + 'initial begin\n'
         code += indent(2) + '$monitor("%x %x %x", ans, dst0, test);\n'
         for r in range(self.row):
@@ -419,6 +427,6 @@ class RowAdder6_2Gen:
 
 
 if __name__ == '__main__':
-    ra = RowAdderGen(8, 4)
+    ra = RowAdderGen(32, 32)
     print(ra.gen_module(colwise=True))
-    # print(ra.gen_testbench())
+    print(ra.gen_testbench(colwise=True))
