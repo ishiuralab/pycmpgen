@@ -116,6 +116,9 @@ class Optimizer:
                                 expr += self.gpcusage[stg][col][idx]
             self.model.minimize(expr)
 
+    def end(self):
+        self.model.end()
+
 
 if __name__ == '__main__':
     import problem
@@ -147,9 +150,10 @@ if __name__ == '__main__':
     opt = Optimizer(prob.get_dict(), objective=None)
     sol = opt.solve()
 
-    # opt = Optimizer(prob.get_dict(), objective='cost')
-    # opt.add_mip_start(sol)
-    # sol = opt.solve(120)
-    # comp = compressor.Compressor(prob.get_dict(), sol)
-    # print(json.dumps(comp.netlist))
-    # print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
+    opt = Optimizer(prob.get_dict(), objective='cost')
+    opt.add_mip_start(sol)
+    sol = opt.solve(120)
+    opt.end()
+    comp = compressor.Compressor(prob.get_dict(), sol)
+    print(json.dumps(comp.netlist))
+    print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
