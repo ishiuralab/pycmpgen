@@ -44,9 +44,11 @@ def test_default(size, probclass, probname):
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
             presolve_elapsed_times += [time.time() - begin]
+            opt.end()
             break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
+            opt.end()
 
     if not sol:
         with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
@@ -58,6 +60,7 @@ def test_default(size, probclass, probname):
     optimize_begin = time.time()
     sol, cost = opt.solve(TIMELIMIT)
     optimize_elapsed = time.time() - optimize_begin
+    opt.end()
 
     with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
@@ -135,9 +138,11 @@ def test_cascading(size, probclass, probname):
             begin = time.time()
             sol, _ = opt.solve(TIMELIMIT)
             presolve_elapsed_times += [time.time() - begin]
+            opt.end()
             break
         except InfeasibleProblemError:
             presolve_elapsed_times += [time.time() - begin]
+            opt.end()
 
     if not sol:
         with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
@@ -149,6 +154,7 @@ def test_cascading(size, probclass, probname):
     optimize_begin = time.time()
     sol, cost = opt.solve(TIMELIMIT)
     optimize_elapsed = time.time() - optimize_begin
+    opt.end()
 
     with open(f'{OUTPUTDIR}/cascade_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, stage: {"✔" if is_optimum(presolve_elapsed_times) else " "}{stage:2}, cost: {"✔" if is_optimum(optimize_elapsed) else " "}{cost:3}', file=f)
