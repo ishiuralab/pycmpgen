@@ -1,0 +1,7 @@
+ 8, stage: ✔ 3, cost: ✔  8
+ 9, stage: ✔ 3, cost: ✔ 11
+10, stage: ✔ 3, cost: ✔ 13
+11, stage: ✔ 3, cost: ✔ 16
+12, stage: ✔ 3, cost: ✔ 19
+13, stage: ✔ 3, cost: ✔ 22
+14, stage: ✔ 3, cost: ✔ 26

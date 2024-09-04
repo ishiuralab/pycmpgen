@@ -1,0 +1,25 @@
+ 8, stage: ✔ 3, cost: ✔  8
+ 9, stage: ✔ 3, cost: ✔ 11
+10, stage: ✔ 3, cost: ✔ 14
+11, stage: ✔ 3, cost: ✔ 17
+12, stage: ✔ 3, cost: ✔ 19
+13, stage: ✔ 3, cost: ✔ 23
+14, stage: ✔ 3, cost: ✔ 26
+15, stage: ✔ 3, cost: ✔ 31
+16, stage: ✔ 3, cost: ✔ 35
+17, stage: ✔ 3, cost: ✔ 41
+18, stage: ✔ 3, cost: ✔ 43
+19, stage: ✔ 4, cost:   47
+20, stage: ✔ 4, cost:   54
+21, stage: ✔ 4, cost:   59
+22, stage: ✔ 4, cost:   67
+23, stage: ✔ 4, cost:   71
+24, stage: ✔ 4, cost:   79
+25, stage: ✔ 4, cost:   84
+26, stage: ✔ 4, cost:   97
+27, stage: ✔ 4, cost:  101
+28, stage: ✔ 4, cost:  105
+29, stage: ✔ 4, cost:  116
+30, stage:   5, cost:  123
+31, stage:   5, cost:  129
+32, stage:   5, cost:  139
