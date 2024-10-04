@@ -1,25 +1,25 @@
- 8, stage: ✔ 2, cost: ✔  6
- 9, stage: ✔ 2, cost: ✔  9
-10, stage: ✔ 2, cost: ✔ 11
-11, stage: ✔ 2, cost: ✔ 14
-12, stage: ✔ 2, cost: ✔ 17
-13, stage: ✔ 3, cost:   20
-14, stage: ✔ 3, cost:   23
-15, stage: ✔ 3, cost:   28
-16, stage: ✔ 3, cost:   32
-17, stage: ✔ 3, cost:   36
-18, stage: ✔ 3, cost:   41
-19, stage: ✔ 3, cost:   45
-20, stage: ✔ 3, cost:   52
-21, stage: ✔ 3, cost:   56
-22, stage: ✔ 3, cost:   65
-23, stage: ✔ 3, cost:   73
-24, stage: ✔ 3, cost:   78
-25, stage: ✔ 3, cost:   87
-26, stage:   4, cost:   91
-27, stage:   4, cost:   99
-28, stage:   4, cost:  106
-29, stage:   4, cost:  114
-30, stage: ✔ 4, cost:  123
-31, stage: ✔ 4, cost:  132
-32, stage: ✔ 4, cost:  143
+ 8, stage: ✔ 2, cost: ✔  6, impl:  10, delay:  8.272ns, logic: 58.398%, route: 41.602%, level:  9, carry4:  4, lut2: 1, lut3: 0, lut4: 0, lut5: 0, lut6: 2
+ 9, stage: ✔ 2, cost: ✔  9, impl:  14, delay:  8.502ns, logic: 48.746%, route: 51.254%, level:  9, carry4:  4, lut2: 1, lut3: 0, lut4: 0, lut5: 1, lut6: 1
+10, stage: ✔ 2, cost: ✔ 11, impl:  16, delay:  8.739ns, logic: 54.979%, route: 45.021%, level:  9, carry4:  5, lut2: 1, lut3: 1, lut4: 0, lut5: 0, lut6: 0
+11, stage: ✔ 2, cost: ✔ 14, impl:  20, delay:  8.875ns, logic: 50.711%, route: 49.289%, level:  9, carry4:  4, lut2: 1, lut3: 0, lut4: 0, lut5: 0, lut6: 2
+12, stage: ✔ 2, cost: ✔ 17, impl:  23, delay:  9.731ns, logic: 54.717%, route: 45.283%, level: 10, carry4:  5, lut2: 2, lut3: 0, lut4: 0, lut5: 1, lut6: 0
+13, stage: ✔ 3, cost:   20, impl:  27, delay: 10.598ns, logic: 49.177%, route: 50.823%, level: 11, carry4:  5, lut2: 1, lut3: 0, lut4: 1, lut5: 2, lut6: 0
+14, stage: ✔ 3, cost:   23, impl:  30, delay: 10.423ns, logic: 51.206%, route: 48.794%, level: 12, carry4:  6, lut2: 2, lut3: 0, lut4: 0, lut5: 2, lut6: 0
+15, stage: ✔ 3, cost:   28, impl:  36, delay: 10.579ns, logic: 49.985%, route: 50.015%, level: 11, carry4:  5, lut2: 1, lut3: 0, lut4: 1, lut5: 1, lut6: 1
+16, stage: ✔ 3, cost:   32, impl:  40, delay: 10.447ns, logic: 48.387%, route: 51.613%, level: 12, carry4:  6, lut2: 1, lut3: 0, lut4: 0, lut5: 2, lut6: 1
+17, stage: ✔ 3, cost:   36, impl:  45, delay: 10.693ns, logic: 49.423%, route: 50.577%, level: 12, carry4:  6, lut2: 1, lut3: 1, lut4: 0, lut5: 2, lut6: 0
+18, stage: ✔ 3, cost:   41, impl:  50, delay: 10.867ns, logic: 46.755%, route: 53.245%, level: 11, carry4:  5, lut2: 1, lut3: 0, lut4: 1, lut5: 2, lut6: 0
+19, stage: ✔ 3, cost:   45, impl:  55, delay: 10.767ns, logic: 48.510%, route: 51.490%, level: 13, carry4:  7, lut2: 1, lut3: 0, lut4: 1, lut5: 1, lut6: 1
+20, stage: ✔ 3, cost:   52, impl:  62, delay: 10.927ns, logic: 50.492%, route: 49.508%, level: 11, carry4:  5, lut2: 1, lut3: 0, lut4: 2, lut5: 0, lut6: 1
+21, stage: ✔ 3, cost:   56, impl:  67, delay: 10.854ns, logic: 44.121%, route: 55.879%, level: 11, carry4:  5, lut2: 1, lut3: 0, lut4: 0, lut5: 1, lut6: 2
+22, stage: ✔ 3, cost:   65, impl:  76, delay: 10.821ns, logic: 47.497%, route: 52.503%, level: 12, carry4:  6, lut2: 1, lut3: 0, lut4: 2, lut5: 1, lut6: 0
+23, stage: ✔ 3, cost:   73, impl:  85, delay: 11.074ns, logic: 45.225%, route: 54.775%, level: 13, carry4:  7, lut2: 1, lut3: 0, lut4: 1, lut5: 0, lut6: 2
+24, stage: ✔ 3, cost:   78, impl:  90, delay: 10.826ns, logic: 48.586%, route: 51.413%, level: 12, carry4:  6, lut2: 2, lut3: 0, lut4: 1, lut5: 1, lut6: 0
+25, stage: ✔ 3, cost:   87, impl: 100, delay: 11.350ns, logic: 46.114%, route: 53.886%, level: 12, carry4:  6, lut2: 1, lut3: 0, lut4: 1, lut5: 2, lut6: 0
+26, stage:   4, cost:   91, impl: 104, delay: 13.009ns, logic: 44.256%, route: 55.744%, level: 17, carry4: 10, lut2: 1, lut3: 0, lut4: 1, lut5: 1, lut6: 2
+27, stage:   4, cost:   99, impl: 113, delay: 13.926ns, logic: 45.153%, route: 54.847%, level: 18, carry4: 11, lut2: 1, lut3: 0, lut4: 2, lut5: 1, lut6: 1
+28, stage:   4, cost:  106, impl: 120, delay: 14.182ns, logic: 41.797%, route: 58.203%, level: 19, carry4: 12, lut2: 1, lut3: 0, lut4: 1, lut5: 2, lut6: 1
+29, stage:   4, cost:  114, impl: 129, delay: 15.170ns, logic: 44.872%, route: 55.128%, level: 22, carry4: 15, lut2: 2, lut3: 0, lut4: 2, lut5: 1, lut6: 0
+30, stage: ✔ 4, cost:  123, impl: 138, delay: 14.803ns, logic: 45.124%, route: 54.876%, level: 22, carry4: 15, lut2: 1, lut3: 1, lut4: 1, lut5: 2, lut6: 0
+31, stage: ✔ 4, cost:  132, impl: 148, delay: 14.921ns, logic: 44.611%, route: 55.389%, level: 24, carry4: 17, lut2: 2, lut3: 0, lut4: 0, lut5: 3, lut6: 0
+32, stage: ✔ 4, cost:  143, impl: 159, delay: 15.212ns, logic: 39.632%, route: 60.368%, level: 23, carry4: 16, lut2: 1, lut3: 1, lut4: 0, lut5: 2, lut6: 1

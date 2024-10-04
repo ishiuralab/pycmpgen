@@ -16,7 +16,7 @@ from problem.multiplier import Multiplier
 from problem.square import Square
 
 TIMELIMIT = 7200
-OUTPUTDIR = 'results/0828'
+OUTPUTDIR = 'results/0913'
 
 def indent(level):
     return '    ' * level
@@ -167,6 +167,12 @@ def test_cascading(size, probclass, probname):
     except FileExistsError:
         pass
 
+    with open(f'{outputdir}/solution.json', 'w') as f:
+        print(json.dumps({'prob': prob, 'sol':sol}), file=f)
+
+    with open(f'{outputdir}/netlist.json', 'w') as f:
+        print(json.dumps({'prob': prob, 'sol':sol}), file=f)
+
     name = 'compressor'
     with open(f'{outputdir}/cascade_{probname}{size}_{stage}.v', 'w') as f:
         print(comp.gen_module(name), file=f)
@@ -189,9 +195,10 @@ def test_cascading(size, probclass, probname):
         print(f'clean:', file=f)
         print(f'\trm testbench', file=f)
 
+
 if __name__ == '__main__':
     size = int(sys.argv[1])
-    test_default(size, Multiplier, 'mul')
+    #test_default(size, Multiplier, 'mul')
     test_cascading(size, Multiplier, 'mul')
-    test_default(size, Square, 'square')
-    test_cascading(size, Square, 'square')
+    #test_default(size, Square, 'square')
+    #test_cascading(size, Square, 'square')

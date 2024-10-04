@@ -1,0 +1,2128 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Mon Sep  9 16:28:27 2024
+| Host         : voidhoge running 64-bit Debian GNU/Linux 12 (bookworm)
+| Command      : report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/hoge/programming/fpga/pycmpgen/results/0828/default/mul23/timing_report.txt
+| Design       : shift_register
+| Device       : 7a100t-csg324
+| Speed File   : -3  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Summary Report
+
+------------------------------------------------------------------------------------------------
+| Timer Settings
+| --------------
+------------------------------------------------------------------------------------------------
+
+  Enable Multi Corner Analysis               :  Yes
+  Enable Pessimism Removal                   :  Yes
+  Pessimism Removal Resolution               :  Nearest Common Node
+  Enable Input Delay Default Clock           :  No
+  Enable Preset / Clear Arcs                 :  No
+  Disable Flight Delays                      :  No
+  Ignore I/O Paths                           :  No
+  Timing Early Launch at Borrowing Latches   :  No
+  Borrow Time for Max Delay Exceptions       :  Yes
+  Merge Timing Exceptions                    :  Yes
+  Inter-SLR Compensation                     :  Conservative
+
+  Corner  Analyze    Analyze    
+  Name    Max Paths  Min Paths  
+  ------  ---------  ---------  
+  Slow    Yes        Yes        
+  Fast    Yes        Yes        
+
+
+------------------------------------------------------------------------------------------------
+| Report Methodology
+| ------------------
+------------------------------------------------------------------------------------------------
+
+Rule       Severity          Description                  Violations  
+---------  ----------------  ---------------------------  ----------  
+TIMING-17  Critical Warning  Non-clocked sequential cell  529         
+
+Note: This report is based on the most recent report_methodology run and may not be up-to-date. Run report_methodology on the current design for the latest report.
+
+
+
+check_timing report
+
+Table of Contents
+-----------------
+1. checking no_clock (529)
+2. checking constant_clock (0)
+3. checking pulse_width_clock (0)
+4. checking unconstrained_internal_endpoints (529)
+5. checking no_input_delay (45)
+6. checking no_output_delay (47)
+7. checking multiple_clock (0)
+8. checking generated_clocks (0)
+9. checking loops (0)
+10. checking partial_input_delay (0)
+11. checking partial_output_delay (0)
+12. checking latch_loops (0)
+
+1. checking no_clock (529)
+--------------------------
+ There are 529 register/latch pins with no clock driven by root clock pin: clk (HIGH)
+
+src0_reg[0]/C
+src10_reg[0]/C
+src10_reg[10]/C
+src10_reg[1]/C
+src10_reg[2]/C
+src10_reg[3]/C
+src10_reg[4]/C
+src10_reg[5]/C
+src10_reg[6]/C
+src10_reg[7]/C
+src10_reg[8]/C
+src10_reg[9]/C
+src11_reg[0]/C
+src11_reg[10]/C
+src11_reg[11]/C
+src11_reg[1]/C
+src11_reg[2]/C
+src11_reg[3]/C
+src11_reg[4]/C
+src11_reg[5]/C
+src11_reg[6]/C
+src11_reg[7]/C
+src11_reg[8]/C
+src11_reg[9]/C
+src12_reg[0]/C
+src12_reg[10]/C
+src12_reg[11]/C
+src12_reg[12]/C
+src12_reg[1]/C
+src12_reg[2]/C
+src12_reg[3]/C
+src12_reg[4]/C
+src12_reg[5]/C
+src12_reg[6]/C
+src12_reg[7]/C
+src12_reg[8]/C
+src12_reg[9]/C
+src13_reg[0]/C
+src13_reg[10]/C
+src13_reg[11]/C
+src13_reg[12]/C
+src13_reg[13]/C
+src13_reg[1]/C
+src13_reg[2]/C
+src13_reg[3]/C
+src13_reg[4]/C
+src13_reg[5]/C
+src13_reg[6]/C
+src13_reg[7]/C
+src13_reg[8]/C
+src13_reg[9]/C
+src14_reg[0]/C
+src14_reg[10]/C
+src14_reg[11]/C
+src14_reg[12]/C
+src14_reg[13]/C
+src14_reg[14]/C
+src14_reg[1]/C
+src14_reg[2]/C
+src14_reg[3]/C
+src14_reg[4]/C
+src14_reg[5]/C
+src14_reg[6]/C
+src14_reg[7]/C
+src14_reg[8]/C
+src14_reg[9]/C
+src15_reg[0]/C
+src15_reg[10]/C
+src15_reg[11]/C
+src15_reg[12]/C
+src15_reg[13]/C
+src15_reg[14]/C
+src15_reg[15]/C
+src15_reg[1]/C
+src15_reg[2]/C
+src15_reg[3]/C
+src15_reg[4]/C
+src15_reg[5]/C
+src15_reg[6]/C
+src15_reg[7]/C
+src15_reg[8]/C
+src15_reg[9]/C
+src16_reg[0]/C
+src16_reg[10]/C
+src16_reg[11]/C
+src16_reg[12]/C
+src16_reg[13]/C
+src16_reg[14]/C
+src16_reg[15]/C
+src16_reg[16]/C
+src16_reg[1]/C
+src16_reg[2]/C
+src16_reg[3]/C
+src16_reg[4]/C
+src16_reg[5]/C
+src16_reg[6]/C
+src16_reg[7]/C
+src16_reg[8]/C
+src16_reg[9]/C
+src17_reg[0]/C
+src17_reg[10]/C
+src17_reg[11]/C
+src17_reg[12]/C
+src17_reg[13]/C
+src17_reg[14]/C
+src17_reg[15]/C
+src17_reg[16]/C
+src17_reg[17]/C
+src17_reg[1]/C
+src17_reg[2]/C
+src17_reg[3]/C
+src17_reg[4]/C
+src17_reg[5]/C
+src17_reg[6]/C
+src17_reg[7]/C
+src17_reg[8]/C
+src17_reg[9]/C
+src18_reg[0]/C
+src18_reg[10]/C
+src18_reg[11]/C
+src18_reg[12]/C
+src18_reg[13]/C
+src18_reg[14]/C
+src18_reg[15]/C
+src18_reg[16]/C
+src18_reg[17]/C
+src18_reg[18]/C
+src18_reg[1]/C
+src18_reg[2]/C
+src18_reg[3]/C
+src18_reg[4]/C
+src18_reg[5]/C
+src18_reg[6]/C
+src18_reg[7]/C
+src18_reg[8]/C
+src18_reg[9]/C
+src19_reg[0]/C
+src19_reg[10]/C
+src19_reg[11]/C
+src19_reg[12]/C
+src19_reg[13]/C
+src19_reg[14]/C
+src19_reg[15]/C
+src19_reg[16]/C
+src19_reg[17]/C
+src19_reg[18]/C
+src19_reg[19]/C
+src19_reg[1]/C
+src19_reg[2]/C
+src19_reg[3]/C
+src19_reg[4]/C
+src19_reg[5]/C
+src19_reg[6]/C
+src19_reg[7]/C
+src19_reg[8]/C
+src19_reg[9]/C
+src1_reg[0]/C
+src1_reg[1]/C
+src20_reg[0]/C
+src20_reg[10]/C
+src20_reg[11]/C
+src20_reg[12]/C
+src20_reg[13]/C
+src20_reg[14]/C
+src20_reg[15]/C
+src20_reg[16]/C
+src20_reg[17]/C
+src20_reg[18]/C
+src20_reg[19]/C
+src20_reg[1]/C
+src20_reg[20]/C
+src20_reg[2]/C
+src20_reg[3]/C
+src20_reg[4]/C
+src20_reg[5]/C
+src20_reg[6]/C
+src20_reg[7]/C
+src20_reg[8]/C
+src20_reg[9]/C
+src21_reg[0]/C
+src21_reg[10]/C
+src21_reg[11]/C
+src21_reg[12]/C
+src21_reg[13]/C
+src21_reg[14]/C
+src21_reg[15]/C
+src21_reg[16]/C
+src21_reg[17]/C
+src21_reg[18]/C
+src21_reg[19]/C
+src21_reg[1]/C
+src21_reg[20]/C
+src21_reg[21]/C
+src21_reg[2]/C
+src21_reg[3]/C
+src21_reg[4]/C
+src21_reg[5]/C
+src21_reg[6]/C
+src21_reg[7]/C
+src21_reg[8]/C
+src21_reg[9]/C
+src22_reg[0]/C
+src22_reg[10]/C
+src22_reg[11]/C
+src22_reg[12]/C
+src22_reg[13]/C
+src22_reg[14]/C
+src22_reg[15]/C
+src22_reg[16]/C
+src22_reg[17]/C
+src22_reg[18]/C
+src22_reg[19]/C
+src22_reg[1]/C
+src22_reg[20]/C
+src22_reg[21]/C
+src22_reg[22]/C
+src22_reg[2]/C
+src22_reg[3]/C
+src22_reg[4]/C
+src22_reg[5]/C
+src22_reg[6]/C
+src22_reg[7]/C
+src22_reg[8]/C
+src22_reg[9]/C
+src23_reg[0]/C
+src23_reg[10]/C
+src23_reg[11]/C
+src23_reg[12]/C
+src23_reg[13]/C
+src23_reg[14]/C
+src23_reg[15]/C
+src23_reg[16]/C
+src23_reg[17]/C
+src23_reg[18]/C
+src23_reg[19]/C
+src23_reg[1]/C
+src23_reg[20]/C
+src23_reg[21]/C
+src23_reg[2]/C
+src23_reg[3]/C
+src23_reg[4]/C
+src23_reg[5]/C
+src23_reg[6]/C
+src23_reg[7]/C
+src23_reg[8]/C
+src23_reg[9]/C
+src24_reg[0]/C
+src24_reg[10]/C
+src24_reg[11]/C
+src24_reg[12]/C
+src24_reg[13]/C
+src24_reg[14]/C
+src24_reg[15]/C
+src24_reg[16]/C
+src24_reg[17]/C
+src24_reg[18]/C
+src24_reg[19]/C
+src24_reg[1]/C
+src24_reg[20]/C
+src24_reg[2]/C
+src24_reg[3]/C
+src24_reg[4]/C
+src24_reg[5]/C
+src24_reg[6]/C
+src24_reg[7]/C
+src24_reg[8]/C
+src24_reg[9]/C
+src25_reg[0]/C
+src25_reg[10]/C
+src25_reg[11]/C
+src25_reg[12]/C
+src25_reg[13]/C
+src25_reg[14]/C
+src25_reg[15]/C
+src25_reg[16]/C
+src25_reg[17]/C
+src25_reg[18]/C
+src25_reg[19]/C
+src25_reg[1]/C
+src25_reg[2]/C
+src25_reg[3]/C
+src25_reg[4]/C
+src25_reg[5]/C
+src25_reg[6]/C
+src25_reg[7]/C
+src25_reg[8]/C
+src25_reg[9]/C
+src26_reg[0]/C
+src26_reg[10]/C
+src26_reg[11]/C
+src26_reg[12]/C
+src26_reg[13]/C
+src26_reg[14]/C
+src26_reg[15]/C
+src26_reg[16]/C
+src26_reg[17]/C
+src26_reg[18]/C
+src26_reg[1]/C
+src26_reg[2]/C
+src26_reg[3]/C
+src26_reg[4]/C
+src26_reg[5]/C
+src26_reg[6]/C
+src26_reg[7]/C
+src26_reg[8]/C
+src26_reg[9]/C
+src27_reg[0]/C
+src27_reg[10]/C
+src27_reg[11]/C
+src27_reg[12]/C
+src27_reg[13]/C
+src27_reg[14]/C
+src27_reg[15]/C
+src27_reg[16]/C
+src27_reg[17]/C
+src27_reg[1]/C
+src27_reg[2]/C
+src27_reg[3]/C
+src27_reg[4]/C
+src27_reg[5]/C
+src27_reg[6]/C
+src27_reg[7]/C
+src27_reg[8]/C
+src27_reg[9]/C
+src28_reg[0]/C
+src28_reg[10]/C
+src28_reg[11]/C
+src28_reg[12]/C
+src28_reg[13]/C
+src28_reg[14]/C
+src28_reg[15]/C
+src28_reg[16]/C
+src28_reg[1]/C
+src28_reg[2]/C
+src28_reg[3]/C
+src28_reg[4]/C
+src28_reg[5]/C
+src28_reg[6]/C
+src28_reg[7]/C
+src28_reg[8]/C
+src28_reg[9]/C
+src29_reg[0]/C
+src29_reg[10]/C
+src29_reg[11]/C
+src29_reg[12]/C
+src29_reg[13]/C
+src29_reg[14]/C
+src29_reg[15]/C
+src29_reg[1]/C
+src29_reg[2]/C
+src29_reg[3]/C
+src29_reg[4]/C
+src29_reg[5]/C
+src29_reg[6]/C
+src29_reg[7]/C
+src29_reg[8]/C
+src29_reg[9]/C
+src2_reg[0]/C
+src2_reg[1]/C
+src2_reg[2]/C
+src30_reg[0]/C
+src30_reg[10]/C
+src30_reg[11]/C
+src30_reg[12]/C
+src30_reg[13]/C
+src30_reg[14]/C
+src30_reg[1]/C
+src30_reg[2]/C
+src30_reg[3]/C
+src30_reg[4]/C
+src30_reg[5]/C
+src30_reg[6]/C
+src30_reg[7]/C
+src30_reg[8]/C
+src30_reg[9]/C
+src31_reg[0]/C
+src31_reg[10]/C
+src31_reg[11]/C
+src31_reg[12]/C
+src31_reg[13]/C
+src31_reg[1]/C
+src31_reg[2]/C
+src31_reg[3]/C
+src31_reg[4]/C
+src31_reg[5]/C
+src31_reg[6]/C
+src31_reg[7]/C
+src31_reg[8]/C
+src31_reg[9]/C
+src32_reg[0]/C
+src32_reg[10]/C
+src32_reg[11]/C
+src32_reg[12]/C
+src32_reg[1]/C
+src32_reg[2]/C
+src32_reg[3]/C
+src32_reg[4]/C
+src32_reg[5]/C
+src32_reg[6]/C
+src32_reg[7]/C
+src32_reg[8]/C
+src32_reg[9]/C
+src33_reg[0]/C
+src33_reg[10]/C
+src33_reg[11]/C
+src33_reg[1]/C
+src33_reg[2]/C
+src33_reg[3]/C
+src33_reg[4]/C
+src33_reg[5]/C
+src33_reg[6]/C
+src33_reg[7]/C
+src33_reg[8]/C
+src33_reg[9]/C
+src34_reg[0]/C
+src34_reg[10]/C
+src34_reg[1]/C
+src34_reg[2]/C
+src34_reg[3]/C
+src34_reg[4]/C
+src34_reg[5]/C
+src34_reg[6]/C
+src34_reg[7]/C
+src34_reg[8]/C
+src34_reg[9]/C
+src35_reg[0]/C
+src35_reg[1]/C
+src35_reg[2]/C
+src35_reg[3]/C
+src35_reg[4]/C
+src35_reg[5]/C
+src35_reg[6]/C
+src35_reg[7]/C
+src35_reg[8]/C
+src35_reg[9]/C
+src36_reg[0]/C
+src36_reg[1]/C
+src36_reg[2]/C
+src36_reg[3]/C
+src36_reg[4]/C
+src36_reg[5]/C
+src36_reg[6]/C
+src36_reg[7]/C
+src36_reg[8]/C
+src37_reg[0]/C
+src37_reg[1]/C
+src37_reg[2]/C
+src37_reg[3]/C
+src37_reg[4]/C
+src37_reg[5]/C
+src37_reg[6]/C
+src37_reg[7]/C
+src38_reg[0]/C
+src38_reg[1]/C
+src38_reg[2]/C
+src38_reg[3]/C
+src38_reg[4]/C
+src38_reg[5]/C
+src38_reg[6]/C
+src39_reg[0]/C
+src39_reg[1]/C
+src39_reg[2]/C
+src39_reg[3]/C
+src39_reg[4]/C
+src39_reg[5]/C
+src3_reg[0]/C
+src3_reg[1]/C
+src3_reg[2]/C
+src3_reg[3]/C
+src40_reg[0]/C
+src40_reg[1]/C
+src40_reg[2]/C
+src40_reg[3]/C
+src40_reg[4]/C
+src41_reg[0]/C
+src41_reg[1]/C
+src41_reg[2]/C
+src41_reg[3]/C
+src42_reg[0]/C
+src42_reg[1]/C
+src42_reg[2]/C
+src43_reg[0]/C
+src43_reg[1]/C
+src44_reg[0]/C
+src4_reg[0]/C
+src4_reg[1]/C
+src4_reg[2]/C
+src4_reg[3]/C
+src4_reg[4]/C
+src5_reg[0]/C
+src5_reg[1]/C
+src5_reg[2]/C
+src5_reg[3]/C
+src5_reg[4]/C
+src5_reg[5]/C
+src6_reg[0]/C
+src6_reg[1]/C
+src6_reg[2]/C
+src6_reg[3]/C
+src6_reg[4]/C
+src6_reg[5]/C
+src6_reg[6]/C
+src7_reg[0]/C
+src7_reg[1]/C
+src7_reg[2]/C
+src7_reg[3]/C
+src7_reg[4]/C
+src7_reg[5]/C
+src7_reg[6]/C
+src7_reg[7]/C
+src8_reg[0]/C
+src8_reg[1]/C
+src8_reg[2]/C
+src8_reg[3]/C
+src8_reg[4]/C
+src8_reg[5]/C
+src8_reg[6]/C
+src8_reg[7]/C
+src8_reg[8]/C
+src9_reg[0]/C
+src9_reg[1]/C
+src9_reg[2]/C
+src9_reg[3]/C
+src9_reg[4]/C
+src9_reg[5]/C
+src9_reg[6]/C
+src9_reg[7]/C
+src9_reg[8]/C
+src9_reg[9]/C
+
+
+2. checking constant_clock (0)
+------------------------------
+ There are 0 register/latch pins with constant_clock.
+
+
+3. checking pulse_width_clock (0)
+---------------------------------
+ There are 0 register/latch pins which need pulse_width check
+
+
+4. checking unconstrained_internal_endpoints (529)
+--------------------------------------------------
+ There are 529 pins that are not constrained for maximum delay. (HIGH)
+
+src0_reg[0]/D
+src10_reg[0]/D
+src10_reg[10]/D
+src10_reg[1]/D
+src10_reg[2]/D
+src10_reg[3]/D
+src10_reg[4]/D
+src10_reg[5]/D
+src10_reg[6]/D
+src10_reg[7]/D
+src10_reg[8]/D
+src10_reg[9]/D
+src11_reg[0]/D
+src11_reg[10]/D
+src11_reg[11]/D
+src11_reg[1]/D
+src11_reg[2]/D
+src11_reg[3]/D
+src11_reg[4]/D
+src11_reg[5]/D
+src11_reg[6]/D
+src11_reg[7]/D
+src11_reg[8]/D
+src11_reg[9]/D
+src12_reg[0]/D
+src12_reg[10]/D
+src12_reg[11]/D
+src12_reg[12]/D
+src12_reg[1]/D
+src12_reg[2]/D
+src12_reg[3]/D
+src12_reg[4]/D
+src12_reg[5]/D
+src12_reg[6]/D
+src12_reg[7]/D
+src12_reg[8]/D
+src12_reg[9]/D
+src13_reg[0]/D
+src13_reg[10]/D
+src13_reg[11]/D
+src13_reg[12]/D
+src13_reg[13]/D
+src13_reg[1]/D
+src13_reg[2]/D
+src13_reg[3]/D
+src13_reg[4]/D
+src13_reg[5]/D
+src13_reg[6]/D
+src13_reg[7]/D
+src13_reg[8]/D
+src13_reg[9]/D
+src14_reg[0]/D
+src14_reg[10]/D
+src14_reg[11]/D
+src14_reg[12]/D
+src14_reg[13]/D
+src14_reg[14]/D
+src14_reg[1]/D
+src14_reg[2]/D
+src14_reg[3]/D
+src14_reg[4]/D
+src14_reg[5]/D
+src14_reg[6]/D
+src14_reg[7]/D
+src14_reg[8]/D
+src14_reg[9]/D
+src15_reg[0]/D
+src15_reg[10]/D
+src15_reg[11]/D
+src15_reg[12]/D
+src15_reg[13]/D
+src15_reg[14]/D
+src15_reg[15]/D
+src15_reg[1]/D
+src15_reg[2]/D
+src15_reg[3]/D
+src15_reg[4]/D
+src15_reg[5]/D
+src15_reg[6]/D
+src15_reg[7]/D
+src15_reg[8]/D
+src15_reg[9]/D
+src16_reg[0]/D
+src16_reg[10]/D
+src16_reg[11]/D
+src16_reg[12]/D
+src16_reg[13]/D
+src16_reg[14]/D
+src16_reg[15]/D
+src16_reg[16]/D
+src16_reg[1]/D
+src16_reg[2]/D
+src16_reg[3]/D
+src16_reg[4]/D
+src16_reg[5]/D
+src16_reg[6]/D
+src16_reg[7]/D
+src16_reg[8]/D
+src16_reg[9]/D
+src17_reg[0]/D
+src17_reg[10]/D
+src17_reg[11]/D
+src17_reg[12]/D
+src17_reg[13]/D
+src17_reg[14]/D
+src17_reg[15]/D
+src17_reg[16]/D
+src17_reg[17]/D
+src17_reg[1]/D
+src17_reg[2]/D
+src17_reg[3]/D
+src17_reg[4]/D
+src17_reg[5]/D
+src17_reg[6]/D
+src17_reg[7]/D
+src17_reg[8]/D
+src17_reg[9]/D
+src18_reg[0]/D
+src18_reg[10]/D
+src18_reg[11]/D
+src18_reg[12]/D
+src18_reg[13]/D
+src18_reg[14]/D
+src18_reg[15]/D
+src18_reg[16]/D
+src18_reg[17]/D
+src18_reg[18]/D
+src18_reg[1]/D
+src18_reg[2]/D
+src18_reg[3]/D
+src18_reg[4]/D
+src18_reg[5]/D
+src18_reg[6]/D
+src18_reg[7]/D
+src18_reg[8]/D
+src18_reg[9]/D
+src19_reg[0]/D
+src19_reg[10]/D
+src19_reg[11]/D
+src19_reg[12]/D
+src19_reg[13]/D
+src19_reg[14]/D
+src19_reg[15]/D
+src19_reg[16]/D
+src19_reg[17]/D
+src19_reg[18]/D
+src19_reg[19]/D
+src19_reg[1]/D
+src19_reg[2]/D
+src19_reg[3]/D
+src19_reg[4]/D
+src19_reg[5]/D
+src19_reg[6]/D
+src19_reg[7]/D
+src19_reg[8]/D
+src19_reg[9]/D
+src1_reg[0]/D
+src1_reg[1]/D
+src20_reg[0]/D
+src20_reg[10]/D
+src20_reg[11]/D
+src20_reg[12]/D
+src20_reg[13]/D
+src20_reg[14]/D
+src20_reg[15]/D
+src20_reg[16]/D
+src20_reg[17]/D
+src20_reg[18]/D
+src20_reg[19]/D
+src20_reg[1]/D
+src20_reg[20]/D
+src20_reg[2]/D
+src20_reg[3]/D
+src20_reg[4]/D
+src20_reg[5]/D
+src20_reg[6]/D
+src20_reg[7]/D
+src20_reg[8]/D
+src20_reg[9]/D
+src21_reg[0]/D
+src21_reg[10]/D
+src21_reg[11]/D
+src21_reg[12]/D
+src21_reg[13]/D
+src21_reg[14]/D
+src21_reg[15]/D
+src21_reg[16]/D
+src21_reg[17]/D
+src21_reg[18]/D
+src21_reg[19]/D
+src21_reg[1]/D
+src21_reg[20]/D
+src21_reg[21]/D
+src21_reg[2]/D
+src21_reg[3]/D
+src21_reg[4]/D
+src21_reg[5]/D
+src21_reg[6]/D
+src21_reg[7]/D
+src21_reg[8]/D
+src21_reg[9]/D
+src22_reg[0]/D
+src22_reg[10]/D
+src22_reg[11]/D
+src22_reg[12]/D
+src22_reg[13]/D
+src22_reg[14]/D
+src22_reg[15]/D
+src22_reg[16]/D
+src22_reg[17]/D
+src22_reg[18]/D
+src22_reg[19]/D
+src22_reg[1]/D
+src22_reg[20]/D
+src22_reg[21]/D
+src22_reg[22]/D
+src22_reg[2]/D
+src22_reg[3]/D
+src22_reg[4]/D
+src22_reg[5]/D
+src22_reg[6]/D
+src22_reg[7]/D
+src22_reg[8]/D
+src22_reg[9]/D
+src23_reg[0]/D
+src23_reg[10]/D
+src23_reg[11]/D
+src23_reg[12]/D
+src23_reg[13]/D
+src23_reg[14]/D
+src23_reg[15]/D
+src23_reg[16]/D
+src23_reg[17]/D
+src23_reg[18]/D
+src23_reg[19]/D
+src23_reg[1]/D
+src23_reg[20]/D
+src23_reg[21]/D
+src23_reg[2]/D
+src23_reg[3]/D
+src23_reg[4]/D
+src23_reg[5]/D
+src23_reg[6]/D
+src23_reg[7]/D
+src23_reg[8]/D
+src23_reg[9]/D
+src24_reg[0]/D
+src24_reg[10]/D
+src24_reg[11]/D
+src24_reg[12]/D
+src24_reg[13]/D
+src24_reg[14]/D
+src24_reg[15]/D
+src24_reg[16]/D
+src24_reg[17]/D
+src24_reg[18]/D
+src24_reg[19]/D
+src24_reg[1]/D
+src24_reg[20]/D
+src24_reg[2]/D
+src24_reg[3]/D
+src24_reg[4]/D
+src24_reg[5]/D
+src24_reg[6]/D
+src24_reg[7]/D
+src24_reg[8]/D
+src24_reg[9]/D
+src25_reg[0]/D
+src25_reg[10]/D
+src25_reg[11]/D
+src25_reg[12]/D
+src25_reg[13]/D
+src25_reg[14]/D
+src25_reg[15]/D
+src25_reg[16]/D
+src25_reg[17]/D
+src25_reg[18]/D
+src25_reg[19]/D
+src25_reg[1]/D
+src25_reg[2]/D
+src25_reg[3]/D
+src25_reg[4]/D
+src25_reg[5]/D
+src25_reg[6]/D
+src25_reg[7]/D
+src25_reg[8]/D
+src25_reg[9]/D
+src26_reg[0]/D
+src26_reg[10]/D
+src26_reg[11]/D
+src26_reg[12]/D
+src26_reg[13]/D
+src26_reg[14]/D
+src26_reg[15]/D
+src26_reg[16]/D
+src26_reg[17]/D
+src26_reg[18]/D
+src26_reg[1]/D
+src26_reg[2]/D
+src26_reg[3]/D
+src26_reg[4]/D
+src26_reg[5]/D
+src26_reg[6]/D
+src26_reg[7]/D
+src26_reg[8]/D
+src26_reg[9]/D
+src27_reg[0]/D
+src27_reg[10]/D
+src27_reg[11]/D
+src27_reg[12]/D
+src27_reg[13]/D
+src27_reg[14]/D
+src27_reg[15]/D
+src27_reg[16]/D
+src27_reg[17]/D
+src27_reg[1]/D
+src27_reg[2]/D
+src27_reg[3]/D
+src27_reg[4]/D
+src27_reg[5]/D
+src27_reg[6]/D
+src27_reg[7]/D
+src27_reg[8]/D
+src27_reg[9]/D
+src28_reg[0]/D
+src28_reg[10]/D
+src28_reg[11]/D
+src28_reg[12]/D
+src28_reg[13]/D
+src28_reg[14]/D
+src28_reg[15]/D
+src28_reg[16]/D
+src28_reg[1]/D
+src28_reg[2]/D
+src28_reg[3]/D
+src28_reg[4]/D
+src28_reg[5]/D
+src28_reg[6]/D
+src28_reg[7]/D
+src28_reg[8]/D
+src28_reg[9]/D
+src29_reg[0]/D
+src29_reg[10]/D
+src29_reg[11]/D
+src29_reg[12]/D
+src29_reg[13]/D
+src29_reg[14]/D
+src29_reg[15]/D
+src29_reg[1]/D
+src29_reg[2]/D
+src29_reg[3]/D
+src29_reg[4]/D
+src29_reg[5]/D
+src29_reg[6]/D
+src29_reg[7]/D
+src29_reg[8]/D
+src29_reg[9]/D
+src2_reg[0]/D
+src2_reg[1]/D
+src2_reg[2]/D
+src30_reg[0]/D
+src30_reg[10]/D
+src30_reg[11]/D
+src30_reg[12]/D
+src30_reg[13]/D
+src30_reg[14]/D
+src30_reg[1]/D
+src30_reg[2]/D
+src30_reg[3]/D
+src30_reg[4]/D
+src30_reg[5]/D
+src30_reg[6]/D
+src30_reg[7]/D
+src30_reg[8]/D
+src30_reg[9]/D
+src31_reg[0]/D
+src31_reg[10]/D
+src31_reg[11]/D
+src31_reg[12]/D
+src31_reg[13]/D
+src31_reg[1]/D
+src31_reg[2]/D
+src31_reg[3]/D
+src31_reg[4]/D
+src31_reg[5]/D
+src31_reg[6]/D
+src31_reg[7]/D
+src31_reg[8]/D
+src31_reg[9]/D
+src32_reg[0]/D
+src32_reg[10]/D
+src32_reg[11]/D
+src32_reg[12]/D
+src32_reg[1]/D
+src32_reg[2]/D
+src32_reg[3]/D
+src32_reg[4]/D
+src32_reg[5]/D
+src32_reg[6]/D
+src32_reg[7]/D
+src32_reg[8]/D
+src32_reg[9]/D
+src33_reg[0]/D
+src33_reg[10]/D
+src33_reg[11]/D
+src33_reg[1]/D
+src33_reg[2]/D
+src33_reg[3]/D
+src33_reg[4]/D
+src33_reg[5]/D
+src33_reg[6]/D
+src33_reg[7]/D
+src33_reg[8]/D
+src33_reg[9]/D
+src34_reg[0]/D
+src34_reg[10]/D
+src34_reg[1]/D
+src34_reg[2]/D
+src34_reg[3]/D
+src34_reg[4]/D
+src34_reg[5]/D
+src34_reg[6]/D
+src34_reg[7]/D
+src34_reg[8]/D
+src34_reg[9]/D
+src35_reg[0]/D
+src35_reg[1]/D
+src35_reg[2]/D
+src35_reg[3]/D
+src35_reg[4]/D
+src35_reg[5]/D
+src35_reg[6]/D
+src35_reg[7]/D
+src35_reg[8]/D
+src35_reg[9]/D
+src36_reg[0]/D
+src36_reg[1]/D
+src36_reg[2]/D
+src36_reg[3]/D
+src36_reg[4]/D
+src36_reg[5]/D
+src36_reg[6]/D
+src36_reg[7]/D
+src36_reg[8]/D
+src37_reg[0]/D
+src37_reg[1]/D
+src37_reg[2]/D
+src37_reg[3]/D
+src37_reg[4]/D
+src37_reg[5]/D
+src37_reg[6]/D
+src37_reg[7]/D
+src38_reg[0]/D
+src38_reg[1]/D
+src38_reg[2]/D
+src38_reg[3]/D
+src38_reg[4]/D
+src38_reg[5]/D
+src38_reg[6]/D
+src39_reg[0]/D
+src39_reg[1]/D
+src39_reg[2]/D
+src39_reg[3]/D
+src39_reg[4]/D
+src39_reg[5]/D
+src3_reg[0]/D
+src3_reg[1]/D
+src3_reg[2]/D
+src3_reg[3]/D
+src40_reg[0]/D
+src40_reg[1]/D
+src40_reg[2]/D
+src40_reg[3]/D
+src40_reg[4]/D
+src41_reg[0]/D
+src41_reg[1]/D
+src41_reg[2]/D
+src41_reg[3]/D
+src42_reg[0]/D
+src42_reg[1]/D
+src42_reg[2]/D
+src43_reg[0]/D
+src43_reg[1]/D
+src44_reg[0]/D
+src4_reg[0]/D
+src4_reg[1]/D
+src4_reg[2]/D
+src4_reg[3]/D
+src4_reg[4]/D
+src5_reg[0]/D
+src5_reg[1]/D
+src5_reg[2]/D
+src5_reg[3]/D
+src5_reg[4]/D
+src5_reg[5]/D
+src6_reg[0]/D
+src6_reg[1]/D
+src6_reg[2]/D
+src6_reg[3]/D
+src6_reg[4]/D
+src6_reg[5]/D
+src6_reg[6]/D
+src7_reg[0]/D
+src7_reg[1]/D
+src7_reg[2]/D
+src7_reg[3]/D
+src7_reg[4]/D
+src7_reg[5]/D
+src7_reg[6]/D
+src7_reg[7]/D
+src8_reg[0]/D
+src8_reg[1]/D
+src8_reg[2]/D
+src8_reg[3]/D
+src8_reg[4]/D
+src8_reg[5]/D
+src8_reg[6]/D
+src8_reg[7]/D
+src8_reg[8]/D
+src9_reg[0]/D
+src9_reg[1]/D
+src9_reg[2]/D
+src9_reg[3]/D
+src9_reg[4]/D
+src9_reg[5]/D
+src9_reg[6]/D
+src9_reg[7]/D
+src9_reg[8]/D
+src9_reg[9]/D
+
+ There are 0 pins that are not constrained for maximum delay due to constant clock.
+
+
+5. checking no_input_delay (45)
+-------------------------------
+ There are 45 input ports with no input delay specified. (HIGH)
+
+src0_
+src10_
+src11_
+src12_
+src13_
+src14_
+src15_
+src16_
+src17_
+src18_
+src19_
+src1_
+src20_
+src21_
+src22_
+src23_
+src24_
+src25_
+src26_
+src27_
+src28_
+src29_
+src2_
+src30_
+src31_
+src32_
+src33_
+src34_
+src35_
+src36_
+src37_
+src38_
+src39_
+src3_
+src40_
+src41_
+src42_
+src43_
+src44_
+src4_
+src5_
+src6_
+src7_
+src8_
+src9_
+
+ There are 0 input ports with no input delay but user has a false path constraint.
+
+
+6. checking no_output_delay (47)
+--------------------------------
+ There are 47 ports with no output delay specified. (HIGH)
+
+dst0[0]
+dst10[0]
+dst11[0]
+dst12[0]
+dst13[0]
+dst14[0]
+dst15[0]
+dst16[0]
+dst17[0]
+dst18[0]
+dst19[0]
+dst1[0]
+dst20[0]
+dst21[0]
+dst22[0]
+dst23[0]
+dst24[0]
+dst25[0]
+dst26[0]
+dst27[0]
+dst28[0]
+dst29[0]
+dst2[0]
+dst30[0]
+dst31[0]
+dst32[0]
+dst33[0]
+dst34[0]
+dst35[0]
+dst36[0]
+dst37[0]
+dst38[0]
+dst39[0]
+dst3[0]
+dst40[0]
+dst41[0]
+dst42[0]
+dst43[0]
+dst44[0]
+dst45[0]
+dst46[0]
+dst4[0]
+dst5[0]
+dst6[0]
+dst7[0]
+dst8[0]
+dst9[0]
+
+ There are 0 ports with no output delay but user has a false path constraint
+
+ There are 0 ports with no output delay but with a timing clock defined on it or propagating through it
+
+
+7. checking multiple_clock (0)
+------------------------------
+ There are 0 register/latch pins with multiple clocks.
+
+
+8. checking generated_clocks (0)
+--------------------------------
+ There are 0 generated clocks that are not connected to a clock source.
+
+
+9. checking loops (0)
+---------------------
+ There are 0 combinational loops in the design.
+
+
+10. checking partial_input_delay (0)
+------------------------------------
+ There are 0 input ports with partial input delay specified.
+
+
+11. checking partial_output_delay (0)
+-------------------------------------
+ There are 0 ports with partial output delay specified.
+
+
+12. checking latch_loops (0)
+----------------------------
+ There are 0 combinational latch loops in the design through latch input
+
+
+
+------------------------------------------------------------------------------------------------
+| Design Timing Summary
+| ---------------------
+------------------------------------------------------------------------------------------------
+
+    WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+    -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+        inf        0.000                      0                  576          inf        0.000                      0                  576           NA           NA                      NA                    NA  
+
+
+There are no user specified timing constraints.
+
+
+------------------------------------------------------------------------------------------------
+| Clock Summary
+| -------------
+------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------
+| Intra Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+Clock             WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints     WPWS(ns)     TPWS(ns)  TPWS Failing Endpoints  TPWS Total Endpoints  
+-----             -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------     --------     --------  ----------------------  --------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Inter Clock Table
+| -----------------
+------------------------------------------------------------------------------------------------
+
+From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| Other Path Groups Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock          WNS(ns)      TNS(ns)  TNS Failing Endpoints  TNS Total Endpoints      WHS(ns)      THS(ns)  THS Failing Endpoints  THS Total Endpoints  
+----------    ----------    --------          -------      -------  ---------------------  -------------------      -------      -------  ---------------------  -------------------  
+
+
+------------------------------------------------------------------------------------------------
+| User Ignored Path Table
+| -----------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+
+
+------------------------------------------------------------------------------------------------
+| Unconstrained Path Table
+| ------------------------
+------------------------------------------------------------------------------------------------
+
+Path Group    From Clock    To Clock    
+----------    ----------    --------    
+(none)                                    
+
+
+------------------------------------------------------------------------------------------------
+| Timing Details
+| --------------
+------------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------
+Path Group:  (none)
+From Clock:  
+  To Clock:  
+
+Max Delay           576 Endpoints
+Min Delay           576 Endpoints
+--------------------------------------------------------------------------------------
+
+
+Max Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst41[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.074ns  (logic 5.008ns (45.225%)  route 6.066ns (54.775%))
+  Logic Levels:           13  (CARRY4=7 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.614 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CO[3]
+                         net (fo=1, routed)           0.000     6.614    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[35]
+    SLICE_X2Y104                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/CI
+    SLICE_X2Y104         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.706 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/CO[3]
+                         net (fo=1, routed)           0.000     6.706    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[39]
+    SLICE_X2Y105                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst10/CI
+    SLICE_X2Y105         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.929 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst10/O[1]
+                         net (fo=1, routed)           1.770     8.699    dst41_OBUF[0]
+    M13                                                               r  dst41_OBUF[0]_inst/I
+    M13                  OBUF (Prop_obuf_I_O)         2.375    11.074 r  dst41_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.074    dst41[0]
+    M13                                                               r  dst41[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src9_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst29[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.035ns  (logic 5.426ns (49.170%)  route 5.609ns (50.830%))
+  Logic Levels:           14  (CARRY4=8 FDRE=1 LUT2=2 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y114         FDRE                         0.000     0.000 r  src9_reg[0]/C
+    SLICE_X0Y114         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src9_reg[0]/Q
+                         net (fo=5, routed)           1.108     1.449    compressor/comp/gpc2/src9[0]
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/lut5_prop1/I4
+    SLICE_X1Y101         LUT5 (Prop_lut5_I4_O)        0.097     1.546 r  compressor/comp/gpc2/lut5_prop1/O
+                         net (fo=1, routed)           0.000     1.546    compressor/comp/gpc2/lut5_prop1_n_0
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/carry4_inst0/S[1]
+    SLICE_X1Y101         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     2.023 r  compressor/comp/gpc2/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.925     2.947    compressor/comp/gpc109/dst[0]
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/lut4_prop1/I3
+    SLICE_X4Y98          LUT4 (Prop_lut4_I3_O)        0.234     3.181 r  compressor/comp/gpc109/lut4_prop1/O
+                         net (fo=1, routed)           0.000     3.181    compressor/comp/gpc109/lut4_prop1_n_0
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/carry4_inst0/S[1]
+    SLICE_X4Y98          CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     3.658 r  compressor/comp/gpc109/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.603     4.262    compressor/comp/gpc212/src3[1]
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/lut2_prop3/I1
+    SLICE_X3Y98          LUT2 (Prop_lut2_I1_O)        0.234     4.496 r  compressor/comp/gpc212/lut2_prop3/O
+                         net (fo=1, routed)           0.000     4.496    compressor/comp/gpc212/lut2_prop3_n_0
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/carry4_inst0/S[3]
+    SLICE_X3Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.299     4.795 r  compressor/comp/gpc212/carry4_inst0/CO[3]
+                         net (fo=2, routed)           0.858     5.653    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene15_0[3]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/I1
+    SLICE_X2Y98          LUT2 (Prop_lut2_I1_O)        0.097     5.750 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/O
+                         net (fo=1, routed)           0.000     5.750    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[15]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/S[3]
+    SLICE_X2Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.034 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/CO[3]
+                         net (fo=1, routed)           0.000     6.034    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[15]
+    SLICE_X2Y99                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CI
+    SLICE_X2Y99          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.126 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CO[3]
+                         net (fo=1, routed)           0.001     6.126    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[19]
+    SLICE_X2Y100                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/CI
+    SLICE_X2Y100         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.218 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/CO[3]
+                         net (fo=1, routed)           0.000     6.218    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[23]
+    SLICE_X2Y101                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst6/CI
+    SLICE_X2Y101         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.310 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst6/CO[3]
+                         net (fo=1, routed)           0.000     6.310    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[27]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CI
+    SLICE_X2Y102         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.533 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/O[1]
+                         net (fo=1, routed)           2.115     8.648    dst29_OBUF[0]
+    T14                                                               r  dst29_OBUF[0]_inst/I
+    T14                  OBUF (Prop_obuf_I_O)         2.387    11.035 r  dst29_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.035    dst29[0]
+    T14                                                               r  dst29[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst32[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.024ns  (logic 4.754ns (43.125%)  route 6.270ns (56.875%))
+  Logic Levels:           11  (CARRY4=5 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.157     6.679 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/O[0]
+                         net (fo=1, routed)           1.974     8.653    dst32_OBUF[0]
+    P17                                                               r  dst32_OBUF[0]_inst/I
+    P17                  OBUF (Prop_obuf_I_O)         2.371    11.024 r  dst32_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.024    dst32[0]
+    P17                                                               r  dst32[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst40[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.020ns  (logic 4.947ns (44.891%)  route 6.073ns (55.109%))
+  Logic Levels:           13  (CARRY4=7 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.614 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CO[3]
+                         net (fo=1, routed)           0.000     6.614    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[35]
+    SLICE_X2Y104                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/CI
+    SLICE_X2Y104         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.706 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/CO[3]
+                         net (fo=1, routed)           0.000     6.706    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[39]
+    SLICE_X2Y105                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst10/CI
+    SLICE_X2Y105         CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.157     6.863 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst10/O[0]
+                         net (fo=1, routed)           1.777     8.640    dst40_OBUF[0]
+    R18                                                               r  dst40_OBUF[0]_inst/I
+    R18                  OBUF (Prop_obuf_I_O)         2.380    11.020 r  dst40_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.020    dst40[0]
+    R18                                                               r  dst40[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src9_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst21[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.015ns  (logic 5.246ns (47.622%)  route 5.770ns (52.378%))
+  Logic Levels:           12  (CARRY4=6 FDRE=1 LUT2=2 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y114         FDRE                         0.000     0.000 r  src9_reg[0]/C
+    SLICE_X0Y114         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src9_reg[0]/Q
+                         net (fo=5, routed)           1.108     1.449    compressor/comp/gpc2/src9[0]
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/lut5_prop1/I4
+    SLICE_X1Y101         LUT5 (Prop_lut5_I4_O)        0.097     1.546 r  compressor/comp/gpc2/lut5_prop1/O
+                         net (fo=1, routed)           0.000     1.546    compressor/comp/gpc2/lut5_prop1_n_0
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/carry4_inst0/S[1]
+    SLICE_X1Y101         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     2.023 r  compressor/comp/gpc2/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.925     2.947    compressor/comp/gpc109/dst[0]
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/lut4_prop1/I3
+    SLICE_X4Y98          LUT4 (Prop_lut4_I3_O)        0.234     3.181 r  compressor/comp/gpc109/lut4_prop1/O
+                         net (fo=1, routed)           0.000     3.181    compressor/comp/gpc109/lut4_prop1_n_0
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/carry4_inst0/S[1]
+    SLICE_X4Y98          CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     3.658 r  compressor/comp/gpc109/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.603     4.262    compressor/comp/gpc212/src3[1]
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/lut2_prop3/I1
+    SLICE_X3Y98          LUT2 (Prop_lut2_I1_O)        0.234     4.496 r  compressor/comp/gpc212/lut2_prop3/O
+                         net (fo=1, routed)           0.000     4.496    compressor/comp/gpc212/lut2_prop3_n_0
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/carry4_inst0/S[3]
+    SLICE_X3Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.299     4.795 r  compressor/comp/gpc212/carry4_inst0/CO[3]
+                         net (fo=2, routed)           0.858     5.653    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene15_0[3]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/I1
+    SLICE_X2Y98          LUT2 (Prop_lut2_I1_O)        0.097     5.750 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/O
+                         net (fo=1, routed)           0.000     5.750    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[15]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/S[3]
+    SLICE_X2Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.034 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/CO[3]
+                         net (fo=1, routed)           0.000     6.034    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[15]
+    SLICE_X2Y99                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CI
+    SLICE_X2Y99          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.126 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CO[3]
+                         net (fo=1, routed)           0.001     6.126    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[19]
+    SLICE_X2Y100                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/CI
+    SLICE_X2Y100         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.349 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/O[1]
+                         net (fo=1, routed)           2.275     8.625    dst21_OBUF[0]
+    U16                                                               r  dst21_OBUF[0]_inst/I
+    U16                  OBUF (Prop_obuf_I_O)         2.391    11.015 r  dst21_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.015    dst21[0]
+    U16                                                               r  dst21[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst37[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.013ns  (logic 4.908ns (44.562%)  route 6.106ns (55.438%))
+  Logic Levels:           12  (CARRY4=6 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.614 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CO[3]
+                         net (fo=1, routed)           0.000     6.614    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[35]
+    SLICE_X2Y104                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/CI
+    SLICE_X2Y104         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.837 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst9/O[1]
+                         net (fo=1, routed)           1.810     8.647    dst37_OBUF[0]
+    N17                                                               r  dst37_OBUF[0]_inst/I
+    N17                  OBUF (Prop_obuf_I_O)         2.367    11.013 r  dst37_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.013    dst37[0]
+    N17                                                               r  dst37[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst34[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        11.006ns  (logic 4.765ns (43.292%)  route 6.241ns (56.708%))
+  Logic Levels:           11  (CARRY4=5 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_O[2])
+                                                      0.180     6.702 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/O[2]
+                         net (fo=1, routed)           1.945     8.647    dst34_OBUF[0]
+    M17                                                               r  dst34_OBUF[0]_inst/I
+    M17                  OBUF (Prop_obuf_I_O)         2.359    11.006 r  dst34_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    11.006    dst34[0]
+    M17                                                               r  dst34[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src9_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst19[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        10.991ns  (logic 5.183ns (47.157%)  route 5.808ns (52.843%))
+  Logic Levels:           11  (CARRY4=5 FDRE=1 LUT2=2 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y114         FDRE                         0.000     0.000 r  src9_reg[0]/C
+    SLICE_X0Y114         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src9_reg[0]/Q
+                         net (fo=5, routed)           1.108     1.449    compressor/comp/gpc2/src9[0]
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/lut5_prop1/I4
+    SLICE_X1Y101         LUT5 (Prop_lut5_I4_O)        0.097     1.546 r  compressor/comp/gpc2/lut5_prop1/O
+                         net (fo=1, routed)           0.000     1.546    compressor/comp/gpc2/lut5_prop1_n_0
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/carry4_inst0/S[1]
+    SLICE_X1Y101         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     2.023 r  compressor/comp/gpc2/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.925     2.947    compressor/comp/gpc109/dst[0]
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/lut4_prop1/I3
+    SLICE_X4Y98          LUT4 (Prop_lut4_I3_O)        0.234     3.181 r  compressor/comp/gpc109/lut4_prop1/O
+                         net (fo=1, routed)           0.000     3.181    compressor/comp/gpc109/lut4_prop1_n_0
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/carry4_inst0/S[1]
+    SLICE_X4Y98          CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     3.658 r  compressor/comp/gpc109/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.603     4.262    compressor/comp/gpc212/src3[1]
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/lut2_prop3/I1
+    SLICE_X3Y98          LUT2 (Prop_lut2_I1_O)        0.234     4.496 r  compressor/comp/gpc212/lut2_prop3/O
+                         net (fo=1, routed)           0.000     4.496    compressor/comp/gpc212/lut2_prop3_n_0
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/carry4_inst0/S[3]
+    SLICE_X3Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.299     4.795 r  compressor/comp/gpc212/carry4_inst0/CO[3]
+                         net (fo=2, routed)           0.858     5.653    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene15_0[3]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/I1
+    SLICE_X2Y98          LUT2 (Prop_lut2_I1_O)        0.097     5.750 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/O
+                         net (fo=1, routed)           0.000     5.750    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[15]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/S[3]
+    SLICE_X2Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.034 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/CO[3]
+                         net (fo=1, routed)           0.000     6.034    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[15]
+    SLICE_X2Y99                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CI
+    SLICE_X2Y99          CARRY4 (Prop_carry4_CI_O[3])
+                                                      0.237     6.271 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/O[3]
+                         net (fo=1, routed)           2.314     8.585    dst19_OBUF[0]
+    U11                                                               r  dst19_OBUF[0]_inst/I
+    U11                  OBUF (Prop_obuf_I_O)         2.406    10.991 r  dst19_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    10.991    dst19[0]
+    U11                                                               r  dst19[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src9_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst25[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        10.984ns  (logic 5.334ns (48.565%)  route 5.649ns (51.435%))
+  Logic Levels:           13  (CARRY4=7 FDRE=1 LUT2=2 LUT4=1 LUT5=1 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y114         FDRE                         0.000     0.000 r  src9_reg[0]/C
+    SLICE_X0Y114         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src9_reg[0]/Q
+                         net (fo=5, routed)           1.108     1.449    compressor/comp/gpc2/src9[0]
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/lut5_prop1/I4
+    SLICE_X1Y101         LUT5 (Prop_lut5_I4_O)        0.097     1.546 r  compressor/comp/gpc2/lut5_prop1/O
+                         net (fo=1, routed)           0.000     1.546    compressor/comp/gpc2/lut5_prop1_n_0
+    SLICE_X1Y101                                                      r  compressor/comp/gpc2/carry4_inst0/S[1]
+    SLICE_X1Y101         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     2.023 r  compressor/comp/gpc2/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.925     2.947    compressor/comp/gpc109/dst[0]
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/lut4_prop1/I3
+    SLICE_X4Y98          LUT4 (Prop_lut4_I3_O)        0.234     3.181 r  compressor/comp/gpc109/lut4_prop1/O
+                         net (fo=1, routed)           0.000     3.181    compressor/comp/gpc109/lut4_prop1_n_0
+    SLICE_X4Y98                                                       r  compressor/comp/gpc109/carry4_inst0/S[1]
+    SLICE_X4Y98          CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     3.658 r  compressor/comp/gpc109/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.603     4.262    compressor/comp/gpc212/src3[1]
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/lut2_prop3/I1
+    SLICE_X3Y98          LUT2 (Prop_lut2_I1_O)        0.234     4.496 r  compressor/comp/gpc212/lut2_prop3/O
+                         net (fo=1, routed)           0.000     4.496    compressor/comp/gpc212/lut2_prop3_n_0
+    SLICE_X3Y98                                                       r  compressor/comp/gpc212/carry4_inst0/S[3]
+    SLICE_X3Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.299     4.795 r  compressor/comp/gpc212/carry4_inst0/CO[3]
+                         net (fo=2, routed)           0.858     5.653    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene15_0[3]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/I1
+    SLICE_X2Y98          LUT2 (Prop_lut2_I1_O)        0.097     5.750 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop15/O
+                         net (fo=1, routed)           0.000     5.750    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[15]
+    SLICE_X2Y98                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/S[3]
+    SLICE_X2Y98          CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.034 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst3/CO[3]
+                         net (fo=1, routed)           0.000     6.034    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[15]
+    SLICE_X2Y99                                                       r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CI
+    SLICE_X2Y99          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.126 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst4/CO[3]
+                         net (fo=1, routed)           0.001     6.126    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[19]
+    SLICE_X2Y100                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/CI
+    SLICE_X2Y100         CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.092     6.218 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst5/CO[3]
+                         net (fo=1, routed)           0.000     6.218    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[23]
+    SLICE_X2Y101                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst6/CI
+    SLICE_X2Y101         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.441 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst6/O[1]
+                         net (fo=1, routed)           2.155     8.596    dst25_OBUF[0]
+    V15                                                               r  dst25_OBUF[0]_inst/I
+    V15                  OBUF (Prop_obuf_I_O)         2.387    10.984 r  dst25_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    10.984    dst25[0]
+    V15                                                               r  dst25[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[3]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst33[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        10.979ns  (logic 4.808ns (43.796%)  route 6.170ns (56.204%))
+  Logic Levels:           11  (CARRY4=5 FDRE=1 LUT2=1 LUT4=1 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X5Y108         FDRE                         0.000     0.000 r  src27_reg[3]/C
+    SLICE_X5Y108         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src27_reg[3]/Q
+                         net (fo=5, routed)           1.140     1.481    compressor/comp/gpc28/lut6_2_inst0/I1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/lut6_2_inst0/LUT6/I1
+    SLICE_X6Y107         LUT6 (Prop_lut6_I1_O)        0.097     1.578 r  compressor/comp/gpc28/lut6_2_inst0/LUT6/O
+                         net (fo=1, routed)           0.000     1.578    compressor/comp/gpc28/lut6_2_inst0_n_1
+    SLICE_X6Y107                                                      r  compressor/comp/gpc28/carry4_inst0/S[0]
+    SLICE_X6Y107         CARRY4 (Prop_carry4_S[0]_O[0])
+                                                      0.190     1.768 r  compressor/comp/gpc28/carry4_inst0/O[0]
+                         net (fo=4, routed)           0.900     2.668    compressor/comp/gpc119/stage1_27[2]
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/lut4_prop1/I1
+    SLICE_X9Y106         LUT4 (Prop_lut4_I1_O)        0.209     2.877 r  compressor/comp/gpc119/lut4_prop1/O
+                         net (fo=1, routed)           0.000     2.877    compressor/comp/gpc119/lut4_prop1_n_0
+    SLICE_X9Y106                                                      r  compressor/comp/gpc119/carry4_inst0/S[1]
+    SLICE_X9Y106         CARRY4 (Prop_carry4_S[1]_O[1])
+                                                      0.169     3.046 r  compressor/comp/gpc119/carry4_inst0/O[1]
+                         net (fo=6, routed)           1.301     4.347    compressor/comp/gpc219/lut6_2_inst1/I1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/lut6_2_inst1/LUT6/I1
+    SLICE_X9Y105         LUT6 (Prop_lut6_I1_O)        0.225     4.572 r  compressor/comp/gpc219/lut6_2_inst1/LUT6/O
+                         net (fo=1, routed)           0.000     4.572    compressor/comp/gpc219/lut6_2_inst1_n_1
+    SLICE_X9Y105                                                      r  compressor/comp/gpc219/carry4_inst0/S[1]
+    SLICE_X9Y105         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     5.049 r  compressor/comp/gpc219/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.955     6.004    compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_gene32_0[2]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/I1
+    SLICE_X2Y102         LUT2 (Prop_lut2_I1_O)        0.234     6.238 r  compressor/ra/ra/rowadder_0/cascade_fa_46/lut2_prop31/O
+                         net (fo=1, routed)           0.000     6.238    compressor/ra/ra/rowadder_0/cascade_fa_46/prop[31]
+    SLICE_X2Y102                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/S[3]
+    SLICE_X2Y102         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.522 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst7/CO[3]
+                         net (fo=1, routed)           0.000     6.522    compressor/ra/ra/rowadder_0/cascade_fa_46/carryout[31]
+    SLICE_X2Y103                                                      r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/CI
+    SLICE_X2Y103         CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.223     6.745 r  compressor/ra/ra/rowadder_0/cascade_fa_46/carry4_inst8/O[1]
+                         net (fo=1, routed)           1.875     8.619    dst33_OBUF[0]
+    N16                                                               r  dst33_OBUF[0]_inst/I
+    N16                  OBUF (Prop_obuf_I_O)         2.359    10.979 r  dst33_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    10.979    dst33[0]
+    N16                                                               r  dst33[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
+Min Delay Paths
+--------------------------------------------------------------------------------------
+Slack:                    inf
+  Source:                 src16_reg[9]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src16_reg[10]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.192ns  (logic 0.128ns (66.739%)  route 0.064ns (33.261%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X9Y96          FDRE                         0.000     0.000 r  src16_reg[9]/C
+    SLICE_X9Y96          FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src16_reg[9]/Q
+                         net (fo=5, routed)           0.064     0.192    src16[9]
+    SLICE_X9Y96          FDRE                                         r  src16_reg[10]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src25_reg[9]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src25_reg[10]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.202ns  (logic 0.128ns (63.237%)  route 0.074ns (36.763%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X15Y106        FDRE                         0.000     0.000 r  src25_reg[9]/C
+    SLICE_X15Y106        FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src25_reg[9]/Q
+                         net (fo=5, routed)           0.074     0.202    src25[9]
+    SLICE_X15Y106        FDRE                                         r  src25_reg[10]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src28_reg[15]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src28_reg[16]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.207ns  (logic 0.141ns (68.045%)  route 0.066ns (31.955%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X11Y108        FDRE                         0.000     0.000 r  src28_reg[15]/C
+    SLICE_X11Y108        FDRE (Prop_fdre_C_Q)         0.141     0.141 r  src28_reg[15]/Q
+                         net (fo=5, routed)           0.066     0.207    src28[15]
+    SLICE_X10Y108        FDRE                                         r  src28_reg[16]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src27_reg[9]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src27_reg[10]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.215ns  (logic 0.148ns (68.717%)  route 0.067ns (31.283%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X8Y107         FDRE                         0.000     0.000 r  src27_reg[9]/C
+    SLICE_X8Y107         FDRE (Prop_fdre_C_Q)         0.148     0.148 r  src27_reg[9]/Q
+                         net (fo=5, routed)           0.067     0.215    src27[9]
+    SLICE_X8Y107         FDRE                                         r  src27_reg[10]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src9_reg[8]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src9_reg[9]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.238ns  (logic 0.128ns (53.810%)  route 0.110ns (46.190%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y98          FDRE                         0.000     0.000 r  src9_reg[8]/C
+    SLICE_X1Y98          FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src9_reg[8]/Q
+                         net (fo=2, routed)           0.110     0.238    src9[8]
+    SLICE_X2Y97          FDRE                                         r  src9_reg[9]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src8_reg[4]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src8_reg[5]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.238ns  (logic 0.128ns (53.707%)  route 0.110ns (46.293%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X3Y97          FDRE                         0.000     0.000 r  src8_reg[4]/C
+    SLICE_X3Y97          FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src8_reg[4]/Q
+                         net (fo=2, routed)           0.110     0.238    src8[4]
+    SLICE_X1Y96          FDRE                                         r  src8_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src26_reg[4]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src26_reg[5]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.239ns  (logic 0.128ns (53.631%)  route 0.111ns (46.369%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X13Y107        FDRE                         0.000     0.000 r  src26_reg[4]/C
+    SLICE_X13Y107        FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src26_reg[4]/Q
+                         net (fo=5, routed)           0.111     0.239    src26[4]
+    SLICE_X14Y107        FDRE                                         r  src26_reg[5]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src20_reg[5]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src20_reg[6]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.243ns  (logic 0.128ns (52.617%)  route 0.115ns (47.383%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X11Y97         FDRE                         0.000     0.000 r  src20_reg[5]/C
+    SLICE_X11Y97         FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src20_reg[5]/Q
+                         net (fo=5, routed)           0.115     0.243    src20[5]
+    SLICE_X10Y96         FDRE                                         r  src20_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src39_reg[1]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src39_reg[2]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.244ns  (logic 0.128ns (52.406%)  route 0.116ns (47.594%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y108         FDRE                         0.000     0.000 r  src39_reg[1]/C
+    SLICE_X1Y108         FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src39_reg[1]/Q
+                         net (fo=5, routed)           0.116     0.244    src39[1]
+    SLICE_X1Y107         FDRE                                         r  src39_reg[2]/D
+  -------------------------------------------------------------------    -------------------
+
+Slack:                    inf
+  Source:                 src22_reg[9]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            src22_reg[10]/D
+  Path Group:             (none)
+  Path Type:              Min at Fast Process Corner
+  Data Path Delay:        0.247ns  (logic 0.128ns (51.816%)  route 0.119ns (48.184%))
+  Logic Levels:           1  (FDRE=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X15Y101        FDRE                         0.000     0.000 r  src22_reg[9]/C
+    SLICE_X15Y101        FDRE (Prop_fdre_C_Q)         0.128     0.128 r  src22_reg[9]/Q
+                         net (fo=7, routed)           0.119     0.247    src22[9]
+    SLICE_X15Y101        FDRE                                         r  src22_reg[10]/D
+  -------------------------------------------------------------------    -------------------
+
+
+
+
+
