@@ -1,0 +1,32 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Aug 23 23:54:21 2024
+# Process ID: 15608
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result
+# Command line: vivado
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 4331.508 MHz, CPU Physical cores: 10, Host memory: 16416 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.xpr
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1
+launch_runs impl_1 -jobs 6
+wait_on_run impl_1
+open_run impl_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/kanai/reserch/rowadders/vertical_shiftregister_result/512_64timing_report.txt
+report_utilization -name utilization_1
+reset_run synth_1
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1
+close_design
+launch_runs impl_1 -jobs 6
+wait_on_run impl_1
+open_run impl_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/512_64timing_report.txt

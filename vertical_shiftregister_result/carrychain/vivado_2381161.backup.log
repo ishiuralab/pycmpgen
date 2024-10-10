@@ -1,0 +1,171 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Aug  9 19:30:21 2024
+# Process ID: 2381161
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result
+# Command line: vivado -mode batch -source auto_synth.tcl
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 4288.024 MHz, CPU Physical cores: 10, Host memory: 16416 MB
+#-----------------------------------------------------------
+source auto_synth.tcl
+# set targetFile "../comp2_1vivado_exe.v"
+# set dirPath "/home/kanai/reserch/pycmpgen/vertical_shiftregister_result"
+# if { [file isdirectory $dirPath] } {
+#     # .vファイルすべて取得
+#     set vFiles [glob -nocomplain "$dirPath/*.v"]
+#     # ファイルの内容を読み込んで表示
+#     if { [llength $vFiles] == 0 } {
+#         puts "No .v files found in the directory."
+#     } else {
+#         open_project /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.xpr
+# 
+#         foreach file $vFiles {
+#             puts "#########################"
+#             puts $file
+#             puts "#########################"
+#             set timingFile [string map {".v" "_timing.txt"} $file]
+#             set utilFile [string map {".v" "_util.txt"} $file]
+#             # targetファイルに書き込み
+#             set fileData [open $file r]
+#             set target [open $targetFile w]
+#             while {[gets $fileData line] != -1} {
+#                 puts $target $line
+#             }
+#             close $fileData
+#             close $target
+# 
+#             # Vivadoで合成、実装
+#             # update_compile_order -fileset sources_1
+#             # reset_run synth_1
+#             # set_property top shift_register [current_fileset]
+#             # launch_runs synth_1 -jobs 6
+#             # wait_on_run synth_1
+#             # launch_runs impl_1 -jobs 6
+#             # wait_on_run impl_1
+#             # open_run impl_1
+#             # report_timing -max_paths 1 -file $timingFile
+#             # report_utilization -file $utilFile
+#         }
+# 
+#         close_project
+#         exit
+#     }
+# 
+# 
+# } else {
+#     puts stderr "Error: File does not exist."
+#     exit 1
+# }
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_64_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_16_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_256_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_32_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_162_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_486_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_54_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_512_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_16_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_486_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_256_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_486_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_54_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_64_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_162_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_64_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_512_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_16_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_162_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_256_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_128_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_32_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_54_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_32_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_128_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_486_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_128_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_256_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_54_16.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_32_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_16_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_512_32.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_64_64.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_128_12.v
+#########################
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_162_32.v
+#########################
+INFO: [Common 17-206] Exiting Vivado at Fri Aug  9 19:30:27 2024...

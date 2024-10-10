@@ -1,0 +1,114 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Aug 23 23:54:21 2024
+# Process ID: 15608
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result
+# Command line: vivado
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 4331.508 MHz, CPU Physical cores: 10, Host memory: 16416 MB
+#-----------------------------------------------------------
+start_gui
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280_es:part0:1.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vek280/es/rev_a/1.0/board.xml as part xcve2802-vsvh1760-2lp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280_es:part0:1.1 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vek280/es/rev_a/1.1/board.xml as part xcve2802-vsvh1760-2lp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280_es_revb:part0:1.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vek280/es/rev_b/1.0/board.xml as part xcve2802-vsvh1760-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vek280_es_revb:part0:1.1 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vek280/es/rev_b/1.1/board.xml as part xcve2802-vsvh1760-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158_es:part0:1.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/es/1.0/board.xml as part xcvh1582-vsva3697-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:vhk158_es:part0:1.1 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/vhk158/es/1.1/board.xml as part xcvh1582-vsva3697-2mp-e-s-es1 specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu208ld:part0:2.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu208ld/production/2.0/board.xml as part xczu58dr-fsvg1517-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216ld/production/2.0/board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670/2.0/board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
+WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at /tools/Xilinx/Vivado/2023.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670ld/1.0/board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
+open_project /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.xpr
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2023.2/data/ip'.
+update_compile_order -fileset sources_1
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.srcs/utils_1/imports/synth_1/multi6_2_200_100.dcp with file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/synth_1/shift_register.dcp
+launch_runs synth_1 -jobs 6
+[Fri Aug 23 23:55:54 2024] Launched synth_1...
+Run output will be captured here: /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/synth_1/runme.log
+launch_runs impl_1 -jobs 6
+[Fri Aug 23 23:56:33 2024] Launched impl_1...
+Run output will be captured here: /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/impl_1/runme.log
+open_run impl_1
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+Netlist sorting complete. Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 8138.203 ; gain = 0.000 ; free physical = 2810 ; free virtual = 10951
+INFO: [Netlist 29-17] Analyzing 3156 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 8236.766 ; gain = 4.000 ; free physical = 2713 ; free virtual = 10853
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 8238.766 ; gain = 2.000 ; free physical = 2711 ; free virtual = 10851
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 8239.766 ; gain = 1.000 ; free physical = 2709 ; free virtual = 10849
+Read PlaceDB: Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.21 . Memory (MB): peak = 8251.438 ; gain = 11.672 ; free physical = 2698 ; free virtual = 10838
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 8251.438 ; gain = 0.000 ; free physical = 2698 ; free virtual = 10838
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00.1 ; elapsed = 00:00:00.1 . Memory (MB): peak = 8254.438 ; gain = 3.000 ; free physical = 2695 ; free virtual = 10835
+Read Physdb Files: Time (s): cpu = 00:00:00.33 ; elapsed = 00:00:00.32 . Memory (MB): peak = 8254.438 ; gain = 17.672 ; free physical = 2695 ; free virtual = 10835
+Restored from archive | CPU: 0.330000 secs | Memory: 15.531319 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.33 ; elapsed = 00:00:00.32 . Memory (MB): peak = 8254.438 ; gain = 17.672 ; free physical = 2695 ; free virtual = 10835
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 8636.406 ; gain = 0.000 ; free physical = 2327 ; free virtual = 10468
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2076 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 2076 instances
+
+open_run: Time (s): cpu = 00:00:13 ; elapsed = 00:00:07 . Memory (MB): peak = 8834.469 ; gain = 993.406 ; free physical = 2178 ; free virtual = 10332
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/kanai/reserch/rowadders/vertical_shiftregister_result/512_64timing_report.txt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+report_utilization -name utilization_1
+reset_run synth_1
+INFO: [Project 1-1161] Replacing file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.srcs/utils_1/imports/synth_1/multi6_2_200_100.dcp with file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/synth_1/shift_register.dcp
+launch_runs synth_1 -jobs 6
+[Sat Aug 24 00:03:57 2024] Launched synth_1...
+Run output will be captured here: /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/synth_1/runme.log
+close_design
+launch_runs impl_1 -jobs 6
+[Sat Aug 24 00:04:44 2024] Launched impl_1...
+Run output will be captured here: /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/project_multi6_2.runs/impl_1/runme.log
+open_run impl_1
+Netlist sorting complete. Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.22 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2654 ; free virtual = 9896
+INFO: [Netlist 29-17] Analyzing 12462 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.08 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2653 ; free virtual = 9894
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2660 ; free virtual = 9901
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2660 ; free virtual = 9901
+Read PlaceDB: Time (s): cpu = 00:00:00.83 ; elapsed = 00:00:00.81 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2651 ; free virtual = 9892
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2651 ; free virtual = 9892
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00.4 ; elapsed = 00:00:00.4 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2646 ; free virtual = 9887
+Read Physdb Files: Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2646 ; free virtual = 9887
+Restored from archive | CPU: 1.270000 secs | Memory: 57.034920 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2646 ; free virtual = 9887
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2646 ; free virtual = 9887
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 8250 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 8250 instances
+
+open_run: Time (s): cpu = 00:00:08 ; elapsed = 00:00:06 . Memory (MB): peak = 9195.797 ; gain = 0.000 ; free physical = 2591 ; free virtual = 9849
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/kanai/reserch/rowadders/vivado_project/project_multi6_2/512_64timing_report.txt
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+report_timing_summary: Time (s): cpu = 00:00:21 ; elapsed = 00:00:08 . Memory (MB): peak = 9492.789 ; gain = 167.492 ; free physical = 2271 ; free virtual = 9519
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat Aug 24 02:27:09 2024...

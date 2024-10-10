@@ -1,0 +1,1411 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Aug  9 19:40:33 2024
+# Process ID: 2424449
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result
+# Command line: vivado -mode batch -source auto_synth.tcl
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 4314.001 MHz, CPU Physical cores: 10, Host memory: 16416 MB
+#-----------------------------------------------------------
+source auto_synth.tcl
+# set targetFile "../comp2_1vivado_exe.v"
+# set dirPath "/home/kanai/reserch/pycmpgen/vertical_shiftregister_result"
+# if { [file isdirectory $dirPath] } {
+#     # .vファイルすべて取得
+#     set vFiles [glob -nocomplain "$dirPath/*.v"]
+#     # ファイルの内容を読み込んで表示
+#     if { [llength $vFiles] == 0 } {
+#         puts "No .v files found in the directory."
+#     } else {
+#         open_project /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.xpr
+# 
+#         foreach file $vFiles {
+#             puts "#########################"
+#             puts $file
+#             puts "#########################"
+#             set timingFile [string map {".v" "_timing.txt"} $file]
+#             set utilFile [string map {".v" "_util.txt"} $file]
+#             # targetファイルに書き込み
+#             set fileData [open $file r]
+#             set target [open $targetFile w]
+#             while {[gets $fileData line] != -1} {
+#                 puts $target $line
+#             }
+#             close $fileData
+#             close $target
+# 
+#             # Vivadoで合成、実装
+#             # update_compile_order -fileset sources_1
+#             reset_run synth_1
+#             set_property top shift_register [current_fileset]
+#             launch_runs synth_1 -jobs 6
+#             wait_on_run synth_1
+#             launch_runs impl_1 -jobs 6
+#             wait_on_run impl_1
+#             open_run impl_1
+#             report_timing -max_paths 1 -file $timingFile
+#             report_utilization -file $utilFile
+#         }
+# 
+#         close_project
+#         exit
+#     }
+# 
+# 
+# } else {
+#     puts stderr "Error: File does not exist."
+#     exit 1
+# }
+INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.gen/sources_1'.
+Scanning sources...
+Finished scanning sources
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_64_32.v
+#########################
+[Fri Aug  9 19:40:39 2024] Launched synth_1...
+Run output will be captured here: /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/synth_1/runme.log
+[Fri Aug  9 19:40:39 2024] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log shift_register.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source shift_register.tcl
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source shift_register.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.srcs/utils_1/imports/synth_1/compressor2_1_162_12_shiftregister.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.srcs/utils_1/imports/synth_1/compressor2_1_162_12_shiftregister.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top shift_register -part xc7a100tcsg324-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2424543
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1763.254 ; gain = 409.598 ; free physical = 3415 ; free virtual = 9471
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'shift_register' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:1]
+INFO: [Synth 8-6157] synthesizing module 'compressor2_1_64_32' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:245]
+INFO: [Synth 8-6157] synthesizing module 'compressor' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:433]
+INFO: [Synth 8-6157] synthesizing module 'gpc1163_5' [/home/kanai/reserch/gpccode/gpc1163_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+	Parameter INIT bound to: 4'b1000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+INFO: [Synth 8-6157] synthesizing module 'LUT2__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+	Parameter INIT bound to: 4'b0110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT2__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0110100110010110100101100110100110010110011010010110100110010110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b1110100010000001100000010001011100010111011111100111111011101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0001011101111111011111111111111111101000100000001000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'CARRY4' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:2366]
+INFO: [Synth 8-6155] done synthesizing module 'CARRY4' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:2366]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1163_5' (0#1) [/home/kanai/reserch/gpccode/gpc1163_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc606_5' [/home/kanai/reserch/gpccode/gpc606_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT5' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b11101000100000001000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b00010111011111100111111011101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6155] done synthesizing module 'gpc606_5' (0#1) [/home/kanai/reserch/gpccode/gpc606_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc615_5' [/home/kanai/reserch/gpccode/gpc615_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT4' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b1001011000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b0110100110010110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b1110100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b0001011111101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6155] done synthesizing module 'gpc615_5' (0#1) [/home/kanai/reserch/gpccode/gpc615_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc2135_5' [/home/kanai/reserch/gpccode/gpc2135_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0001011111101000111010000001011111101000000101110001011111101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized3' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0000000000010111000101111111111111111111111010001110100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized3' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6155] done synthesizing module 'gpc2135_5' (0#1) [/home/kanai/reserch/gpccode/gpc2135_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc1_1' [/home/kanai/reserch/gpccode/gpc1_1.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1_1' (0#1) [/home/kanai/reserch/gpccode/gpc1_1.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc135_4' [/home/kanai/reserch/gpccode/gpc135_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc135_4' (0#1) [/home/kanai/reserch/gpccode/gpc135_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc207_4' [/home/kanai/reserch/gpccode/gpc207_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81293]
+	Parameter INIT bound to: 2'b10 
+INFO: [Synth 8-6155] done synthesizing module 'LUT1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81293]
+INFO: [Synth 8-6157] synthesizing module 'LUT1__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81293]
+	Parameter INIT bound to: 2'b00 
+INFO: [Synth 8-6155] done synthesizing module 'LUT1__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81293]
+INFO: [Synth 8-6155] done synthesizing module 'gpc207_4' (0#1) [/home/kanai/reserch/gpccode/gpc207_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc117_4' [/home/kanai/reserch/gpccode/gpc117_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc117_4' (0#1) [/home/kanai/reserch/gpccode/gpc117_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc2223_5' [/home/kanai/reserch/gpccode/gpc2223_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc2223_5' (0#1) [/home/kanai/reserch/gpccode/gpc2223_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc623_5' [/home/kanai/reserch/gpccode/gpc623_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc623_5' (0#1) [/home/kanai/reserch/gpccode/gpc623_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc1325_5' [/home/kanai/reserch/gpccode/gpc1325_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b00000000111010001110100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b11101000000101110001011111101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized3' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b10000000000010000000100010000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized3' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized4' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b01111000100001111000011101111000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized4' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1325_5' (0#1) [/home/kanai/reserch/gpccode/gpc1325_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc1423_5' [/home/kanai/reserch/gpccode/gpc1423_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1423_5' (0#1) [/home/kanai/reserch/gpccode/gpc1423_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc1343_5' [/home/kanai/reserch/gpccode/gpc1343_5.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1343_5' (0#1) [/home/kanai/reserch/gpccode/gpc1343_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc215_4' [/home/kanai/reserch/gpccode/gpc215_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'gpc215_4' (0#1) [/home/kanai/reserch/gpccode/gpc215_4.v:1]
+WARNING: [Synth 8-689] width (4) of port connection 'dst' does not match port width (5) of module 'gpc2135_5' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:4746]
+INFO: [Synth 8-6155] done synthesizing module 'compressor' (0#1) [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:433]
+INFO: [Synth 8-6157] synthesizing module 'rowadder2_1_38' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:4789]
+INFO: [Synth 8-6155] done synthesizing module 'rowadder2_1_38' (0#1) [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:4789]
+WARNING: [Synth 8-689] width (38) of port connection 'dst0' does not match port width (39) of module 'rowadder2_1_38' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:430]
+INFO: [Synth 8-6155] done synthesizing module 'compressor2_1_64_32' (0#1) [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:245]
+INFO: [Synth 8-6155] done synthesizing module 'shift_register' (0#1) [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:1]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1853.223 ; gain = 499.566 ; free physical = 3301 ; free virtual = 9358
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1868.066 ; gain = 514.410 ; free physical = 3296 ; free virtual = 9358
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-3
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1876.070 ; gain = 522.414 ; free physical = 3295 ; free virtual = 9357
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1884.078 ; gain = 530.422 ; free physical = 3283 ; free virtual = 9346
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	               64 Bit    Registers := 32    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3185 ; free virtual = 9247
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3182 ; free virtual = 9244
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |   303|
+|3     |LUT1   |     6|
+|4     |LUT2   |   156|
+|5     |LUT4   |   494|
+|6     |LUT5   |   808|
+|7     |LUT6   |   471|
+|8     |FDRE   |  2048|
+|9     |IBUF   |    33|
+|10    |OBUF   |    38|
++------+-------+------+
+
+Report Instance Areas: 
++------+----------------------+--------------------+------+
+|      |Instance              |Module              |Cells |
++------+----------------------+--------------------+------+
+|1     |top                   |                    |  4358|
+|2     |  compressor2_1_64_32 |compressor2_1_64_32 |  2238|
+|3     |    compressor_inst   |compressor          |  2152|
+|4     |      gpc0            |gpc1163_5           |     6|
+|5     |      gpc1            |gpc1163_5_0         |     6|
+|6     |      gpc10           |gpc606_5            |     7|
+|7     |      gpc100          |gpc615_5            |     8|
+|8     |      gpc101          |gpc615_5_1          |     8|
+|9     |      gpc102          |gpc615_5_2          |     8|
+|10    |      gpc103          |gpc615_5_3          |     8|
+|11    |      gpc104          |gpc615_5_4          |     8|
+|12    |      gpc105          |gpc615_5_5          |     8|
+|13    |      gpc106          |gpc615_5_6          |     8|
+|14    |      gpc107          |gpc615_5_7          |     8|
+|15    |      gpc108          |gpc615_5_8          |     8|
+|16    |      gpc109          |gpc615_5_9          |     8|
+|17    |      gpc11           |gpc606_5_10         |     7|
+|18    |      gpc110          |gpc615_5_11         |     8|
+|19    |      gpc111          |gpc615_5_12         |     8|
+|20    |      gpc112          |gpc606_5_13         |     7|
+|21    |      gpc113          |gpc2135_5           |     7|
+|22    |      gpc114          |gpc606_5_14         |     7|
+|23    |      gpc115          |gpc606_5_15         |     7|
+|24    |      gpc116          |gpc615_5_16         |     8|
+|25    |      gpc117          |gpc615_5_17         |     8|
+|26    |      gpc118          |gpc615_5_18         |     8|
+|27    |      gpc119          |gpc615_5_19         |     8|
+|28    |      gpc12           |gpc606_5_20         |     7|
+|29    |      gpc120          |gpc606_5_21         |     7|
+|30    |      gpc121          |gpc606_5_22         |     7|
+|31    |      gpc122          |gpc615_5_23         |     8|
+|32    |      gpc123          |gpc615_5_24         |     8|
+|33    |      gpc124          |gpc615_5_25         |     8|
+|34    |      gpc125          |gpc615_5_26         |     8|
+|35    |      gpc126          |gpc615_5_27         |     8|
+|36    |      gpc127          |gpc615_5_28         |     8|
+|37    |      gpc128          |gpc615_5_29         |     8|
+|38    |      gpc129          |gpc615_5_30         |     8|
+|39    |      gpc13           |gpc606_5_31         |     7|
+|40    |      gpc130          |gpc606_5_32         |     7|
+|41    |      gpc131          |gpc606_5_33         |     7|
+|42    |      gpc132          |gpc606_5_34         |     7|
+|43    |      gpc133          |gpc606_5_35         |     7|
+|44    |      gpc134          |gpc606_5_36         |     7|
+|45    |      gpc135          |gpc606_5_37         |     7|
+|46    |      gpc136          |gpc606_5_38         |     7|
+|47    |      gpc137          |gpc606_5_39         |     7|
+|48    |      gpc138          |gpc606_5_40         |     7|
+|49    |      gpc139          |gpc615_5_41         |     8|
+|50    |      gpc14           |gpc606_5_42         |     7|
+|51    |      gpc140          |gpc615_5_43         |     8|
+|52    |      gpc141          |gpc606_5_44         |     7|
+|53    |      gpc142          |gpc606_5_45         |     7|
+|54    |      gpc143          |gpc606_5_46         |     7|
+|55    |      gpc144          |gpc606_5_47         |     7|
+|56    |      gpc145          |gpc606_5_48         |     7|
+|57    |      gpc146          |gpc606_5_49         |     7|
+|58    |      gpc147          |gpc606_5_50         |     7|
+|59    |      gpc148          |gpc606_5_51         |     7|
+|60    |      gpc149          |gpc606_5_52         |     7|
+|61    |      gpc15           |gpc606_5_53         |     7|
+|62    |      gpc16           |gpc606_5_54         |     7|
+|63    |      gpc17           |gpc606_5_55         |     7|
+|64    |      gpc18           |gpc606_5_56         |     7|
+|65    |      gpc19           |gpc615_5_57         |     8|
+|66    |      gpc2            |gpc1163_5_58        |     6|
+|67    |      gpc20           |gpc615_5_59         |     8|
+|68    |      gpc21           |gpc615_5_60         |     8|
+|69    |      gpc22           |gpc615_5_61         |     8|
+|70    |      gpc23           |gpc606_5_62         |     7|
+|71    |      gpc24           |gpc606_5_63         |     7|
+|72    |      gpc25           |gpc606_5_64         |     7|
+|73    |      gpc26           |gpc606_5_65         |     7|
+|74    |      gpc27           |gpc606_5_66         |     7|
+|75    |      gpc28           |gpc606_5_67         |     7|
+|76    |      gpc29           |gpc606_5_68         |     7|
+|77    |      gpc3            |gpc1163_5_69        |     6|
+|78    |      gpc30           |gpc606_5_70         |     7|
+|79    |      gpc31           |gpc606_5_71         |     7|
+|80    |      gpc32           |gpc615_5_72         |     8|
+|81    |      gpc33           |gpc615_5_73         |     8|
+|82    |      gpc34           |gpc615_5_74         |     8|
+|83    |      gpc35           |gpc615_5_75         |     8|
+|84    |      gpc36           |gpc615_5_76         |     8|
+|85    |      gpc37           |gpc615_5_77         |     8|
+|86    |      gpc38           |gpc606_5_78         |     7|
+|87    |      gpc39           |gpc606_5_79         |     7|
+|88    |      gpc4            |gpc1163_5_80        |     6|
+|89    |      gpc40           |gpc606_5_81         |     7|
+|90    |      gpc409          |gpc606_5_82         |     7|
+|91    |      gpc41           |gpc606_5_83         |     7|
+|92    |      gpc410          |gpc606_5_84         |     7|
+|93    |      gpc411          |gpc606_5_85         |     7|
+|94    |      gpc412          |gpc606_5_86         |     7|
+|95    |      gpc413          |gpc606_5_87         |     7|
+|96    |      gpc414          |gpc606_5_88         |     7|
+|97    |      gpc415          |gpc606_5_89         |     7|
+|98    |      gpc416          |gpc606_5_90         |     7|
+|99    |      gpc417          |gpc606_5_91         |     7|
+|100   |      gpc418          |gpc606_5_92         |     7|
+|101   |      gpc419          |gpc606_5_93         |     7|
+|102   |      gpc42           |gpc606_5_94         |     7|
+|103   |      gpc420          |gpc615_5_95         |     8|
+|104   |      gpc421          |gpc606_5_96         |     7|
+|105   |      gpc422          |gpc606_5_97         |     7|
+|106   |      gpc423          |gpc606_5_98         |     7|
+|107   |      gpc424          |gpc606_5_99         |     7|
+|108   |      gpc425          |gpc606_5_100        |     7|
+|109   |      gpc426          |gpc606_5_101        |     7|
+|110   |      gpc427          |gpc606_5_102        |     7|
+|111   |      gpc428          |gpc606_5_103        |     7|
+|112   |      gpc429          |gpc615_5_104        |     8|
+|113   |      gpc43           |gpc606_5_105        |     7|
+|114   |      gpc430          |gpc615_5_106        |     8|
+|115   |      gpc431          |gpc606_5_107        |     7|
+|116   |      gpc432          |gpc606_5_108        |     7|
+|117   |      gpc433          |gpc606_5_109        |     7|
+|118   |      gpc434          |gpc606_5_110        |     7|
+|119   |      gpc435          |gpc606_5_111        |     7|
+|120   |      gpc436          |gpc606_5_112        |     7|
+|121   |      gpc437          |gpc606_5_113        |     7|
+|122   |      gpc438          |gpc606_5_114        |     7|
+|123   |      gpc439          |gpc615_5_115        |     8|
+|124   |      gpc44           |gpc606_5_116        |     7|
+|125   |      gpc440          |gpc615_5_117        |     8|
+|126   |      gpc441          |gpc615_5_118        |     8|
+|127   |      gpc442          |gpc606_5_119        |     7|
+|128   |      gpc443          |gpc606_5_120        |     7|
+|129   |      gpc444          |gpc606_5_121        |     7|
+|130   |      gpc445          |gpc606_5_122        |     7|
+|131   |      gpc446          |gpc606_5_123        |     7|
+|132   |      gpc447          |gpc615_5_124        |     8|
+|133   |      gpc448          |gpc615_5_125        |     8|
+|134   |      gpc449          |gpc615_5_126        |     8|
+|135   |      gpc45           |gpc606_5_127        |     7|
+|136   |      gpc450          |gpc615_5_128        |     8|
+|137   |      gpc451          |gpc606_5_129        |     7|
+|138   |      gpc452          |gpc606_5_130        |     7|
+|139   |      gpc453          |gpc606_5_131        |     7|
+|140   |      gpc454          |gpc606_5_132        |     7|
+|141   |      gpc455          |gpc615_5_133        |     8|
+|142   |      gpc456          |gpc615_5_134        |     8|
+|143   |      gpc457          |gpc615_5_135        |     8|
+|144   |      gpc458          |gpc615_5_136        |     8|
+|145   |      gpc459          |gpc606_5_137        |     7|
+|146   |      gpc46           |gpc606_5_138        |     7|
+|147   |      gpc460          |gpc606_5_139        |     7|
+|148   |      gpc461          |gpc606_5_140        |     7|
+|149   |      gpc462          |gpc606_5_141        |     7|
+|150   |      gpc463          |gpc615_5_142        |     8|
+|151   |      gpc464          |gpc615_5_143        |     8|
+|152   |      gpc465          |gpc615_5_144        |     8|
+|153   |      gpc466          |gpc2135_5_145       |     7|
+|154   |      gpc467          |gpc606_5_146        |     7|
+|155   |      gpc468          |gpc606_5_147        |     7|
+|156   |      gpc469          |gpc606_5_148        |     7|
+|157   |      gpc47           |gpc606_5_149        |     7|
+|158   |      gpc470          |gpc615_5_150        |     8|
+|159   |      gpc471          |gpc615_5_151        |     8|
+|160   |      gpc472          |gpc615_5_152        |     8|
+|161   |      gpc473          |gpc606_5_153        |     7|
+|162   |      gpc48           |gpc606_5_154        |     7|
+|163   |      gpc49           |gpc606_5_155        |     7|
+|164   |      gpc5            |gpc606_5_156        |     7|
+|165   |      gpc50           |gpc606_5_157        |     7|
+|166   |      gpc51           |gpc606_5_158        |     7|
+|167   |      gpc52           |gpc606_5_159        |     7|
+|168   |      gpc53           |gpc615_5_160        |     8|
+|169   |      gpc54           |gpc615_5_161        |     8|
+|170   |      gpc55           |gpc615_5_162        |     8|
+|171   |      gpc56           |gpc615_5_163        |     8|
+|172   |      gpc57           |gpc615_5_164        |     8|
+|173   |      gpc58           |gpc615_5_165        |     8|
+|174   |      gpc59           |gpc615_5_166        |     8|
+|175   |      gpc6            |gpc606_5_167        |     7|
+|176   |      gpc60           |gpc615_5_168        |     8|
+|177   |      gpc61           |gpc615_5_169        |     8|
+|178   |      gpc62           |gpc615_5_170        |     8|
+|179   |      gpc63           |gpc615_5_171        |     8|
+|180   |      gpc64           |gpc615_5_172        |     8|
+|181   |      gpc65           |gpc615_5_173        |     8|
+|182   |      gpc66           |gpc615_5_174        |     8|
+|183   |      gpc67           |gpc615_5_175        |     8|
+|184   |      gpc68           |gpc615_5_176        |     8|
+|185   |      gpc69           |gpc615_5_177        |     8|
+|186   |      gpc7            |gpc606_5_178        |     7|
+|187   |      gpc70           |gpc615_5_179        |     8|
+|188   |      gpc705          |gpc615_5_180        |     8|
+|189   |      gpc706          |gpc615_5_181        |     8|
+|190   |      gpc707          |gpc615_5_182        |     8|
+|191   |      gpc708          |gpc606_5_183        |     7|
+|192   |      gpc709          |gpc606_5_184        |     7|
+|193   |      gpc71           |gpc606_5_185        |     7|
+|194   |      gpc710          |gpc615_5_186        |     8|
+|195   |      gpc711          |gpc135_4            |     5|
+|196   |      gpc712          |gpc135_4_187        |     5|
+|197   |      gpc713          |gpc135_4_188        |     5|
+|198   |      gpc714          |gpc615_5_189        |     8|
+|199   |      gpc715          |gpc615_5_190        |     8|
+|200   |      gpc716          |gpc615_5_191        |     8|
+|201   |      gpc717          |gpc615_5_192        |     8|
+|202   |      gpc718          |gpc606_5_193        |     7|
+|203   |      gpc719          |gpc1163_5_194       |     6|
+|204   |      gpc72           |gpc606_5_195        |     7|
+|205   |      gpc720          |gpc207_4            |     8|
+|206   |      gpc721          |gpc207_4_196        |     8|
+|207   |      gpc722          |gpc615_5_197        |     8|
+|208   |      gpc723          |gpc615_5_198        |     8|
+|209   |      gpc724          |gpc615_5_199        |     8|
+|210   |      gpc725          |gpc615_5_200        |     8|
+|211   |      gpc726          |gpc615_5_201        |     8|
+|212   |      gpc727          |gpc117_4            |     6|
+|213   |      gpc728          |gpc606_5_202        |     7|
+|214   |      gpc729          |gpc615_5_203        |     8|
+|215   |      gpc73           |gpc606_5_204        |     7|
+|216   |      gpc730          |gpc615_5_205        |     8|
+|217   |      gpc731          |gpc615_5_206        |     8|
+|218   |      gpc732          |gpc615_5_207        |     8|
+|219   |      gpc733          |gpc606_5_208        |     7|
+|220   |      gpc734          |gpc615_5_209        |     8|
+|221   |      gpc735          |gpc615_5_210        |     8|
+|222   |      gpc736          |gpc615_5_211        |     8|
+|223   |      gpc737          |gpc615_5_212        |     8|
+|224   |      gpc738          |gpc615_5_213        |     8|
+|225   |      gpc739          |gpc606_5_214        |     7|
+|226   |      gpc74           |gpc606_5_215        |     7|
+|227   |      gpc740          |gpc606_5_216        |     7|
+|228   |      gpc741          |gpc606_5_217        |     7|
+|229   |      gpc742          |gpc606_5_218        |     7|
+|230   |      gpc743          |gpc606_5_219        |     7|
+|231   |      gpc744          |gpc606_5_220        |     7|
+|232   |      gpc745          |gpc606_5_221        |     7|
+|233   |      gpc746          |gpc606_5_222        |     7|
+|234   |      gpc747          |gpc606_5_223        |     7|
+|235   |      gpc748          |gpc2135_5_224       |     7|
+|236   |      gpc75           |gpc606_5_225        |     7|
+|237   |      gpc76           |gpc606_5_226        |     7|
+|238   |      gpc77           |gpc615_5_227        |     8|
+|239   |      gpc78           |gpc615_5_228        |     8|
+|240   |      gpc79           |gpc606_5_229        |     7|
+|241   |      gpc8            |gpc606_5_230        |     7|
+|242   |      gpc80           |gpc606_5_231        |     7|
+|243   |      gpc804          |gpc606_5_232        |     7|
+|244   |      gpc805          |gpc606_5_233        |     7|
+|245   |      gpc806          |gpc2135_5_234       |     7|
+|246   |      gpc807          |gpc606_5_235        |     7|
+|247   |      gpc808          |gpc2223_5           |     9|
+|248   |      gpc809          |gpc615_5_236        |     8|
+|249   |      gpc81           |gpc606_5_237        |     7|
+|250   |      gpc810          |gpc1163_5_238       |     6|
+|251   |      gpc811          |gpc1163_5_239       |     6|
+|252   |      gpc812          |gpc615_5_240        |     8|
+|253   |      gpc813          |gpc615_5_241        |     8|
+|254   |      gpc814          |gpc606_5_242        |     7|
+|255   |      gpc815          |gpc135_4_243        |     5|
+|256   |      gpc816          |gpc615_5_244        |     8|
+|257   |      gpc817          |gpc623_5            |     8|
+|258   |      gpc818          |gpc1325_5           |     9|
+|259   |      gpc819          |gpc615_5_245        |     8|
+|260   |      gpc82           |gpc606_5_246        |     7|
+|261   |      gpc820          |gpc606_5_247        |     7|
+|262   |      gpc821          |gpc615_5_248        |     8|
+|263   |      gpc822          |gpc623_5_249        |     8|
+|264   |      gpc823          |gpc623_5_250        |     8|
+|265   |      gpc824          |gpc606_5_251        |     7|
+|266   |      gpc83           |gpc1163_5_252       |     6|
+|267   |      gpc84           |gpc1163_5_253       |     6|
+|268   |      gpc85           |gpc1163_5_254       |     6|
+|269   |      gpc859          |gpc1423_5           |     9|
+|270   |      gpc86           |gpc606_5_255        |     7|
+|271   |      gpc860          |gpc1343_5           |     7|
+|272   |      gpc861          |gpc1343_5_256       |     7|
+|273   |      gpc862          |gpc623_5_257        |     8|
+|274   |      gpc863          |gpc135_4_258        |     5|
+|275   |      gpc864          |gpc215_4            |     7|
+|276   |      gpc865          |gpc615_5_259        |     8|
+|277   |      gpc866          |gpc135_4_260        |     5|
+|278   |      gpc867          |gpc1163_5_261       |     6|
+|279   |      gpc868          |gpc1343_5_262       |     7|
+|280   |      gpc869          |gpc2135_5_263       |     7|
+|281   |      gpc87           |gpc606_5_264        |     7|
+|282   |      gpc870          |gpc623_5_265        |     8|
+|283   |      gpc871          |gpc2135_5_266       |     7|
+|284   |      gpc88           |gpc606_5_267        |     7|
+|285   |      gpc89           |gpc606_5_268        |     7|
+|286   |      gpc9            |gpc606_5_269        |     7|
+|287   |      gpc90           |gpc606_5_270        |     7|
+|288   |      gpc91           |gpc606_5_271        |     7|
+|289   |      gpc92           |gpc615_5_272        |     8|
+|290   |      gpc93           |gpc615_5_273        |     8|
+|291   |      gpc94           |gpc615_5_274        |     8|
+|292   |      gpc95           |gpc615_5_275        |     8|
+|293   |      gpc96           |gpc615_5_276        |     8|
+|294   |      gpc97           |gpc615_5_277        |     8|
+|295   |      gpc98           |gpc615_5_278        |     8|
+|296   |      gpc99           |gpc615_5_279        |     8|
+|297   |    rowadder2_1inst   |rowadder2_1_38      |    86|
++------+----------------------+--------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 3 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.547 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+Synthesis Optimization Complete : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1994.555 ; gain = 640.891 ; free physical = 3173 ; free virtual = 9235
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2004.453 ; gain = 0.000 ; free physical = 3456 ; free virtual = 9518
+INFO: [Netlist 29-17] Analyzing 774 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2150.043 ; gain = 0.000 ; free physical = 3363 ; free virtual = 9430
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 471 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 471 instances
+
+Synth Design complete | Checksum: ba927ae6
+INFO: [Common 17-83] Releasing license: Synthesis
+92 Infos, 3 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:11 ; elapsed = 00:00:09 . Memory (MB): peak = 2150.078 ; gain = 807.328 ; free physical = 3363 ; free virtual = 9430
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1297.526; main = 1297.526; forked = 0.000
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 2150.047; main = 2150.047; forked = 0.000
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2174.055 ; gain = 0.000 ; free physical = 3362 ; free virtual = 9429
+INFO: [Common 17-1381] The checkpoint '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/synth_1/shift_register.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file shift_register_utilization_synth.rpt -pb shift_register_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Aug  9 19:40:55 2024...
+[Fri Aug  9 19:40:58 2024] synth_1 finished
+wait_on_runs: Time (s): cpu = 00:00:19 ; elapsed = 00:00:20 . Memory (MB): peak = 1348.070 ; gain = 0.000 ; free physical = 4564 ; free virtual = 10621
+[Fri Aug  9 19:40:58 2024] Launched impl_1...
+Run output will be captured here: /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/runme.log
+[Fri Aug  9 19:40:58 2024] Waiting for impl_1 to finish...
+
+*** Running vivado
+    with args -log shift_register.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source shift_register.tcl -notrace
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source shift_register.tcl -notrace
+Command: link_design -top shift_register -part xc7a100tcsg324-3
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+Netlist sorting complete. Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1691.719 ; gain = 0.000 ; free physical = 3763 ; free virtual = 9820
+INFO: [Netlist 29-17] Analyzing 774 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1766.438 ; gain = 1.000 ; free physical = 3673 ; free virtual = 9730
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1766.438 ; gain = 0.000 ; free physical = 3673 ; free virtual = 9730
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 471 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 471 instances
+
+6 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00.58 ; elapsed = 00:00:00.35 . Memory (MB): peak = 1882.000 ; gain = 115.527 ; free physical = 3645 ; free virtual = 9702
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2384.859 ; gain = 502.859 ; free physical = 3229 ; free virtual = 9286
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2913 ; free virtual = 8972
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2913 ; free virtual = 8972
+Phase 1 Initialization | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2913 ; free virtual = 8972
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+Phase 2.1 Timer Update | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2913 ; free virtual = 8972
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2912 ; free virtual = 8971
+Phase 2 Timer Update And Timing Data Collection | Checksum: 16857ddd2
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.04 . Memory (MB): peak = 2691.578 ; gain = 0.000 ; free physical = 2912 ; free virtual = 8971
+
+Phase 3 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 12db59dd7
+
+Time (s): cpu = 00:00:00.19 ; elapsed = 00:00:00.09 . Memory (MB): peak = 2747.605 ; gain = 56.027 ; free physical = 2911 ; free virtual = 8970
+Retarget | Checksum: 12db59dd7
+INFO: [Opt 31-389] Phase Retarget created 10 cells and removed 20 cells
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: bb144981
+
+Time (s): cpu = 00:00:00.2 ; elapsed = 00:00:00.1 . Memory (MB): peak = 2747.605 ; gain = 56.027 ; free physical = 2911 ; free virtual = 8970
+Constant propagation | Checksum: bb144981
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 12 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 8b32d900
+
+Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2747.605 ; gain = 56.027 ; free physical = 2911 ; free virtual = 8970
+Sweep | Checksum: 8b32d900
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+
+Phase 6 BUFG optimization
+Phase 6 BUFG optimization | Checksum: 8b32d900
+
+Time (s): cpu = 00:00:00.27 ; elapsed = 00:00:00.14 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+BUFG optimization | Checksum: 8b32d900
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 8b32d900
+
+Time (s): cpu = 00:00:00.27 ; elapsed = 00:00:00.14 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+Shift Register Optimization | Checksum: 8b32d900
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 8b32d900
+
+Time (s): cpu = 00:00:00.28 ; elapsed = 00:00:00.15 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+Post Processing Netlist | Checksum: 8b32d900
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00.4 ; elapsed = 00:00:00.2 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00.4 ; elapsed = 00:00:00.2 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+Phase 9 Finalization | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00.4 ; elapsed = 00:00:00.2 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |              10  |              20  |                                              0  |
+|  Constant propagation         |               0  |              12  |                                              0  |
+|  Sweep                        |               0  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00.4 ; elapsed = 00:00:00.2 . Memory (MB): peak = 2779.621 ; gain = 88.043 ; free physical = 2911 ; free virtual = 8970
+INFO: [Constraints 18-11670] Building netlist checker database with flags, 0x8
+Done building netlist checker database: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+Ending Netlist Obfuscation Task | Checksum: 105910d57
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2779.621 ; gain = 0.000 ; free physical = 2911 ; free virtual = 8970
+INFO: [Common 17-83] Releasing license: Implementation
+24 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+INFO: [runtcl-4] Executing : report_drc -file shift_register_drc_opted.rpt -pb shift_register_drc_opted.pb -rpx shift_register_drc_opted.rpx
+Command: report_drc -file shift_register_drc_opted.rpt -pb shift_register_drc_opted.pb -rpx shift_register_drc_opted.rpx
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/tools/Xilinx/Vivado/2023.2/data/ip'.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_drc_opted.rpt.
+report_drc completed successfully
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2868 ; free virtual = 8928
+INFO: [Common 17-1381] The checkpoint '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_opt.dcp' has been generated.
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2860 ; free virtual = 8925
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 75653078
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2860 ; free virtual = 8925
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2860 ; free virtual = 8925
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 1698f9948
+
+Time (s): cpu = 00:00:00.88 ; elapsed = 00:00:00.31 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.98 ; elapsed = 00:00:00.37 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.98 ; elapsed = 00:00:00.38 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+Phase 1 Placer Initialization | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.98 ; elapsed = 00:00:00.38 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.99 ; elapsed = 00:00:00.39 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.99 ; elapsed = 00:00:00.39 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 1f28cb9a4
+
+Time (s): cpu = 00:00:00.99 ; elapsed = 00:00:00.39 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2848 ; free virtual = 8914
+
+Phase 2.4 Global Placement Core
+WARNING: [Place 46-29] Timing had been disabled during Placer and, therefore, physical synthesis in Placer will be skipped.
+Phase 2.4 Global Placement Core | Checksum: 17fecdda2
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+Phase 2 Global Placement | Checksum: 17fecdda2
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 17fecdda2
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 166812f14
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: db4c5e30
+
+Time (s): cpu = 00:00:04 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: db4c5e30
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+
+Phase 3.5 Small Shape Detail Placement
+Phase 3.5 Small Shape Detail Placement | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2782 ; free virtual = 8852
+
+Phase 3.6 Re-assign LUT pins
+Phase 3.6 Re-assign LUT pins | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2781 ; free virtual = 8851
+
+Phase 3.7 Pipeline Register Optimization
+Phase 3.7 Pipeline Register Optimization | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2781 ; free virtual = 8851
+Phase 3 Detail Placement | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+Phase 4.1 Post Commit Optimization | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                1x1|
+|___________|___________________|___________________|
+|      South|                1x1|                1x1|
+|___________|___________________|___________________|
+|       East|                1x1|                1x1|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+Phase 4.3 Placer Reporting | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1055bb000
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+Ending Placer Task | Checksum: 804a5668
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+42 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+INFO: [runtcl-4] Executing : report_io -file shift_register_io_placed.rpt
+report_io: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.11 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2788 ; free virtual = 8853
+INFO: [runtcl-4] Executing : report_utilization -file shift_register_utilization_placed.rpt -pb shift_register_utilization_placed.pb
+INFO: [runtcl-4] Executing : report_control_sets -verbose -file shift_register_control_sets_placed.rpt
+report_control_sets: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.07 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2789 ; free virtual = 8854
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2789 ; free virtual = 8854
+Wrote PlaceDB: Time (s): cpu = 00:00:00.35 ; elapsed = 00:00:00.13 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.03 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8854
+Wrote Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2785 ; free virtual = 8853
+Wrote Device Cache: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2784 ; free virtual = 8853
+Write Physdb Complete: Time (s): cpu = 00:00:00.39 ; elapsed = 00:00:00.17 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2784 ; free virtual = 8853
+INFO: [Common 17-1381] The checkpoint '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_placed.dcp' has been generated.
+Command: phys_opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+
+Starting Initial Update Timing Task
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 2875.668 ; gain = 0.000 ; free physical = 2789 ; free virtual = 8855
+INFO: [Vivado_Tcl 4-235] No timing constraint found. The netlist was not modified.
+INFO: [Common 17-83] Releasing license: Implementation
+49 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+phys_opt_design completed successfully
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2880.367 ; gain = 4.699 ; free physical = 2789 ; free virtual = 8855
+Wrote PlaceDB: Time (s): cpu = 00:00:00.31 ; elapsed = 00:00:00.1 . Memory (MB): peak = 2880.367 ; gain = 4.699 ; free physical = 2779 ; free virtual = 8849
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2880.367 ; gain = 0.000 ; free physical = 2779 ; free virtual = 8849
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 2880.367 ; gain = 0.000 ; free physical = 2778 ; free virtual = 8848
+Wrote Netlist Cache: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2880.367 ; gain = 0.000 ; free physical = 2778 ; free virtual = 8848
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2880.367 ; gain = 0.000 ; free physical = 2778 ; free virtual = 8848
+Write Physdb Complete: Time (s): cpu = 00:00:00.35 ; elapsed = 00:00:00.12 . Memory (MB): peak = 2880.367 ; gain = 4.699 ; free physical = 2778 ; free virtual = 8848
+INFO: [Common 17-1381] The checkpoint '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_physopt.dcp' has been generated.
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7a100t'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: ae525f0 ConstDB: 0 ShapeSum: 75653078 RouteDB: 0
+Post Restoration Checksum: NetGraph: 6a5005cb | NumContArr: 307b7613 | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 2201d7118
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 3003.789 ; gain = 62.656 ; free physical = 2638 ; free virtual = 8705
+
+Phase 2 Router Initialization
+INFO: [Route 35-64] No timing constraints were detected. The router will operate in resource-optimization mode.
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 2201d7118
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 3036.789 ; gain = 95.656 ; free physical = 2605 ; free virtual = 8672
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 2201d7118
+
+Time (s): cpu = 00:00:14 ; elapsed = 00:00:11 . Memory (MB): peak = 3036.789 ; gain = 95.656 ; free physical = 2605 ; free virtual = 8672
+ Number of Nodes with overlaps = 0
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 3580
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 3580
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 30b7cdc7d
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 30b7cdc7d
+
+Time (s): cpu = 00:00:15 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 3.2 Initial Net Routing
+Phase 3.2 Initial Net Routing | Checksum: 1c1a0c088
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+Phase 3 Initial Routing | Checksum: 1c1a0c088
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 25
+ Number of Nodes with overlaps = 0
+Phase 4.1 Global Iteration 0 | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+Phase 4 Rip-up And Reroute | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 5 Delay and Skew Optimization
+Phase 5 Delay and Skew Optimization | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+Phase 6.1 Hold Fix Iter | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+Phase 6 Post Hold Fix | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.425817 %
+  Global Horizontal Routing Utilization  = 0.490196 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+
+--GLOBAL Congestion:
+Utilization threshold used for congestion level computation: 0.85
+Congestion Report
+North Dir 1x1 Area, Max Cong = 29.7297%, No Congested Regions.
+South Dir 1x1 Area, Max Cong = 30.6306%, No Congested Regions.
+East Dir 1x1 Area, Max Cong = 29.4118%, No Congested Regions.
+West Dir 1x1 Area, Max Cong = 39.7059%, No Congested Regions.
+
+------------------------------
+Reporting congestion hotspots
+------------------------------
+Direction: North
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: South
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: East
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+Direction: West
+----------------
+Congested clusters found at Level 0
+Effective congestion level: 0 Aspect Ratio: 1 Sparse Ratio: 0
+
+Phase 7 Route finalize | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 31040c349
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:11 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8634
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 24a69bcc5
+
+Time (s): cpu = 00:00:16 ; elapsed = 00:00:12 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2566 ; free virtual = 8633
+INFO: [Route 35-16] Router Completed Successfully
+
+Phase 10 Post-Route Event Processing
+Phase 10 Post-Route Event Processing | Checksum: 12ed9d145
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2565 ; free virtual = 8633
+Ending Routing Task | Checksum: 12ed9d145
+
+Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 3075.273 ; gain = 134.141 ; free physical = 2565 ; free virtual = 8633
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+58 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:12 . Memory (MB): peak = 3075.273 ; gain = 194.906 ; free physical = 2565 ; free virtual = 8633
+INFO: [runtcl-4] Executing : report_drc -file shift_register_drc_routed.rpt -pb shift_register_drc_routed.pb -rpx shift_register_drc_routed.rpx
+Command: report_drc -file shift_register_drc_routed.rpt -pb shift_register_drc_routed.pb -rpx shift_register_drc_routed.rpx
+INFO: [IP_Flow 19-1839] IP Catalog is up to date.
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 2-168] The results of DRC are in file /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_drc_routed.rpt.
+report_drc completed successfully
+INFO: [runtcl-4] Executing : report_methodology -file shift_register_methodology_drc_routed.rpt -pb shift_register_methodology_drc_routed.pb -rpx shift_register_methodology_drc_routed.rpx
+Command: report_methodology -file shift_register_methodology_drc_routed.rpt -pb shift_register_methodology_drc_routed.pb -rpx shift_register_methodology_drc_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [DRC 23-133] Running Methodology with 8 threads
+INFO: [Vivado_Tcl 2-1520] The results of Report Methodology are in file /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_methodology_drc_routed.rpt.
+report_methodology completed successfully
+INFO: [runtcl-4] Executing : report_power -file shift_register_power_routed.rpt -pb shift_register_power_summary_routed.pb -rpx shift_register_power_routed.rpx
+Command: report_power -file shift_register_power_routed.rpt -pb shift_register_power_summary_routed.pb -rpx shift_register_power_routed.rpx
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+WARNING: [Power 33-232] No user defined clocks were found in the design! Power estimation will be inaccurate until this is corrected.
+Resolution: Please specify clocks using create_clock/create_generated_clock for sequential elements. For pure combinatorial circuits, please specify a virtual clock, otherwise the vectorless estimation might be inaccurate
+Running Vector-less Activity Propagation...
+
+Finished Running Vector-less Activity Propagation
+68 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+report_power completed successfully
+INFO: [runtcl-4] Executing : report_route_status -file shift_register_route_status.rpt -pb shift_register_route_status.pb
+INFO: [runtcl-4] Executing : report_timing_summary -max_paths 10 -report_unconstrained -file shift_register_timing_summary_routed.rpt -pb shift_register_timing_summary_routed.pb -rpx shift_register_timing_summary_routed.rpx -warn_on_violation 
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+WARNING: [Timing 38-313] There are no user specified timing constraints. Timing constraints are needed for proper timing analysis.
+INFO: [runtcl-4] Executing : report_incremental_reuse -file shift_register_incremental_reuse_routed.rpt
+INFO: [Vivado_Tcl 4-1062] Incremental flow is disabled. No incremental reuse Info to report.
+INFO: [runtcl-4] Executing : report_clock_utilization -file shift_register_clock_utilization_routed.rpt
+INFO: [runtcl-4] Executing : report_bus_skew -warn_on_violation -file shift_register_bus_skew_routed.rpt -pb shift_register_bus_skew_routed.pb -rpx shift_register_bus_skew_routed.rpx
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Delay Type: min_max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2527 ; free virtual = 8597
+Wrote PlaceDB: Time (s): cpu = 00:00:00.34 ; elapsed = 00:00:00.14 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2532 ; free virtual = 8605
+Wrote PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2532 ; free virtual = 8605
+Writing XDEF routing.
+Writing XDEF routing logical nets.
+Writing XDEF routing special nets.
+Wrote RouteStorage: Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2531 ; free virtual = 8604
+Wrote Netlist Cache: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2531 ; free virtual = 8605
+Wrote Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2531 ; free virtual = 8605
+Write Physdb Complete: Time (s): cpu = 00:00:00.37 ; elapsed = 00:00:00.16 . Memory (MB): peak = 3170.168 ; gain = 0.000 ; free physical = 2531 ; free virtual = 8605
+INFO: [Common 17-1381] The checkpoint '/home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/impl_1/shift_register_routed.dcp' has been generated.
+INFO: [Common 17-206] Exiting Vivado at Fri Aug  9 19:41:31 2024...
+[Fri Aug  9 19:41:31 2024] impl_1 finished
+wait_on_runs: Time (s): cpu = 00:00:00.63 ; elapsed = 00:00:33 . Memory (MB): peak = 1348.070 ; gain = 0.000 ; free physical = 2548 ; free virtual = 8619
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1692.953 ; gain = 0.000 ; free physical = 2206 ; free virtual = 8281
+INFO: [Netlist 29-17] Analyzing 774 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2023.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Read ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1766.703 ; gain = 1.000 ; free physical = 2118 ; free virtual = 8193
+INFO: [Designutils 20-5722] Start Reading Physical Databases.
+Reading placement.
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 2111 ; free virtual = 8186
+Reading placer database...
+Read Device Cache: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 2110 ; free virtual = 8186
+Read PlaceDB: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.07 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 3621 ; free virtual = 9697
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 3640 ; free virtual = 9715
+Reading routing.
+Read RouteStorage: Time (s): cpu = 00:00:00.03 ; elapsed = 00:00:00.02 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 4077 ; free virtual = 10152
+Read Physdb Files: Time (s): cpu = 00:00:00.11 ; elapsed = 00:00:00.11 . Memory (MB): peak = 1790.516 ; gain = 0.000 ; free physical = 4077 ; free virtual = 10152
+Restored from archive | CPU: 0.140000 secs | Memory: 5.736206 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.14 . Memory (MB): peak = 1790.516 ; gain = 23.812 ; free physical = 4077 ; free virtual = 10152
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2155.625 ; gain = 0.000 ; free physical = 3712 ; free virtual = 9788
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 471 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 471 instances
+
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+#########################
+/home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_16_32.v
+#########################
+INFO: [Project 1-1161] Replacing file /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.srcs/utils_1/imports/synth_1/compressor2_1_162_12_shiftregister.dcp with file /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/synth_1/shift_register.dcp
+[Fri Aug  9 19:41:38 2024] Launched synth_1...
+Run output will be captured here: /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.runs/synth_1/runme.log
+[Fri Aug  9 19:41:38 2024] Waiting for synth_1 to finish...
+
+*** Running vivado
+    with args -log shift_register.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source shift_register.tcl
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source shift_register.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.srcs/utils_1/imports/synth_1/compressor2_1_162_12_shiftregister.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.srcs/utils_1/imports/synth_1/compressor2_1_162_12_shiftregister.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top shift_register -part xc7a100tcsg324-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2445340
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1763.219 ; gain = 407.598 ; free physical = 2502 ; free virtual = 8569
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'shift_register' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:1]
+INFO: [Synth 8-6157] synthesizing module 'compressor2_1_16_32' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:241]
+INFO: [Synth 8-6157] synthesizing module 'compressor' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:423]
+INFO: [Synth 8-6157] synthesizing module 'gpc135_4' [/home/kanai/reserch/gpccode/gpc135_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT4' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b1001011000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b0110100110010110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0001011111101000111010000001011111101000000101110001011111101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0000000000010111000101111111111111111111111010001110100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'CARRY4' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:2366]
+INFO: [Synth 8-6155] done synthesizing module 'CARRY4' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:2366]
+INFO: [Synth 8-6155] done synthesizing module 'gpc135_4' (0#1) [/home/kanai/reserch/gpccode/gpc135_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc606_5' [/home/kanai/reserch/gpccode/gpc606_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+	Parameter INIT bound to: 64'b0110100110010110100101100110100110010110011010010110100110010110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81549]
+INFO: [Synth 8-6157] synthesizing module 'LUT5' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b11101000100000001000000000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6157] synthesizing module 'LUT5__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+	Parameter INIT bound to: 32'b00010111011111100111111011101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT5__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81453]
+INFO: [Synth 8-6155] done synthesizing module 'gpc606_5' (0#1) [/home/kanai/reserch/gpccode/gpc606_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc615_5' [/home/kanai/reserch/gpccode/gpc615_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized1' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b1110100000000000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized1' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6157] synthesizing module 'LUT4__parameterized2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+	Parameter INIT bound to: 16'b0001011111101000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT4__parameterized2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81407]
+INFO: [Synth 8-6155] done synthesizing module 'gpc615_5' (0#1) [/home/kanai/reserch/gpccode/gpc615_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'gpc1343_5' [/home/kanai/reserch/gpccode/gpc1343_5.v:1]
+INFO: [Synth 8-6157] synthesizing module 'LUT2' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+	Parameter INIT bound to: 4'b1000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT2' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+INFO: [Synth 8-6157] synthesizing module 'LUT2__parameterized0' [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+	Parameter INIT bound to: 4'b0110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT2__parameterized0' (0#1) [/tools/Xilinx/Vivado/2023.2/scripts/rt/data/unisim_comp.v:81327]
+INFO: [Synth 8-6155] done synthesizing module 'gpc1343_5' (0#1) [/home/kanai/reserch/gpccode/gpc1343_5.v:1]
+ERROR: [Synth 8-439] module 'gpc1406_5' not found [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:736]
+ERROR: [Synth 8-6156] failed synthesizing module 'compressor' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:423]
+ERROR: [Synth 8-6156] failed synthesizing module 'compressor2_1_16_32' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:241]
+ERROR: [Synth 8-6156] failed synthesizing module 'shift_register' [/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v:1]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 1840.156 ; gain = 484.535 ; free physical = 2404 ; free virtual = 8471
+---------------------------------------------------------------------------------
+synthesize failed
+INFO: [Common 17-83] Releasing license: Synthesis
+44 Infos, 0 Warnings, 0 Critical Warnings and 5 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Fri Aug  9 19:41:48 2024...
+[Fri Aug  9 19:41:51 2024] synth_1 finished
+ERROR: [Vivado 12-13638] Failed runs(s) : 'synth_1'
+wait_on_runs: Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 2402.434 ; gain = 0.000 ; free physical = 3663 ; free virtual = 9730
+ERROR: [Common 17-39] 'wait_on_runs' failed due to earlier errors.
+
+    while executing
+"wait_on_run synth_1"
+    ("foreach" body line 21)
+    invoked from within
+"foreach file $vFiles {
+            puts "#########################"
+            puts $file
+            puts "#########################"
+            se..."
+    invoked from within
+"if { [llength $vFiles] == 0 } {
+        puts "No .v files found in the directory."
+    } else {
+        open_project /home/kanai/reserch/pycmpgen/comp..."
+    invoked from within
+"if { [file isdirectory $dirPath] } {
+    # .vファイルすべて取得
+    set vFiles [glob -nocomplain "$dirPath/*.v"]
+    # ファイルの内容..."
+    (file "auto_synth.tcl" line 5)
+INFO: [Common 17-206] Exiting Vivado at Fri Aug  9 19:41:51 2024...

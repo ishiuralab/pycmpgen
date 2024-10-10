@@ -1,0 +1,78 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Sat Aug 10 01:51:49 2024
+| Host         : kanai-CFSR3-1 running 64-bit Ubuntu 22.04.4 LTS
+| Command      : report_timing -max_paths 1 -file /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/comp2_1_128_32_timing.txt
+| Design       : shift_register
+| Device       : 7a100t-csg324
+| Speed File   : -3  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 src7_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst29[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        16.255ns  (logic 6.644ns (40.874%)  route 9.611ns (59.126%))
+  Logic Levels:           18  (CARRY4=9 FDRE=1 LUT2=2 LUT4=3 LUT5=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X0Y110         FDRE                         0.000     0.000 r  src7_reg[0]/C
+    SLICE_X0Y110         FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src7_reg[0]/Q
+                         net (fo=5, routed)           2.048     2.389    compressor2_1_128_32/compressor_inst/gpc61/src7[0]
+    SLICE_X7Y73          LUT5 (Prop_lut5_I4_O)        0.097     2.486 r  compressor2_1_128_32/compressor_inst/gpc61/lut5_prop3/O
+                         net (fo=1, routed)           0.000     2.486    compressor2_1_128_32/compressor_inst/gpc61/lut5_prop3_n_0
+    SLICE_X7Y73          CARRY4 (Prop_carry4_S[3]_O[3])
+                                                      0.187     2.673 r  compressor2_1_128_32/compressor_inst/gpc61/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.793     3.467    compressor2_1_128_32/compressor_inst/gpc757/dst[0]
+    SLICE_X11Y70         LUT4 (Prop_lut4_I3_O)        0.234     3.701 r  compressor2_1_128_32/compressor_inst/gpc757/lut4_prop1/O
+                         net (fo=1, routed)           0.000     3.701    compressor2_1_128_32/compressor_inst/gpc757/lut4_prop1_n_0
+    SLICE_X11Y70         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.412     4.113 r  compressor2_1_128_32/compressor_inst/gpc757/carry4_inst0/CO[3]
+                         net (fo=2, routed)           1.290     5.402    compressor2_1_128_32/compressor_inst/gpc1288/stage2_11[0]
+    SLICE_X35Y69         LUT4 (Prop_lut4_I3_O)        0.097     5.499 r  compressor2_1_128_32/compressor_inst/gpc1288/lut4_prop0/O
+                         net (fo=1, routed)           0.000     5.499    compressor2_1_128_32/compressor_inst/gpc1288/lut4_prop0_n_0
+    SLICE_X35Y69         CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.395     5.894 r  compressor2_1_128_32/compressor_inst/gpc1288/carry4_inst0/CO[3]
+                         net (fo=2, routed)           1.012     6.907    compressor2_1_128_32/compressor_inst/gpc1510/src2[1]
+    SLICE_X34Y76         LUT2 (Prop_lut2_I1_O)        0.097     7.004 r  compressor2_1_128_32/compressor_inst/gpc1510/lut2_prop2/O
+                         net (fo=1, routed)           0.000     7.004    compressor2_1_128_32/compressor_inst/gpc1510/lut2_prop2_n_0
+    SLICE_X34Y76         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     7.288 r  compressor2_1_128_32/compressor_inst/gpc1510/carry4_inst0/CO[3]
+                         net (fo=4, routed)           0.875     8.163    compressor2_1_128_32/compressor_inst/gpc1632/src0[4]
+    SLICE_X39Y77         LUT5 (Prop_lut5_I3_O)        0.097     8.260 r  compressor2_1_128_32/compressor_inst/gpc1632/lut5_prop1/O
+                         net (fo=1, routed)           0.000     8.260    compressor2_1_128_32/compressor_inst/gpc1632/lut5_prop1_n_0
+    SLICE_X39Y77         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477     8.737 r  compressor2_1_128_32/compressor_inst/gpc1632/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.808     9.545    compressor2_1_128_32/compressor_inst/gpc1692/src0[1]
+    SLICE_X38Y82         LUT4 (Prop_lut4_I3_O)        0.234     9.779 r  compressor2_1_128_32/compressor_inst/gpc1692/lut4_prop0/O
+                         net (fo=1, routed)           0.000     9.779    compressor2_1_128_32/compressor_inst/gpc1692/lut4_prop0_n_0
+    SLICE_X38Y82         CARRY4 (Prop_carry4_S[0]_O[3])
+                                                      0.454    10.233 r  compressor2_1_128_32/compressor_inst/gpc1692/carry4_inst0/O[3]
+                         net (fo=2, routed)           1.294    11.527    compressor2_1_128_32/rowadder2_1inst/src0[22]
+    SLICE_X4Y77          LUT2 (Prop_lut2_I0_O)        0.222    11.749 r  compressor2_1_128_32/rowadder2_1inst/lut_22_prop/O
+                         net (fo=1, routed)           0.000    11.749    compressor2_1_128_32/rowadder2_1inst/prop[22]
+    SLICE_X4Y77          CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.301    12.050 r  compressor2_1_128_32/rowadder2_1inst/carry4_23_20/CO[3]
+                         net (fo=1, routed)           0.000    12.050    compressor2_1_128_32/rowadder2_1inst/carryout[23]
+    SLICE_X4Y78          CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.089    12.139 r  compressor2_1_128_32/rowadder2_1inst/carry4_27_24/CO[3]
+                         net (fo=1, routed)           0.000    12.139    compressor2_1_128_32/rowadder2_1inst/carryout[27]
+    SLICE_X4Y79          CARRY4 (Prop_carry4_CI_O[1])
+                                                      0.230    12.369 r  compressor2_1_128_32/rowadder2_1inst/carry4_31_28/O[1]
+                         net (fo=1, routed)           1.490    13.859    dst29_OBUF[0]
+    T14                  OBUF (Prop_obuf_I_O)         2.396    16.255 r  dst29_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    16.255    dst29[0]
+    T14                                                               r  dst29[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+
