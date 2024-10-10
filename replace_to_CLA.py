@@ -12,6 +12,10 @@ class Compressor_CLA:
         self.dst_length = (self.row - 1).bit_length() + self.col
         self.module_name = f'compressor_CLA{self.row}_{self.col}'
         self.indent = '    '
+        self.comp_outs_size = 0
+        for i, size in enumerate(self.comp.stages[-1]):
+            if size > 0:
+                self.comp_outs_size += 1
 
     def gen_module(self):
         code = ''
@@ -51,7 +55,7 @@ class Compressor_CLA:
         args = []
         for i in range(self.col):
             args.append(f'{self.indent * level}.src{i}(src{i})')
-        for i in range(self.dst_length):
+        for i in range(self.comp_outs_size):
             args.append(f'{self.indent * level}.dst{i}(comp_out{i})')
         return ',\n'.join(args)
 
@@ -124,3 +128,4 @@ if __name__ == '__main__':
         print(ShiftRegister(src_form, dst_form, comp_cla.module_name).gen_module(), file=f)
         print(comp_cla.gen_module(), file=f)
         print(Testbench(src_form, dst_form, comp_cla.module_name).gen_module(), file=f)
+
