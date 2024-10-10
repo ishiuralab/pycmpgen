@@ -1,0 +1,90 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Oct 11 02:18:36 2024
+# Process ID: 80218
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA
+# Command line: vivado
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 1091.568 MHz, CPU Physical cores: 10, Host memory: 16425 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.xpr
+update_compile_order -fileset sources_1
+pwd
+ls
+source synth_all.tcl
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1
+add_files -norecurse /home/kanai/reserch/LCU/LCUs.v
+reset_run synth_1
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1
+launch_runs impl_1 -jobs 6
+wait_on_run impl_1
+open_run impl_1
+report_utilization -name utilization_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 10 -input_pins -routable_nets -name timing_1 -file /home/kanai/reserch/pycmpgen/timing_report.txt
+pwd
+source synth_all.tcl
+update_compile_order -fileset sources_1
+add_files -norecurse {/home/kanai/reserch/gpccode/gpc1407_5.v /home/kanai/reserch/gpccode/gpc3_2.v /home/kanai/reserch/gpccode/gpc615_5.v /home/kanai/reserch/gpccode/gpc117_4.v /home/kanai/reserch/gpccode/gpc1163_5.v /home/kanai/reserch/gpccode/gpc425_5.v /home/kanai/reserch/gpccode/gpc2116_5.v /home/kanai/reserch/gpccode/gpc607_5.v /home/kanai/reserch/gpccode/gpc1325_5.v /home/kanai/reserch/gpccode/gpc135_4.v /home/kanai/reserch/gpccode/gpc215_4.v /home/kanai/reserch/gpccode/gpc1253_5.v /home/kanai/reserch/gpccode/gpc703_5.v /home/kanai/reserch/gpccode/gpc1244_5.v /home/kanai/reserch/gpccode/gpc223_4.v /home/kanai/reserch/gpccode/gpc126_4.v /home/kanai/reserch/gpccode/gpc623_5.v /home/kanai/reserch/gpccode/gpc2126_5.v /home/kanai/reserch/gpccode/gpc44_4.v /home/kanai/reserch/gpccode/gpc1_1.v /home/kanai/reserch/gpccode/gpc2117_5.v /home/kanai/reserch/gpccode/gpc606_5.v /home/kanai/reserch/gpccode/gpc1316_5.v /home/kanai/reserch/gpccode/gpc2223_5.v /home/kanai/reserch/gpccode/gpc1423_5.v /home/kanai/reserch/gpccode/gpc2135_5.v /home/kanai/reserch/gpccode/gpc23_3.v /home/kanai/reserch/gpccode/gpc7_3.v /home/kanai/reserch/gpccode/gpc1415_5.v /home/kanai/reserch/gpccode/gpc1334_5.v /home/kanai/reserch/gpccode/gpc1406_5.v /home/kanai/reserch/gpccode/gpc15_3.v /home/kanai/reserch/gpccode/gpc207_4.v /home/kanai/reserch/gpccode/gpc1343_5.v}
+source synth_all.tcl
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 6
+wait_on_run synth_1
+launch_runs impl_1 -jobs 6
+wait_on_run impl_1
+refresh_design
+add_files -norecurse {/home/kanai/reserch/gpccode/gpc1407_5.v /home/kanai/reserch/gpccode/gpc3_2.v /home/kanai/reserch/gpccode/gpc615_5.v /home/kanai/reserch/gpccode/gpc117_4.v /home/kanai/reserch/gpccode/allgpcs.v /home/kanai/reserch/gpccode/gpc1163_5.v /home/kanai/reserch/gpccode/gpc425_5.v /home/kanai/reserch/gpccode/gpc2116_5.v /home/kanai/reserch/gpccode/gpc607_5.v /home/kanai/reserch/gpccode/gpc1325_5.v /home/kanai/reserch/gpccode/gpc135_4.v /home/kanai/reserch/gpccode/gpc215_4.v /home/kanai/reserch/gpccode/gpc1253_5.v /home/kanai/reserch/gpccode/gpc703_5.v /home/kanai/reserch/gpccode/gpc1244_5.v /home/kanai/reserch/gpccode/gpc223_4.v /home/kanai/reserch/gpccode/gpc126_4.v /home/kanai/reserch/gpccode/gpc623_5.v /home/kanai/reserch/gpccode/gpc2126_5.v /home/kanai/reserch/gpccode/gpc44_4.v /home/kanai/reserch/gpccode/gpc1_1.v /home/kanai/reserch/gpccode/gpc2117_5.v /home/kanai/reserch/gpccode/gpc606_5.v /home/kanai/reserch/gpccode/gpc1316_5.v /home/kanai/reserch/gpccode/gpc2223_5.v /home/kanai/reserch/gpccode/gpc1423_5.v /home/kanai/reserch/gpccode/gpc2135_5.v /home/kanai/reserch/gpccode/gpc23_3.v /home/kanai/reserch/gpccode/gpc7_3.v /home/kanai/reserch/gpccode/gpc1415_5.v /home/kanai/reserch/gpccode/gpc1334_5.v /home/kanai/reserch/gpccode/gpc1406_5.v /home/kanai/reserch/gpccode/gpc15_3.v /home/kanai/reserch/gpccode/gpc207_4.v /home/kanai/reserch/gpccode/gpc1343_5.v}
+update_compile_order -fileset sources_1
+add_files -norecurse /home/kanai/reserch/gpccode/gpc117_4.v
+source synth_all.tcl
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/LCU/LCUs.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1244_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1253_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc126_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1316_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/allgpcs.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1325_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1334_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1407_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1423_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc15_3.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc2116_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc2117_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc2126_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc2223_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc223_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc23_3.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc3_2.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc425_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc44_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc607_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc703_5.v] -no_script -reset -force -quiet
+remove_files  {/home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v /home/kanai/reserch/LCU/LCUs.v /home/kanai/reserch/gpccode/gpc1244_5.v /home/kanai/reserch/gpccode/gpc1253_5.v /home/kanai/reserch/gpccode/gpc126_4.v /home/kanai/reserch/gpccode/gpc1316_5.v /home/kanai/reserch/gpccode/allgpcs.v /home/kanai/reserch/gpccode/gpc1325_5.v /home/kanai/reserch/gpccode/gpc1334_5.v /home/kanai/reserch/gpccode/gpc1407_5.v /home/kanai/reserch/gpccode/gpc1423_5.v /home/kanai/reserch/gpccode/gpc15_3.v /home/kanai/reserch/gpccode/gpc2116_5.v /home/kanai/reserch/gpccode/gpc2117_5.v /home/kanai/reserch/gpccode/gpc2126_5.v /home/kanai/reserch/gpccode/gpc2223_5.v /home/kanai/reserch/gpccode/gpc223_4.v /home/kanai/reserch/gpccode/gpc23_3.v /home/kanai/reserch/gpccode/gpc3_2.v /home/kanai/reserch/gpccode/gpc425_5.v /home/kanai/reserch/gpccode/gpc44_4.v /home/kanai/reserch/gpccode/gpc607_5.v /home/kanai/reserch/gpccode/gpc703_5.v}
+update_compile_order -fileset sources_1
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1163_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc117_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1343_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc135_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1406_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1415_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc1_1.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc207_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc2135_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc215_4.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc606_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc615_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc623_5.v] -no_script -reset -force -quiet
+export_ip_user_files -of_objects  [get_files /home/kanai/reserch/gpccode/gpc7_3.v] -no_script -reset -force -quiet
+remove_files  {/home/kanai/reserch/gpccode/gpc1163_5.v /home/kanai/reserch/gpccode/gpc117_4.v /home/kanai/reserch/gpccode/gpc1343_5.v /home/kanai/reserch/gpccode/gpc135_4.v /home/kanai/reserch/gpccode/gpc1406_5.v /home/kanai/reserch/gpccode/gpc1415_5.v /home/kanai/reserch/gpccode/gpc1_1.v /home/kanai/reserch/gpccode/gpc207_4.v /home/kanai/reserch/gpccode/gpc2135_5.v /home/kanai/reserch/gpccode/gpc215_4.v /home/kanai/reserch/gpccode/gpc606_5.v /home/kanai/reserch/gpccode/gpc615_5.v /home/kanai/reserch/gpccode/gpc623_5.v /home/kanai/reserch/gpccode/gpc7_3.v}
+close_design

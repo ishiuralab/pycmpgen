@@ -1,0 +1,24 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Fri Oct 11 03:00:09 2024
+# Process ID: 330548
+# Current directory: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA
+# Command line: vivado
+# Log file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/vivado.log
+# Journal file: /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/vivado.jou
+# Running On: kanai-CFSR3-1, OS: Linux, CPU Frequency: 3548.192 MHz, CPU Physical cores: 10, Host memory: 16425 MB
+#-----------------------------------------------------------
+start_gui
+open_project /home/kanai/reserch/pycmpgen/comp2_1project/comp2_1project.xpr
+add_files -norecurse {/home/kanai/reserch/gpccode/allgpcs.v /home/kanai/reserch/LCU/LCUs.v}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+add_files -norecurse /home/kanai/reserch/pycmpgen/comp2_1vivado_exe.v
+update_compile_order -fileset sources_1
+source synth_all.tcl
+pwd
+sour
+source synth_all.tcl

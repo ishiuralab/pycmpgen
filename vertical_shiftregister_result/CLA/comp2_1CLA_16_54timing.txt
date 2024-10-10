@@ -1,0 +1,74 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Fri Oct 11 04:33:11 2024
+| Host         : kanai-CFSR3-1 running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -max_paths 1 -file /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/comp2_1CLA_16_54timing.txt
+| Design       : shift_register
+| Device       : 7a100t-csg324
+| Speed File   : -3  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 src2_reg[10]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst21[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        16.310ns  (logic 6.955ns (42.639%)  route 9.356ns (57.361%))
+  Logic Levels:           16  (CARRY4=9 FDRE=1 LUT2=1 LUT4=2 LUT6=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X1Y83          FDRE                         0.000     0.000 r  src2_reg[10]/C
+    SLICE_X1Y83          FDRE (Prop_fdre_C_Q)         0.341     0.341 r  src2_reg[10]/Q
+                         net (fo=5, routed)           1.204     1.545    compressor_CLA54_16/compressor_inst/gpc1/lut6_2_inst2/I0
+    SLICE_X0Y83          LUT6 (Prop_lut6_I0_O)        0.097     1.642 r  compressor_CLA54_16/compressor_inst/gpc1/lut6_2_inst2/LUT6/O
+                         net (fo=1, routed)           0.000     1.642    compressor_CLA54_16/compressor_inst/gpc1/lut6_2_inst2_n_1
+    SLICE_X0Y83          CARRY4 (Prop_carry4_S[2]_CO[3])
+                                                      0.301     1.943 r  compressor_CLA54_16/compressor_inst/gpc1/carry4_inst0/CO[3]
+                         net (fo=4, routed)           1.068     3.011    compressor_CLA54_16/compressor_inst/gpc102/lut6_2_inst2/I3
+    SLICE_X2Y84          LUT6 (Prop_lut6_I3_O)        0.097     3.108 r  compressor_CLA54_16/compressor_inst/gpc102/lut6_2_inst2/LUT6/O
+                         net (fo=1, routed)           0.000     3.108    compressor_CLA54_16/compressor_inst/gpc102/lut6_2_inst2_n_1
+    SLICE_X2Y84          CARRY4 (Prop_carry4_S[2]_O[2])
+                                                      0.188     3.296 r  compressor_CLA54_16/compressor_inst/gpc102/carry4_inst0/O[2]
+                         net (fo=4, routed)           0.703     3.999    compressor_CLA54_16/compressor_inst/gpc152/stage2_4[1]
+    SLICE_X5Y82          LUT4 (Prop_lut4_I2_O)        0.217     4.216 r  compressor_CLA54_16/compressor_inst/gpc152/lut4_prop0/O
+                         net (fo=1, routed)           0.000     4.216    compressor_CLA54_16/compressor_inst/gpc152/lut4_prop0_n_0
+    SLICE_X5Y82          CARRY4 (Prop_carry4_S[0]_O[1])
+                                                      0.303     4.519 r  compressor_CLA54_16/compressor_inst/gpc152/carry4_inst0/O[1]
+                         net (fo=4, routed)           0.919     5.439    compressor_CLA54_16/compressor_inst/gpc178/lut5_prop3_1[0]
+    SLICE_X4Y77          LUT4 (Prop_lut4_I2_O)        0.225     5.664 r  compressor_CLA54_16/compressor_inst/gpc178/lut4_prop1/O
+                         net (fo=1, routed)           0.000     5.664    compressor_CLA54_16/compressor_inst/gpc178/lut4_prop1_n_0
+    SLICE_X4Y77          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.412     6.076 r  compressor_CLA54_16/compressor_inst/gpc178/carry4_inst0/CO[3]
+                         net (fo=2, routed)           1.183     7.259    compressor_CLA54_16/LCU64/LCU16_0/CLA2/src0[1]
+    SLICE_X7Y73          LUT2 (Prop_lut2_I0_O)        0.097     7.356 r  compressor_CLA54_16/LCU64/LCU16_0/CLA2/lut_1_prop/O
+                         net (fo=3, routed)           0.510     7.866    compressor_CLA54_16/LCU64/LCU16_0/CLA2/prop[1]
+    SLICE_X5Y73          CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.509     8.375 r  compressor_CLA54_16/LCU64/LCU16_0/CLA2/GeneG/CO[3]
+                         net (fo=2, routed)           0.786     9.161    compressor_CLA54_16/LCU64/LCU16_0/gene[2]
+    SLICE_X1Y71          CARRY4 (Prop_carry4_DI[2]_CO[3])
+                                                      0.295     9.456 r  compressor_CLA54_16/LCU64/LCU16_0/GeneG/CO[3]
+                         net (fo=1, routed)           0.803    10.259    compressor_CLA54_16/LCU64/gene[0]
+    SLICE_X0Y71          CARRY4 (Prop_carry4_DI[0]_CO[0])
+                                                      0.286    10.545 r  compressor_CLA54_16/LCU64/CARRY4_inst/CO[0]
+                         net (fo=2, routed)           0.445    10.989    compressor_CLA54_16/LCU64/LCU16_1/cin
+    SLICE_X0Y68          CARRY4 (Prop_carry4_CYINIT_CO[0])
+                                                      0.584    11.573 r  compressor_CLA54_16/LCU64/LCU16_1/CARRY4_inst/CO[0]
+                         net (fo=1, routed)           0.437    12.010    compressor_CLA54_16/LCU64/LCU16_1/CLA1/cin
+    SLICE_X0Y65          CARRY4 (Prop_carry4_CYINIT_O[1])
+                                                      0.603    12.613 r  compressor_CLA54_16/LCU64/LCU16_1/CLA1/CARRY4_inst/O[1]
+                         net (fo=1, routed)           1.298    13.911    dst21_OBUF[0]
+    U16                  OBUF (Prop_obuf_I_O)         2.400    16.310 r  dst21_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    16.310    dst21[0]
+    U16                                                               r  dst21[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

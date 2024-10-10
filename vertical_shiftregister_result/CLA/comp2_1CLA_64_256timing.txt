@@ -1,0 +1,89 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Fri Oct 11 04:46:41 2024
+| Host         : kanai-CFSR3-1 running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -max_paths 1 -file /home/kanai/reserch/pycmpgen/vertical_shiftregister_result/CLA/comp2_1CLA_64_256timing.txt
+| Design       : shift_register
+| Device       : 7a100t-csg324
+| Speed File   : -3  PRODUCTION 1.23 2018-06-13
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack:                    inf
+  Source:                 src9_reg[0]/C
+                            (rising edge-triggered cell FDRE)
+  Destination:            dst55[0]
+                            (output port)
+  Path Group:             (none)
+  Path Type:              Max at Slow Process Corner
+  Data Path Delay:        26.801ns  (logic 8.977ns (33.497%)  route 17.823ns (66.503%))
+  Logic Levels:           22  (CARRY4=12 FDRE=1 LUT2=2 LUT4=4 LUT5=2 OBUF=1)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+    SLICE_X10Y128        FDRE                         0.000     0.000 r  src9_reg[0]/C
+    SLICE_X10Y128        FDRE (Prop_fdre_C_Q)         0.393     0.393 r  src9_reg[0]/Q
+                         net (fo=3, routed)           2.808     3.201    compressor_CLA256_64/compressor_inst/gpc143/src9[0]
+    SLICE_X50Y61         LUT4 (Prop_lut4_I3_O)        0.097     3.298 r  compressor_CLA256_64/compressor_inst/gpc143/lut4_prop3/O
+                         net (fo=1, routed)           0.000     3.298    compressor_CLA256_64/compressor_inst/gpc143/lut4_prop3_n_0
+    SLICE_X50Y61         CARRY4 (Prop_carry4_S[3]_O[3])
+                                                      0.191     3.489 r  compressor_CLA256_64/compressor_inst/gpc143/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.901     4.390    compressor_CLA256_64/compressor_inst/gpc2990/stage1_9[0]
+    SLICE_X62Y60         LUT4 (Prop_lut4_I3_O)        0.222     4.612 r  compressor_CLA256_64/compressor_inst/gpc2990/lut4_prop0/O
+                         net (fo=1, routed)           0.000     4.612    compressor_CLA256_64/compressor_inst/gpc2990/lut4_prop0_n_0
+    SLICE_X62Y60         CARRY4 (Prop_carry4_S[0]_O[2])
+                                                      0.406     5.018 r  compressor_CLA256_64/compressor_inst/gpc2990/carry4_inst0/O[2]
+                         net (fo=4, routed)           0.616     5.635    compressor_CLA256_64/compressor_inst/gpc4460/src2[1]
+    SLICE_X62Y61         LUT5 (Prop_lut5_I0_O)        0.217     5.852 r  compressor_CLA256_64/compressor_inst/gpc4460/lut5_prop3/O
+                         net (fo=1, routed)           0.000     5.852    compressor_CLA256_64/compressor_inst/gpc4460/lut5_prop3_n_0
+    SLICE_X62Y61         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.284     6.136 r  compressor_CLA256_64/compressor_inst/gpc4460/carry4_inst0/CO[3]
+                         net (fo=2, routed)           1.178     7.313    compressor_CLA256_64/compressor_inst/gpc5204/src3[0]
+    SLICE_X57Y57         LUT2 (Prop_lut2_I0_O)        0.097     7.410 r  compressor_CLA256_64/compressor_inst/gpc5204/lut2_prop3/O
+                         net (fo=1, routed)           0.000     7.410    compressor_CLA256_64/compressor_inst/gpc5204/lut2_prop3_n_0
+    SLICE_X57Y57         CARRY4 (Prop_carry4_S[3]_CO[3])
+                                                      0.299     7.709 r  compressor_CLA256_64/compressor_inst/gpc5204/carry4_inst0/CO[3]
+                         net (fo=4, routed)           1.007     8.717    compressor_CLA256_64/compressor_inst/gpc5569/lut6_2_inst2/I4
+    SLICE_X61Y64         LUT5 (Prop_lut5_I4_O)        0.107     8.824 r  compressor_CLA256_64/compressor_inst/gpc5569/lut6_2_inst2/LUT5/O
+                         net (fo=1, routed)           0.000     8.824    compressor_CLA256_64/compressor_inst/gpc5569/lut6_2_inst2_n_0
+    SLICE_X61Y64         CARRY4 (Prop_carry4_DI[2]_O[3])
+                                                      0.291     9.115 r  compressor_CLA256_64/compressor_inst/gpc5569/carry4_inst0/O[3]
+                         net (fo=4, routed)           1.105    10.220    compressor_CLA256_64/compressor_inst/gpc5744/stage5_15[1]
+    SLICE_X46Y62         LUT4 (Prop_lut4_I2_O)        0.234    10.454 r  compressor_CLA256_64/compressor_inst/gpc5744/lut4_prop1/O
+                         net (fo=1, routed)           0.000    10.454    compressor_CLA256_64/compressor_inst/gpc5744/lut4_prop1_n_0
+    SLICE_X46Y62         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.402    10.856 r  compressor_CLA256_64/compressor_inst/gpc5744/carry4_inst0/CO[3]
+                         net (fo=2, routed)           1.218    12.074    compressor_CLA256_64/compressor_inst/gpc5858/stage6_19[0]
+    SLICE_X35Y54         LUT4 (Prop_lut4_I3_O)        0.097    12.171 r  compressor_CLA256_64/compressor_inst/gpc5858/lut4_prop1/O
+                         net (fo=1, routed)           0.000    12.171    compressor_CLA256_64/compressor_inst/gpc5858/lut4_prop1_n_0
+    SLICE_X35Y54         CARRY4 (Prop_carry4_S[1]_O[3])
+                                                      0.477    12.648 r  compressor_CLA256_64/compressor_inst/gpc5858/carry4_inst0/O[3]
+                         net (fo=2, routed)           0.622    13.270    compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/CLA1/src0[1]
+    SLICE_X35Y55         LUT2 (Prop_lut2_I0_O)        0.234    13.504 r  compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/CLA1/lut_1_prop/O
+                         net (fo=3, routed)           0.814    14.318    compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/CLA1/prop[1]
+    SLICE_X38Y57         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.499    14.817 r  compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/CLA1/PropG/CO[3]
+                         net (fo=3, routed)           0.670    15.487    compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/prop[1]
+    SLICE_X37Y61         CARRY4 (Prop_carry4_S[1]_CO[3])
+                                                      0.394    15.881 r  compressor_CLA256_64/LCU256/LCU64_0/LCU16_1/PropG/CO[3]
+                         net (fo=3, routed)           1.789    17.670    compressor_CLA256_64/LCU256/LCU64_0/prop[1]
+    SLICE_X48Y84         CARRY4 (Prop_carry4_S[1]_CO[2])
+                                                      0.410    18.080 r  compressor_CLA256_64/LCU256/LCU64_0/CARRY4_inst/CO[2]
+                         net (fo=2, routed)           0.785    18.866    compressor_CLA256_64/LCU256/LCU64_0/LCU16_3/cin
+    SLICE_X46Y103        CARRY4 (Prop_carry4_CYINIT_CO[0])
+                                                      0.553    19.419 r  compressor_CLA256_64/LCU256/LCU64_0/LCU16_3/CARRY4_inst/CO[0]
+                         net (fo=1, routed)           0.738    20.156    compressor_CLA256_64/LCU256/LCU64_0/LCU16_3/CLA1/cin
+    SLICE_X47Y115        CARRY4 (Prop_carry4_CYINIT_O[3])
+                                                      0.643    20.799 r  compressor_CLA256_64/LCU256/LCU64_0/LCU16_3/CLA1/CARRY4_inst/O[3]
+                         net (fo=1, routed)           3.571    24.370    dst55_OBUF[0]
+    T10                  OBUF (Prop_obuf_I_O)         2.430    26.801 r  dst55_OBUF[0]_inst/O
+                         net (fo=0)                   0.000    26.801    dst55[0]
+    T10                                                               r  dst55[0] (OUT)
+  -------------------------------------------------------------------    -------------------
+
+
+
+

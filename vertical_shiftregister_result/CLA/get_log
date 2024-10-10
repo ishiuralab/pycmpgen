@@ -1,0 +1,10 @@
+set xlsx_name (ls | grep '\.xlsx' | ./file_sort.py)
+for i in $xlsx_name
+    ../xlsx_to_csv.py $i
+end > csv_log
+
+set timing_name (ls | grep 'timing.txt' | ./file_sort.py)
+
+for i in $timing_name
+    ./get_timing.py $i
+end > timing_log
