@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for size in `seq 8 32`
+for size in `seq 8 16`
 do
-    ./experiment.py $size
+    ./experiment_min_slice.py $size
 done
