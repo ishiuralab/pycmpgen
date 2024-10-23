@@ -6,6 +6,7 @@ import os
 import time
 
 from optimizer import Optimizer, InfeasibleProblemError
+from compressor import Compressor
 from problem.multiplier import Multiplier
 from problem.square import Square
 
@@ -49,11 +50,22 @@ def main(size, probclass):
         sol, cost = opt.solve(TIMELIMIT)
         opt.end()
         costs += [cost]
+        try:
+            os.makedirs(f'{OUTPUTDIR}/default_{probname}{size}/')
+        except FileExistsError:
+            pass
+        comp = Compressor(prob=prob, sol=sol)
+        with open(f'{OUTPUTDIR}/default_{probname}{size}/default_{probname}{size}_{stage}.json', 'w') as f:
+            print(comp.get_dict(), file=f)
+        with open(f'{OUTPUTDIR}/default_{probname}{size}/default_{probname}{size}_{stage}.v', 'w') as f:
+            print(f'// probclass: {probname}', file=f)
+            print(f'// size:      {size}', file=f)
+            print(f'// stage:     {stage}', file=f)
+            print(f'// cost:      {cost}', file=f)
+            print(comp.gen_module(), file=f)
         prob = probclass(size, 1, stage + 1, gpclist).get_dict()
         sol['stages'] += [[1 for _ in range(prob['colnum'])]]
         sol['gpcusage'] += [[[0 for _ in gpclist] for _ in range(prob['colnum'])]]
-
-    outputdir = f'{OUTPUTDIR}/cascade/{probname}{size}'
 
     with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, minstage: {minstage}, costs: {costs}', file=f)
