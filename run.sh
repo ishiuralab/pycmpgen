@@ -2,5 +2,5 @@
 
 for size in `seq 8 16`
 do
-    ./experiment_min_slice.py $size
+    ./experiment_slice_prioritized.py $size
 done
