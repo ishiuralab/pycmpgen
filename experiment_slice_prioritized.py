@@ -47,7 +47,9 @@ def main(size, probclass):
     for stage in range(minstage, minstage + 5):
         opt = Optimizer(prob, objective='cost')
         opt.add_mip_start(sol)
+        begin = time.time()
         sol, cost = opt.solve(TIMELIMIT)
+        elapsed = begin - time.time()
         opt.end()
         costs += [cost]
         try:
@@ -62,6 +64,7 @@ def main(size, probclass):
             print(f'// size:      {size}', file=f)
             print(f'// stage:     {stage}', file=f)
             print(f'// cost:      {cost}', file=f)
+            print(f'// elapsed:   {time}', file=f)
             print(comp.gen_module(), file=f)
         prob = probclass(size, 1, stage + 1, gpclist).get_dict()
         sol['stages'] += [[1 for _ in range(prob['colnum'])]]
