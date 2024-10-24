@@ -65,7 +65,7 @@ def main(size, probclass):
             print(comp.gen_module(), file=f)
         prob = probclass(size, 1, stage + 1, gpclist).get_dict()
         sol['stages'] += [[1 for _ in range(prob['colnum'])]]
-        sol['gpcusage'] += [[[0 for _ in gpclist] for _ in range(prob['colnum'])]]
+        sol['gpcusage'] += [[[1 if i == 0 else 0 for i in range(len(gpclist))] for _ in range(prob['colnum'])]]
 
     with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, minstage: {minstage}, costs: {costs}', file=f)
