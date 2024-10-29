@@ -70,6 +70,14 @@ def main(size, probclass):
         sol['stages'] += [[1 for _ in range(prob['colnum'])]]
         sol['gpcusage'] += [[[1 if i == 0 else 0 for i in range(len(gpclist))] for _ in range(prob['colnum'])]]
 
+    minslice_stage = minstage + costs.index(min(costs))
+    with open(f'results/1024/default_mul{size}/default_mul{size}_{minslice_stage}.json') as f:
+        sol = json.loads(f.read())
+        src = sol['solution']['stages'][0]
+        dst = sol['solution']['stages'][-1]
+    with open(f'results/1024/default_mul{size}/default_mul{size}_{minslice_stage}_shift_register.v', 'w') as f:
+        print(ShiftRegister(src, dst, 'compressor').gen_module(), file=f)
+
     with open(f'{OUTPUTDIR}/default_{probname}_digest.txt', 'a') as f:
         print(f'{size:2}, minstage: {minstage}, costs: {costs}', file=f)
     print(f'{size:2}, minstage: {minstage}, costs: {costs}')
