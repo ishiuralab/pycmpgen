@@ -2,6 +2,10 @@
 // size:      9
 // stage:     5
 // cost:      10
+// impl:      14
+// delay:     11.787
+// logic:     5.925
+// route:     5.863
 // elapsed:   8.865694284439087
 module compressor (
       input wire [0:0] src0,
