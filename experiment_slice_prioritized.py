@@ -10,7 +10,7 @@ from compressor import Compressor
 from problem.multiplier import Multiplier
 from problem.square import Square
 
-TIMELIMIT = 60
+TIMELIMIT = 7200
 OUTPUTDIR = 'results/1024'
 
 try:
