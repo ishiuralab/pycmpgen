@@ -9,6 +9,7 @@ from optimizer import Optimizer, InfeasibleProblemError
 from compressor import Compressor
 from problem.multiplier import Multiplier
 from problem.square import Square
+from shift_register import ShiftRegister
 
 TIMELIMIT = 7200
 OUTPUTDIR = 'results/1029'
