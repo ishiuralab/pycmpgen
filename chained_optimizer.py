@@ -131,7 +131,7 @@ class ChainedOptimizerLsb7(Optimizer):
         self.lsb7gpcs = []
         self.non7gpcs = []
         for gpc in self.gpclist:
-            if gpc['src'][0] == 7:
+            if gpc['src'][0] == 7 and len(gpc['dst']) == 5:
                 self.lsb7gpcs.append(gpc)
             else:
                 self.non7gpcs.append(gpc)

@@ -249,14 +249,21 @@ class ChainedCompressorLsb7(Compressor):
     def build(self):
         for stg in range(self.stagenum):
             for col in range(self.colnum):
-                lsb7 = [
-                    self.gpcusage[stg][col][idx] for idx, gpc in enumerate(self.gpclist) if gpc['src'][0] == 7
-                ]
-                non7 = [
-                    self.gpcusage[stg][col][idx] for idx, gpc in enumerate(self.gpclist) if gpc['src'][0] < 7
-                ]
+                lsb7, non7 = [], []
+                for idx, gpc in enumerate(self.gpclist):
+                    if gpc['src'][0] == 7 and len(gpc['dst']) == 5:
+                        lsb7 += [self.gpcusage[stg][col][idx]]
+                    else:
+                        non7 += [self.gpcusage[stg][col][idx]]
                 self.gpcusage[stg][col] = lsb7 + non7
-        self.gpclist = list(filter(lambda gpc: gpc['src'][0] == 7, self.gpclist)) + list(filter(lambda gpc: gpc['src'][0] < 7, self.gpclist))
+        self.lsb7gpcs = []
+        self.non7gpcs = []
+        for gpc in self.gpclist:
+            if gpc['src'][0] == 7 and len(gpc['dst']) == 5:
+                self.lsb7gpcs.append(gpc)
+            else:
+                self.non7gpcs.append(gpc)
+        self.gpclist = self.lsb7gpcs + self.non7gpcs
         self.netlist = []
         self.wires = []
         dst_stage = self.stages[0][:]
@@ -300,7 +307,7 @@ class ChainedCompressorLsb7(Compressor):
                 )
                 dst_stage[col] += limit - used
         return dst_stage, netlist, wires
-                    
+
 
     def get_gpcchain_shape(self, idxlist):
         srcshape = []
@@ -313,7 +320,7 @@ class ChainedCompressorLsb7(Compressor):
             partialsrc[0] -= 1
             srcshape += partialsrc
             dstshape += self.gpclist[gpcidx]['dst'][:-1]
-        if self.gpclist[idxlist[0]]['src'][0] < 7:
+        if not(self.gpclist[idxlist[0]]['src'][0] == 7 and len(self.gpclist[idxlist[0]]['dst']) == 5):
             srcshape[0] += 1
         dstshape += [1]
         return srcshape, dstshape
@@ -416,10 +423,14 @@ class ChainedCompressorLsb7(Compressor):
         srcshape, dstshape = self.get_gpcchain_shape(idxlist)
 
         if self.gpclist[idxlist[0]]['src'][0] == 7:
-            spec = {'shape': srcshape, 'lut': [], 'cin': None}
-            offset = -1
+            if len(self.gpclist[idxlist[0]]['dst']) == 5:
+                spec = {'shape': srcshape, 'lut': [], 'cin': None, 'base': 0}
+                offset = -1
+            else:
+                spec = {'shape': [1] + srcshape, 'lut': [[[1],None,2]], 'cin': None, 'base': 1}
+                offset = 0
         else:
-            spec = {'shape': srcshape, 'lut': [], 'cin': 0}
+            spec = {'shape': srcshape, 'lut': [], 'cin': 0, 'base': 0}
             offset = 0
         for gpcidx in idxlist:
             luts = []
@@ -502,10 +513,11 @@ if __name__ == '__main__':
     with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
 
-    prob = problem.multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
+    prob = problem.popcounter.Popcounter(1024, 1, 10, gpclist).get_dict()
+    # prob = problem.multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
     # prob = problem.square.Square(54, 1, 4, gpclist).get_dict()
     opt = ChainedOptimizerLsb7(prob, objective='cost')
-    sol = opt.solve(timelimit=1200)
+    sol = opt.solve(timelimit=120)
     comp = ChainedCompressorLsb7(prob, sol)
-    # comp.randomtest()
-    print(comp.gen_module())
+    comp.randomtest()
+    #print(comp.gen_module())

@@ -10,6 +10,10 @@ class InvalidCircuitError(RuntimeError):
 
 class GpcGenerator:
     def __init__(self, spec):
+        if 'base' in spec:
+            self.base = spec['base']
+        else:
+            self.base = 0
         self.spec = spec
         self.width = sum(num << place for place, num in enumerate(self.spec['shape'])).bit_length()
         self.carry4cnt = (self.width + 2) // 4
@@ -33,14 +37,14 @@ class GpcGenerator:
         return code
 
     def get_module_arguments(self):
-        args = [f'input [{num - 1}:0] src{place}' for place, num in enumerate(self.spec['shape']) if num != 0]
-        args += [f'output [{self.width - 1}:0] dst']
+        args = [f'input [{num - 1}:0] src{place}' for place, num in enumerate(self.spec['shape'][self.base:]) if num != 0]
+        args += [f'output [{self.width - self.base - 1}:0] dst']
         return ', '.join(args)
 
     def get_module_name(self):
         shape = self.spec['shape']
         stripped = shape[: next((len(shape) - i for i, x in enumerate(shape[::-1]) if x != 0), len(shape))]
-        return f'gpc{"".join((f"{c}" for c in stripped[::-1]))}_{self.width}'
+        return f'gpc{"".join((f"{c}" for c in stripped[self.base:][::-1]))}_{self.width - self.base}'
 
     def gen_wire_declarations(self, level=1):
         code = ''
@@ -70,7 +74,7 @@ class GpcGenerator:
         prop = init >> 32
         for idx, srcidx in enumerate(symms):
             p, i = self.idx2wire[srcidx]
-            args += [f'.I{idx}(src{p}[{i}])']
+            args += [f'.I{idx}(src{p - self.base}[{i}])']
 
         # gene
         code += self.indent * level + f'LUT{len(symms)} #(\n'
@@ -97,7 +101,7 @@ class GpcGenerator:
         args = [f'.O5(gene[{place}])', f'.O6(prop[{place}])']
         for idx, srcidx in enumerate(symms + [asymm]):
             p, i = self.idx2wire[srcidx]
-            args += [f'.I{idx}(src{p}[{i}])']
+            args += [f'.I{idx}(src{p - self.base}[{i}])']
         code += self.indent * level + f'LUT6_2 #(\n'
         code += self.indent * (level + 1) + f'.INIT(64\'h{init:x})\n'
         code += self.indent * level + f') lut6_2_inst{place}(\n'
@@ -118,6 +122,7 @@ class GpcGenerator:
                 args += [f'.CI(1\'h0)']
             else:
                 p, i = self.idx2wire[self.spec['cin']]
+                assert p >= self.base
                 args += [f'.CI(src{p}[{i}])']
         else:
             args += [f'.CI(carryout[{place - 1}])']
@@ -137,7 +142,7 @@ class GpcGenerator:
 
     def gen_dst_assignment(self, level=1):
         terms = [f'carryout[{self.width - 2}]']
-        for place in range(self.width - 1)[::-1]:
+        for place in range(self.base, self.width - 1)[::-1]:
             terms += [f'out[{place}]']
         return self.indent * level + f'assign dst = {{{", ".join(terms)}}};\n'
 
@@ -159,18 +164,19 @@ class TestGenerator(GpcGenerator):
 
     def gen_wire_reg_declarations(self, level=1):
         code = ''
-        for place, num in enumerate(self.spec['shape']):
+        for place, num in enumerate(self.spec['shape'][self.base:]):
             if num > 0:
                 code += self.indent * level + f'reg [{num - 1}:0] src{place};\n'
-        code += self.indent * level + f'wire [{self.width - 1}:0] dst;\n'
-        code += self.indent * level + f'wire [{self.width - 1}:0] exp;\n'
+        code += self.indent * level + f'wire [{self.width - self.base - 1}:0] dst;\n'
+        code += self.indent * level + f'wire [{self.width - self.base - 1}:0] exp;\n'
         code += self.indent * level + f'wire test;\n'
         return code
 
     def gen_assignments(self, level=1):
         terms = []
         for place, idx in self.idx2wire:
-            terms += [f'src{place}[{idx}] * {1 << place}']
+            if place >= self.base:
+                terms += [f'src{place - self.base}[{idx}] * {1 << (place - self.base)}']
         code = ''
         code += self.indent * level + f'assign exp = {" + ".join(terms)};\n'
         code += self.indent * level + f'assign test = dst == exp;\n'
@@ -179,8 +185,9 @@ class TestGenerator(GpcGenerator):
     def gen_gpc_instantiation(self, level=1):
         args = []
         for place, num in enumerate(self.spec['shape']):
-            if num > 0:
-                args += [f'.src{place}(src{place})']
+            if place >= self.base:
+                if num > 0:
+                    args += [f'.src{place - self.base}(src{place - self.base})']
         args += [f'.dst(dst)']
         code = ''
         code += self.indent * level + f'{self.get_module_name()} {self.get_module_name()}(\n'
@@ -199,9 +206,10 @@ class TestGenerator(GpcGenerator):
     def gen_monitor(self, level):
         args = ['\"']
         for place, num in enumerate(self.spec['shape']):
-            if num > 0:
-                args += [f'src{place}']
-                args[0] += f'src{place}:0x%x, '
+            if place >= self.base:
+                if num > 0:
+                    args += [f'src{place - self.base}']
+                    args[0] += f'src{place - self.base}:0x%x, '
         for name in ['dst', 'exp']:
             args += [name]
             args[0] += f'{name}:0x%x, '
@@ -211,10 +219,10 @@ class TestGenerator(GpcGenerator):
 
     def gen_test_sequence(self, level):
         code = ''
-        terms = [f'src{p}[{i}]' for p, i in self.idx2wire]
+        terms = [f'src{place - self.base}[{num}]' for place, num in self.idx2wire if place >= self.base ]
         lhs = f'{{{", ".join(terms[::-1])}}}'
-        for value in range(1 << sum(self.spec['shape'])):
-            code += self.indent * level + f'{lhs} <= {sum(self.spec["shape"])}\'h{value:x};\n'
+        for value in range(1 << sum(self.spec['shape'][self.base:])):
+            code += self.indent * level + f'{lhs} <= {sum(self.spec["shape"][self.base:])}\'h{value:x};\n'
             code += self.indent * level + f'#1\n'
         code += self.indent * level + f'$finish();\n'
         return code
@@ -223,7 +231,9 @@ class TestGenerator(GpcGenerator):
 if __name__ == '__main__':
     with open(sys.argv[1], 'r') as f:
         spec = json.loads(f.read())
-    codegen = CodeGenerator(spec)
+    spec['base'] = 1
+    spec['cin'] = None
+    codegen = GpcGenerator(spec)
     print(codegen.gen_module())
     testgen = TestGenerator(spec)
     print(testgen.gen_module())
