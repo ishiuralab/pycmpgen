@@ -60,7 +60,7 @@ class Optimizer:
                 for col in range(self.colnum):
                     for idx, gpc in enumerate(self.gpclist):
                         sol['gpcusage'][stg][col][idx] = round(self.gpcusage[stg][col][idx].solution_value)
-            return sol
+            return sol, round(data.objective_value)
         else:
             raise InfeasibleProblemError('No solution found for the problem and configuration.')
 

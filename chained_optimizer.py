@@ -298,7 +298,7 @@ class ChainedOptimizerLsb7(Optimizer):
             for stg in range(self.stagenum):
                 for col in range(self.colnum):
                     sol['reduction'][stg][col] = round(self.reduction[stg][col].solution_value)
-            return sol
+            return sol, round(data.objective_value)
         else:
             raise InfeasibleProblemError('No solution found for the problem and configuration.')
 
