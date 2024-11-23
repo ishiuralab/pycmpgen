@@ -235,5 +235,5 @@ if __name__ == '__main__':
     spec['cin'] = None
     codegen = GpcGenerator(spec)
     print(codegen.gen_module())
-    testgen = TestGenerator(spec)
-    print(testgen.gen_module())
+    # testgen = TestGenerator(spec)
+    # print(testgen.gen_module())

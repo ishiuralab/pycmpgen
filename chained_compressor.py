@@ -428,7 +428,7 @@ class ChainedCompressorLsb7(Compressor):
                 offset = -1
             else:
                 spec = {'shape': [1] + srcshape, 'lut': [[[1],None,2]], 'cin': None, 'base': 1}
-                offset = 0
+                offset = 1
         else:
             spec = {'shape': srcshape, 'lut': [], 'cin': 0, 'base': 0}
             offset = 0
