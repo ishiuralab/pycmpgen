@@ -1,5 +1,5 @@
 import json
-from . import problem
+from problem import problem
 
 class Rectangle(problem.Problem):
     def __init__(self, row, col, dstlimit, stagenum, gpclist=problem.default_gpclist):
