@@ -16,7 +16,7 @@ from problem.multiplier import Multiplier
 from problem.square import Square
 
 TIMELIMIT = 7200
-OUTPUTDIR = 'results/vld'
+OUTPUTDIR = 'results/vld_unredundant'
 
 def indent(level):
     return '    ' * level
@@ -198,7 +198,5 @@ def test_cascading(size, probclass, probname):
 
 if __name__ == '__main__':
     size = int(sys.argv[1])
-    test_default(size, Multiplier, 'mul')
     test_cascading(size, Multiplier, 'mul')
-    test_default(size, Square, 'square')
     test_cascading(size, Square, 'square')
