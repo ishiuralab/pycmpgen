@@ -1,25 +1,25 @@
- 8, stage: ✔ 3, cost: ✔  8
- 9, stage: ✔ 3, cost: ✔ 11
-10, stage: ✔ 3, cost: ✔ 14
-11, stage: ✔ 3, cost: ✔ 17
-12, stage: ✔ 3, cost: ✔ 19
-13, stage: ✔ 3, cost: ✔ 23
-14, stage: ✔ 3, cost: ✔ 26
-15, stage: ✔ 3, cost: ✔ 31
-16, stage: ✔ 3, cost: ✔ 35
-17, stage: ✔ 3, cost: ✔ 40
-18, stage: ✔ 3, cost: ✔ 43
-19, stage: ✔ 4, cost:   49
-20, stage: ✔ 4, cost: ✔ 51
-21, stage: ✔ 4, cost:   61
-22, stage: ✔ 4, cost:   69
-23, stage: ✔ 4, cost:   72
-24, stage: ✔ 4, cost:   75
-25, stage: ✔ 4, cost:   84
-26, stage: ✔ 4, cost:   89
-27, stage: ✔ 4, cost:  100
-28, stage:   5, cost:  109
-29, stage:   5, cost:  113
-30, stage: ✔ 4, cost:  124
-31, stage:   5, cost:  130
-32, stage:   5, cost:  140
+ 8, stage: ✔ 3, cost: ✔  8, impl:   8, delay:  8.750ns
+ 9, stage: ✔ 3, cost: ✔ 11, impl:  11, delay:  8.708ns
+10, stage: ✔ 3, cost: ✔ 14, impl:  14, delay:  8.901ns
+11, stage: ✔ 3, cost: ✔ 17, impl:  17, delay:  8.737ns
+12, stage: ✔ 3, cost: ✔ 19, impl:  19, delay:  9.256ns
+13, stage: ✔ 3, cost: ✔ 23, impl:  23, delay:  9.040ns
+14, stage: ✔ 3, cost: ✔ 26, impl:  26, delay:  9.466ns
+15, stage: ✔ 3, cost: ✔ 31, impl:  31, delay:  9.120ns
+16, stage: ✔ 3, cost: ✔ 35, impl:  35, delay:  9.443ns
+17, stage: ✔ 3, cost: ✔ 40, impl:  40, delay:  9.326ns
+18, stage: ✔ 3, cost: ✔ 43, impl:  43, delay:  9.534ns
+19, stage: ✔ 4, cost:   49, impl:  49, delay: 11.043ns
+20, stage: ✔ 4, cost: ✔ 51, impl:  51, delay: 11.857ns
+21, stage: ✔ 4, cost:   61, impl:  60, delay: 10.991ns
+22, stage: ✔ 4, cost:   69, impl:  69, delay: 11.484ns
+23, stage: ✔ 4, cost:   72, impl:  72, delay: 11.958ns
+24, stage: ✔ 4, cost:   75, impl:  75, delay: 11.513ns
+25, stage: ✔ 4, cost:   84, impl:  84, delay: 11.686ns
+26, stage: ✔ 4, cost:   89, impl:  89, delay: 11.715ns
+27, stage: ✔ 4, cost:  100, impl: 100, delay: 11.849ns
+28, stage:   5, cost:  109, impl: 108, delay: 13.093ns
+29, stage:   5, cost:  113, impl: 113, delay: 13.454ns
+30, stage: ✔ 4, cost:  124, impl: 124, delay: 12.012ns
+31, stage:   5, cost:  130, impl: 130, delay: 14.085ns
+32, stage:   5, cost:  140, impl: 139, delay: 13.342ns
