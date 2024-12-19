@@ -10,10 +10,17 @@ class InfeasibleProblemError(RuntimeError):
     pass
 
 
+class InvalidProblemError(RuntimeError):
+    pass
+
+
 class Optimizer:
     def __init__(self, prob, objective=None):
         for key, value in prob.items():
             setattr(self, key, value)
+        self.build_model(objective)
+
+    def build_model(self, objective):
         self.model = Model(name='compressor')
         self.init_variables()
         self.add_constraint_src()
@@ -121,10 +128,11 @@ if __name__ == '__main__':
     with open('gpclist/noda_mt.json', 'r') as f:
         gpclist = json.loads(f.read())
 
+    # prob = problem.multiplier.Multiplier(8, 2, 1)
     # prob = problem.multiplier.Multiplier(16, 6, 1)
     # prob = problem.multiplier.Multiplier(32, 6, 2)
     # prob = problem.multiplier.Multiplier(64, 6, 3)
-    # prob = problem.multiplier.Multiplier(128, 6, 4)
+    # prob = problem.multiplier.Multiplier(128, 6, 3)
     # prob = problem.multiplier.Multiplier(256, 6, 5)
 
     # prob = problem.popcounter.Popcounter(32, 2, 6)
@@ -133,9 +141,8 @@ if __name__ == '__main__':
     # prob = problem.popcounter.Popcounter(4096, 6, 6)
     # prob = problem.popcounter.Popcounter(8192, 6, 6)
 
-
     # prob = problem.neuron.Neuron(14, 2, 2)
-    prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
+    prob = problem.rectangle.Rectangle(4, 4, 2, 1, gpclist)
 
     # prob = problem.neuron.Neuron(14, 2, 2, gpclist)
 
