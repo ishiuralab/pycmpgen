@@ -2,3 +2,16 @@ cmpgen-env/
 __pycache__/
 note
 *~
+*.jou
+*.log
+clockInfo.txt
+a.out
+comp2_1project/comp2_1project.cache
+comp2_1project/comp2_1project.hw
+comp2_1project/comp2_1project.runs
+comp2_1project/comp2_1project.srcs
+comp2_1project/comp2_1project.xpr
+comp2_1project/solve_TIMING17.xdc
+impl_checkpoint.dcp
+synth_checkpoint.dcp
+myenv
