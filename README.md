@@ -26,16 +26,18 @@
 - 2-1 rowadder は (3;2) のチェーンであり, 6-2 rowadder は (6,0,7;5) のチェーンを 2 本束ねたものです.
 - [rowadder.py](./rowadder.py)
 
-### Chained GPC Tree 
-- Chained GPC Tree は, コンプレッサツリーの GPC を rowadder のようにキャリーチェーンを使って接続した木です.
+### GPC Chain Tree
+- GPC Chain Tree は, コンプレッサツリーの GPC を rowadder のようにキャリーチェーンを使って接続した回路の木です.
 - 現状, 最も面積効率の良い多入力加算器を作れます.
 - [chained_optimizer](./chained_optimizer.py)
 - [chained_compressor](./chained_compressor.py)
 
 
 ## Usage
-### 1. 問題の定義
+### 1. 問題の定義 (Problem クラスの使い方/定義し方)
 ソルバー ([optimier.py](./optimizer.py) や [chained_optimizer.py](./chained_optimizer.py)) に与える問題 (定数群) は, Problem クラスを継承したクラスとして定義します.
+
+普通のコンプレッサツリーを作る場合でも, GPC chain tree を作る場合でも, Problem クラスは共通です.
 
 Problem クラスは以下のフィールドを持ちます.
 - stagenum (整数): ステージ数
@@ -53,7 +55,7 @@ Problem クラスは以下のフィールドを持ちます.
 - `assert max(self.src) <= self.gpclimit`
 - `assert max(self.dst) <= self.gpclimit`
 
-この関係は, validate() を呼ぶことにより, チェックされます.
+この関係は, `validate()` を呼ぶことにより, チェックされます.
 
 例えば, ポップカウンタは以下のように定義できます.
 ```python
@@ -79,3 +81,251 @@ class Popcounter(problem.Problem):
         self.rowlimit = size
         self.validate()
 ```
+
+### 2. 最適化 (Optimizer の使い方)
+定義した問題について, 最適な回路を計算します. [optimizer.py](./optimizer.py) と [chained_optimizer.py](./chained_optimizer.py) の使い方です.
+
+#### 2.1 基本の使い方
+
+これらのクラスは以下をコンストラクタの引数にとります.
+- 問題 (`prob`)
+  - 問題の定数群をまとめた辞書 (`Problem.get_dict()` で得られる)
+- 目的 (`objective`)
+  - None: 目的関数なし (最初の実行可能解を発見したら停止する)
+  - 'cost': GPC のコストの和を最小化
+  - 'gpcnum': GPC の使用数を最小化 (GPC (1;1) は自動で除外)
+
+
+問題の辞書は, Problem クラスの `get_dict()` を呼ぶことで得られます.
+例えば, 128 ビットのポップカウンタは (先程定義したクラスを用いて) 以下のようにすると初期解 (最初の実行可能解) の探索が行われます.
+
+```python
+from problem.popcounter import Popcounter
+from optimizer import Optimizer, InfeasibleProblemError
+
+prob = Popcounter(128, 2, 5)
+opt  = Optimizer(prob.get_dict(), objective=None)
+sol  = opt.solve()
+```
+- solve メソッドは解の探索を行い, 回路構成を格納した辞書として返します. (上記では, sol に解を代入しています.)
+- solve メソッドには探索の制限時間 (`timelimit`) を指定することができます (optional).
+  - 何も指定しない場合, 無制限となります.
+- solve メソッドにおいて, 解が存在しないことがわかった場合 `InfieasibleProblemError` を raise します.
+
+Problem クラスで段数は固定なので, コンプレッサツリーを構成できる最小段数を得るには以下のように段数を小さい順に指定して探索を行います.
+
+```python
+from problem.popcounter import Popcounter
+from optimizer import Optimizer, InfeasibleProblemError
+from compressor import Compressor
+
+maxstage = 10
+
+for stage in range(maxstage + 1):
+    prob = Popcounter(128, 2, stage)
+    opt  = Optimizer(prob.get_dict(), objective=None)
+    try:
+        sol = opt.solve() # 見つからなかったらエラー
+        break # ここに到達したら解発見
+    except InfeasibleProblemError: # エラー回収
+        continue
+```
+
+- Compressor Tree
+  - [optimizer.py](./optimizer.py)
+- GPC Chain Tree
+  - [chained_optimizer.py](./chained_optimizer.py)
+
+#### 2.1 初期解の設定
+
+すでに得られている実行可能解を用いて, その解を初期解として最適化を行うことができます.
+
+```python
+import problem
+import optimizer
+
+maxstage = 10
+
+for stage in range(maxstage + 1):
+    prob = problem.popcounter.Popcounter(128, 2, stage)
+    opt  = optimizer.Optimizer(prob.get_dict(), objective=None)
+    try:
+        sol = opt.solve() # 見つからなかったらエラー
+        break # ここに到達したら解発見
+    except optimizer.InfeasibleProblemError: # エラー回収
+        continue
+
+opt = optimizer.Optimizerf(prob.get_dict(), objective='cost') # コストを目的に指定して optimizer を作り直し
+opt.add_mip_start(sol) # 初期解を設定
+sol = opt.solve() # 最適化
+```
+
+
+### 3. 回路記述生成 (Compressor の使い方)
+解から実際に回路記述を生成します. [compressor.py](./compressor.py) と [chained_compressor.py](./chained_compressor.py) の使い方を解説します.
+
+Compressor のコンストラクタは引数として以下を取ります.
+- 問題 (`prob`)
+  - 問題の定数群をまとめた辞書 (`Problem.get_dict()` で得られる)
+- 解 (`sol`)
+  - 解を表す辞書 (`Optimizer.solve()` で得られる)
+  
+先程のコンプレッサツリーのコードでは以下のようにするとコンプレッサツリークラスのインスタンスを作れます.
+
+```python
+from problem.popcounter import Popcounter
+from optimizer import Optimizer, InfeasibleProblemError
+from compressor import Compressor
+
+maxstage = 10
+
+for stage in range(maxstage + 1):
+    prob = Popcounter(128, 2, stage)
+    opt  = Optimizer(prob.get_dict(), objective=None)
+    try:
+        sol = opt.solve() # 見つからなかったらエラー
+        break # ここに到達したら解発見
+    except InfeasibleProblemError: # エラー回収
+        continue
+
+opt = Optimizer(prob.get_dict(), objective='cost') # コストを目的に指定して optimizer を作り直し
+opt.add_mip_start(sol) # 初期解を設定
+sol = opt.solve() # 最適化
+
+comp = Compressor(prob.get_dict(), sol)
+```
+
+
+#### 3.1 コード生成
+
+`Compressor.gen_module()` メソッドで, コンプレッサツリーの Verilog 記述を文字列として得られます.
+
+`gen_module()` は以下の引数を取ります.
+- モジュール名 `name = 'compressor'`
+
+```python
+print(comp.gen_module())
+```
+
+```verilog
+module compressor (
+      input wire [127:0] src0,
+      output wire [1:0] dst0,
+      output wire [1:0] dst1,
+      output wire [1:0] dst2,
+      output wire [1:0] dst3,
+      output wire [1:0] dst4,
+      output wire [1:0] dst5,
+      output wire [0:0] dst6);
+
+   wire [127:0] stage0_0;
+   wire [19:0] stage1_0;
+   wire [17:0] stage1_1;
+   wire [17:0] stage1_2;
+   wire [3:0] stage2_0;
+   wire [5:0] stage2_1;
+   wire [5:0] stage2_2;
+   // ...
+   // ...
+   // ...
+   gpc1_1 gpc29 (
+      {stage2_0[3]},
+      {stage3_0[1]}
+   );
+endmodule
+```
+
+ポートは以下のようになっています.
+- 入力 `src` (wire)
+  - 0 桁目から順に, `src0`, `src1`... のように, `src` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
+  - 長さは `Problem.src` の各要素と一致します.
+  - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
+- 出力 `dst` (wire)
+  - 0 桁目から順に, `dst0`, `dst1`... のように, `dst` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
+  - 各ワイヤは `Problem.dst` の各要素以下です. (一致するとは限らず)
+  - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
+
+
+#### 3.2 回路シミュレーションによるランダムテスト
+
+`Compressor.randomtest()` メソッドで, ランダムな入力に対して回路をシミュレーションし, 加算器になっているかを検証できます.
+
+```python
+print('PASS' if comp.randomtest(1 << 10) else 'FAIL', file=sys.stderr)
+```
+
+全てのテストをパスすると True, 一つでもコケるとその時点で False を返します.
+
+### 4. テストベンチの生成
+
+Compressor のインスタンス等を用いてテストベンチを自動生成することができます.
+
+コンストラクタは以下の引数を取ります.
+- 入力形状 `src`
+  - Compressor.stages[0] 等
+- 出力形状 `dst`
+  - Compressor.stages[-1] 等
+  - Problem.dst とは必ずしも一致しません (最適化で減ることがある).
+- テスト対象モジュールの名前 `name`
+- 繰り返し回数 `iteration = 100`
+
+テストシーケンスは以下の 3 種類で, この順に生成されます.
+- 全部 0
+- 全部 1
+- ランダムな入力 `iteration` 回
+
+
+```python
+from problem.popcounter import Popcounter
+from optimizer import Optimizer, InfeasibleProblemError
+from compressor import Compressor
+from testbench import Testbench
+
+maxstage = 10
+
+for stage in range(maxstage + 1):
+    prob = Popcounter(128, 2, stage)
+    opt  = Optimizer(prob.get_dict(), objective=None)
+    try:
+        sol = opt.solve() # 見つからなかったらエラー
+        break # ここに到達したら解発見
+    except InfeasibleProblemError: # エラー回収
+        continue
+
+opt = Optimizer(prob.get_dict(), objective='cost') # コストを目的に指定して optimizer を作り直し
+opt.add_mip_start(sol) # 初期解を設定
+sol = opt.solve() # 最適化
+
+comp = Compressor(prob.get_dict(), sol)
+print(comp.gen_module('popcounter'))
+
+# テストベンチ
+tb = Testbench(comp.stages[0], comp.stages[-1], 'popcounter')
+print(tb.gen_module())
+```
+
+```shellsession
+$ python3 test.py > test.v # 上記の Python スクリプトを実行
+...略...
+$ iverilog test.v gpclist/gpc1_1.v ../xilinx-verilog-emulators/*.v ../advgpcgen-rs/hdl/gpc/gpc*.v -o testbench
+$ ./testbench
+srcsum: 0x00, dstsum: 0x00, test: 1
+srcsum: 0x80, dstsum: 0x80, test: 1
+srcsum: 0x43, dstsum: 0x43, test: 1
+...略...
+srcsum: 0x40, dstsum: 0x40, test: 1
+srcsum: 0x3f, dstsum: 0x3f, test: 1
+srcsum: 0x3f, dstsum: 0x3f, test: 1
+$ 
+```
+
+テストベンチとモジュールののコンパイルには以下が必要です.
+- (Compressor Tree の場合) GPC の設計記述 (advgpcgen-rs の hdl ブランチ)
+- (Compressor Tree の場合) GPC (1;1) の設計記述 (単なるワイヤ)
+- LUT と CARRY4 の記述
+
+テストベンチの出力の見方は以下です. test が全て 1 ならば成功, さもなくば失敗です.
+- srcsum: 入力の和
+- dstsum: 出力の和
+- test: srcsum == dstsum
+
