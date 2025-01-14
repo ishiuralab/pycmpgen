@@ -29,9 +29,53 @@
 ### Chained GPC Tree 
 - Chained GPC Tree は, コンプレッサツリーの GPC を rowadder のようにキャリーチェーンを使って接続した木です.
 - 現状, 最も面積効率の良い多入力加算器を作れます.
+- [chained_optimizer](./chained_optimizer.py)
 - [chained_compressor](./chained_compressor.py)
 
 
 ## Usage
 ### 1. 問題の定義
-- 
+ソルバー ([optimier.py](./optimizer.py) や [chained_optimizer.py](./chained_optimizer.py)) に与える問題 (定数群) は, Problem クラスを継承したクラスとして定義します.
+
+Problem クラスは以下のフィールドを持ちます.
+- stagenum (整数): ステージ数
+- colnum (整数): 列数
+- src (整数のリスト): 入力形状 (多入力加算器の入力の各列のビット数)
+- dst (整数のリスト): 出力形状 (多入力加算器の出力の各列のビット数)
+- gpclimit (整数): 各段, 各列の各 GPC の仕様数の上限
+- rowlimit (整数): 各段, 各列のビット数の上限
+
+各フィールドは以下の関係を満たす必要があります.
+- `assert len(self.src) == self.colnum`
+- `assert len(self.dst) == self.colnum`
+- `assert max(self.src) <= self.rowlimit`
+- `assert max(self.dst) <= self.rowlimit`
+- `assert max(self.src) <= self.gpclimit`
+- `assert max(self.dst) <= self.gpclimit`
+
+この関係は, validate() を呼ぶことにより, チェックされます.
+
+例えば, ポップカウンタは以下のように定義できます.
+```python
+#!/usr/bin/env python3
+
+import json
+from problem import problem
+
+
+class Popcounter(problem.Problem):
+    def __init__(self, size, dstlimit, stagenum, gpclist=problem.default_gpclist):
+        # size: ポップカウントするビット数
+        # dstlimit: 出力の行数
+        # stagenum: ステージ数
+        # gpclist: GPC の集合
+        super().__init__(gpclist)
+        self.stagenum = stagenum
+        self.colnum = size.bit_length()
+        self.src = [size] + [0] * (self.colnum - 1)
+        # ポップカウンタの入力は, 1 の位 (0 列目) に size 個のビットがあり, 1 列目から colnum - 1 列目まで 0 ビット
+        self.dst = [dstlimit] * self.colnum
+        self.gpclimit = size
+        self.rowlimit = size
+        self.validate()
+```
