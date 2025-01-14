@@ -237,12 +237,12 @@ module compressor (
 endmodule
 ```
 
-ポートは以下のようになっています.
-- 入力 `src` (wire)
+コンプレッサモジュールは以下のポートを持ちます.
+- 入力 `src{}` (wire)
   - 0 桁目から順に, `src0`, `src1`... のように, `src` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
   - 長さは `Problem.src` の各要素と一致します.
   - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
-- 出力 `dst` (wire)
+- 出力 `dst{}` (wire)
   - 0 桁目から順に, `dst0`, `dst1`... のように, `dst` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
   - 各ワイヤは `Problem.dst` の各要素以下です. (一致するとは限らず)
   - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
@@ -410,6 +410,103 @@ module shift_register(
     end
     always @(posedge clk) begin
         src0 <= {src0, src0_};
+    end
+endmodule
+```
+
+### 6. Row Adder 生成系 (RowAdderGen の使い方)
+[rowadder.py](./rowadder.py) を用いてキャリーチェーンを用いた行加算器を多段化した回路を作ることができます.
+6-2 rowadder と 2-1 rowadder の最適な組み合わせを自動的に求めます. (TODO: 最適になってないので直す)
+ソルバーは不要です.
+
+`RowAdder` クラスのコンストラクタは以下の引数を取ります.
+- 行数 `row`
+- 列数 `col`
+
+`RowAdderGen.gen_module()` で行加算器モジュールが生成できます. このメソッドは以下の引数を取ります.
+- モジュール名 `name`
+
+`RowAdderGen.gen_testbench()` でテストベンチが生成できます. (TODO: iteration 回数設定)
+
+以下は 4 ビットの値を 8 個足し合わせる行加算器を得る例です.
+
+```python
+from rowadder import RowAdderGen
+
+ra = RowAdderGen(8, 4)
+print(ra.gen_module())
+print(ra.gen_testbench())
+```
+
+生成されるモジュールは以下です.
+
+行加算器モジュールは以下のポートを持ちます.
+- 入力 `src{}` (wire)
+  - 各行の入力 (row 個)
+  - 何行目かを表す数字が 10 進数で付きます.
+- 出力 `dst0` (wire)
+  - コンプレッサツリー等と異なり, 1 つの長いワイヤで出力を表します.
+
+```verilog
+...略...
+module rowadder8_1_4(input [3:0] src0, input [3:0] src1, input [3:0] src2, input [3:0] src3, input [3:0] src4, input [3:0] src5, input [3:0] src6, input [3:0] src7, output [6:0] dst0);
+    wire [7:0] internal0;
+    wire [6:0] internal1;
+    wire [6:0] internal2;
+    wire [4:0] internal3;
+    wire [4:0] internal4;
+    assign dst0 = internal0[6:0];
+    rowadder2_1_7_ rowadder_0(.src0(internal1), .src1(internal2), .dst0(internal0));
+    rowadder6_2_5_ rowadder_1(.src0(internal3), .src1(internal4), .src2({1'h0, src0}), .src3({1'h0, src1}), .src4({1'h0, src2}), .src5({1'h0, src3}), .dst0(internal1), .dst1(internal2));
+    rowadder2_1_4_ rowadder_2(.src0(src4), .src1(src5), .dst0(internal3));
+    rowadder2_1_4_ rowadder_3(.src0(src6), .src1(src7), .dst0(internal4));
+endmodule
+
+module testbench();
+    reg [3:0] src0;
+    reg [3:0] src1;
+    reg [3:0] src2;
+    reg [3:0] src3;
+    reg [3:0] src4;
+    reg [3:0] src5;
+    reg [3:0] src6;
+    reg [3:0] src7;
+    wire [6:0] dst0;
+    wire [6:0] ans;
+    wire test;
+    assign ans = src0+src1+src2+src3+src4+src5+src6+src7;
+    assign test = ans == dst0;
+    rowadder8_1_4 ra(.src0(src0), .src1(src1), .src2(src2), .src3(src3), .src4(src4), .src5(src5), .src6(src6), .src7(src7), .dst0(dst0));
+    initial begin
+        $monitor("%x %x %x", ans, dst0, test);
+        src0 <= 4'h0;
+        src1 <= 4'h0;
+        src2 <= 4'h0;
+        src3 <= 4'h0;
+        src4 <= 4'h0;
+        src5 <= 4'h0;
+        src6 <= 4'h0;
+        src7 <= 4'h0;
+        #1;
+        src0 <= 4'hf;
+        src1 <= 4'hf;
+        src2 <= 4'hf;
+        src3 <= 4'hf;
+        src4 <= 4'hf;
+        src5 <= 4'hf;
+        src6 <= 4'hf;
+        src7 <= 4'hf;
+        #1;
+        src0 <= 4'he;
+        src1 <= 4'h1;
+        src2 <= 4'hf;
+        src3 <= 4'hb;
+        src4 <= 4'h1;
+        src5 <= 4'h3;
+        src6 <= 4'h2;
+        src7 <= 4'h3;
+        #1;
+        // ...略...
     end
 endmodule
 ```
