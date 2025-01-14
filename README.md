@@ -510,3 +510,10 @@ module testbench();
     end
 endmodule
 ```
+
+## 各モジュールのポート
+|        | Compressor Tree   | GPC Chain Tree    | ShiftRegister      | RowAdderGen       |
+|--------|-------------------|-------------------|--------------------|-------------------|
+| 入力   | 列ごと `src{col}` | 列ごと `src{col}` | 列ごと `src{col}_` | 行ごと `src{row}` |
+| 出力   | 列ごと `dst{col}` | 列ごと `dst{col}` | 列ごと `dst{col}`  | 行ごと  `dst0`    |
+| その他 |                   |                   | クロック `clk`     |                   |
