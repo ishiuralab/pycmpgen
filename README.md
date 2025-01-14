@@ -107,6 +107,8 @@ prob = Popcounter(128, 2, 5)
 opt  = Optimizer(prob.get_dict(), objective=None)
 sol  = opt.solve()
 ```
+
+solve メソッドは以下を行います.
 - solve メソッドは解の探索を行い, 回路構成を格納した辞書として返します. (上記では, sol に解を代入しています.)
 - solve メソッドには探索の制限時間 (`timelimit`) を指定することができます (optional).
   - 何も指定しない場合, 無制限となります.
@@ -320,12 +322,94 @@ $
 ```
 
 テストベンチとモジュールののコンパイルには以下が必要です.
-- (Compressor Tree の場合) GPC の設計記述 (advgpcgen-rs の hdl ブランチ)
+- (Compressor Tree の場合) GPC の設計記述 (advgpcgen-rs の hdl ブランチを参照)
 - (Compressor Tree の場合) GPC (1;1) の設計記述 (単なるワイヤ)
 - LUT と CARRY4 の記述
 
-テストベンチの出力の見方は以下です. test が全て 1 ならば成功, さもなくば失敗です.
+テストベンチの各出力の見方は以下です. test が全て 1 ならば成功, さもなくば失敗です.
 - srcsum: 入力の和
 - dstsum: 出力の和
 - test: srcsum == dstsum
 
+#### 5. 論理合成, 配置配線 (ShiftRegister の使い方)
+Vivado で配置配線を行うとき, 大規模な多入力加算器の場合は入出力ポートが多すぎて配線できないことがあります.
+そこで, 入力をシフトレジスタから供給することにより, 必要なポートを削減してこの問題をある程度解決できます.
+
+シフトレジスタモジュールの生成には [shift_register.py](./shift_register.py) を使います.
+
+`ShiftRegister` クラスのコンストラクタは以下の引数を取ります. (テストベンチとほぼ同じです.)
+- 入力形状 `src`
+  - Compressor.stages[0] 等
+- 出力形状 `dst`
+  - Compressor.stages[-1] 等
+  - Problem.dst とは必ずしも一致しません (最適化で減ることがある).
+- テスト対象モジュールの名前 `name`
+
+```python
+from problem.popcounter import Popcounter
+from optimizer import Optimizer, InfeasibleProblemError
+from compressor import Compressor
+from testbench import Testbench
+from shift_register import ShiftRegister
+
+maxstage = 10
+
+for stage in range(maxstage + 1):
+    prob = Popcounter(128, 2, stage)
+    opt  = Optimizer(prob.get_dict(), objective=None)
+    try:
+        sol = opt.solve() # 見つからなかったらエラー
+        break # ここに到達したら解発見
+    except InfeasibleProblemError: # エラー回収
+        continue
+
+opt = Optimizer(prob.get_dict(), objective='cost') # コストを目的に指定して optimizer を作り直し
+opt.add_mip_start(sol) # 初期解を設定
+sol = opt.solve() # 最適化
+
+comp = Compressor(prob.get_dict(), sol)
+print(comp.gen_module('popcounter'))
+
+# テストベンチ
+tb = Testbench(comp.stages[0], comp.stages[-1], 'popcounter')
+# print(tb.gen_module())
+
+# シフトレジスタ
+sr = ShiftRegister(comp.stages[0], comp.stages[-1], 'popcounter')
+print(sr.gen_module())
+```
+
+生成されるシフトレジスタを以下に示します.
+- 列ごとにシフトレジスタにする
+  - ここではポップカウンタなので 1 本しかありません
+- 出力はそのまま出力
+
+```verilog
+module shift_register(
+        input wire clk,
+        input wire src0_,
+        output wire [1:0] dst0,
+        output wire [1:0] dst1,
+        output wire [1:0] dst2,
+        output wire [1:0] dst3,
+        output wire [1:0] dst4,
+        output wire [1:0] dst5,
+        output wire [0:0] dst6);
+    reg [127:0] src0;
+    popcounter popcounter(
+            .src0(src0),
+            .dst0(dst0),
+            .dst1(dst1),
+            .dst2(dst2),
+            .dst3(dst3),
+            .dst4(dst4),
+            .dst5(dst5),
+            .dst6(dst6));
+    initial begin
+        src0 <= 128'h0;
+    end
+    always @(posedge clk) begin
+        src0 <= {src0, src0_};
+    end
+endmodule
+```
