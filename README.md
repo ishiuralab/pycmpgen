@@ -517,3 +517,7 @@ endmodule
 | 入力   | 列ごと `src{col}` | 列ごと `src{col}` | 列ごと `src{col}_` | 行ごと `src{row}` |
 | 出力   | 列ごと `dst{col}` | 列ごと `dst{col}` | 列ごと `dst{col}`  | 行ごと  `dst0`    |
 | その他 |                   |                   | クロック `clk`     |                   |
+
+## Author
+- Mugi Noda (void-hoge)
+- Ryo Kanai (Lona01001000)
