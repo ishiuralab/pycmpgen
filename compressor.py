@@ -202,12 +202,9 @@ if __name__ == '__main__':
     from optimizer import Optimizer
     import json
 
-
-
     # prob = Popcounter(1024, 6, 4)
     with open('gpclist/default.json', 'r') as f:
         gpclist = json.loads(f.read())
-
 
     # prob = Popcounter(1024, 6, 4, gpclist)
     # prob = Multiplier(128, 6, 4)
