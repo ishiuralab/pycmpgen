@@ -164,9 +164,10 @@ sol = opt.solve() # 最適化
 
 
 ### 3. 回路記述生成 (Compressor の使い方)
+
 解から実際に回路記述を生成します. [compressor.py](./compressor.py) と [chained_compressor.py](./chained_compressor.py) の使い方を解説します.
 
-Compressor のコンストラクタは引数として以下を取ります.
+`Compressor` クラスのコンストラクタは引数として以下を取ります.
 - 問題 (`prob`)
   - 問題の定数群をまとめた辞書 (`Problem.get_dict()` で得られる)
 - 解 (`sol`)
@@ -518,6 +519,6 @@ endmodule
 | 出力   | 列ごと `dst{col}` | 列ごと `dst{col}` | 列ごと `dst{col}`  | 行ごと  `dst0`    |
 | その他 |                   |                   | クロック `clk`     |                   |
 
-## Author
+## Authors
 - Mugi Noda (void-hoge)
 - Ryo Kanai (Lona01001000)
