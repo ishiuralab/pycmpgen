@@ -238,9 +238,7 @@ module compressor (
    wire [3:0] stage2_0;
    wire [5:0] stage2_1;
    wire [5:0] stage2_2;
-   // ...
-   // ...
-   // ...
+   // ...略...
    gpc1_1 gpc29 (
       {stage2_0[3]},
       {stage3_0[1]}
@@ -460,7 +458,7 @@ print(ra.gen_testbench())
   - コンプレッサツリー等と異なり, 1 つの長いワイヤで出力を表します.
 
 ```verilog
-...略...
+// ...略...
 module rowadder8_1_4(input [3:0] src0, input [3:0] src1, input [3:0] src2, input [3:0] src3, input [3:0] src4, input [3:0] src5, input [3:0] src6, input [3:0] src7, output [6:0] dst0);
     wire [7:0] internal0;
     wire [6:0] internal1;
@@ -535,6 +533,7 @@ endmodule
 - [Rowadder Generatior](https://github.com/ishiuralab/rowadders) (to be appeared...?)
 
 ## Related Publications
+- 野田麦, 石浦菜岐佐: ''一般化並列カウンタのチェーン状接続によるコンプレッサツリーの効率的FPGA実装'' *電子情報通信学会技術研究報告* VLD2024-84, (Jan. 2025). (to be appeared)
 - M.Noda and N.Ishiura: ''Enumeration of Generalized Parallel Counters for Multi-Input Adder Synthesis for FPGAs,'' in *Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2024)*, pp. 64-68 (Nov. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-11.pdf)
 - 野田麦, 叶亮, 石浦菜岐佐: ''一般化並列カウンタ (6,0,7;5) による多入力加算器の効率的 FPGA 実装,'' *電子情報通信学会ソサイエティ大会*, A-6-2, (Sept. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2024-09b.pdf)
 - 野田麦, 石浦菜岐佐: ''コンプレッサツリー生成のための一般化並列カウンタの網羅的探索,'' *情報通信学会 DA シンポジウム 2024*, pp. 106-112 (Aug. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2024-08.pdf)
