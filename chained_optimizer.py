@@ -334,7 +334,7 @@ class ChainedOptimizerLsb7(Optimizer):
 
 
 if __name__ == '__main__':
-    import problem
+    from problem import square, multiplier, rectangle
     import compressor
     import json
 
@@ -342,13 +342,13 @@ if __name__ == '__main__':
         # with open(f'gpclist/reduced_conventional.json') as f:
         gpclist = json.loads(f.read())
 
-    # prob = problem.multiplier.Multiplier(4, 1, 2, gpclist)
-    # prob = problem.rectangle.Rectangle(12, 32, 2, 2, gpclist)
-    # prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
-    # prob = problem.multiplier.Multiplier(18, 2, 2, gpclist)
-    # prob = problem.multiplier.Multiplier(32, 1, 4, gpclist)
-    prob = problem.square.Square(7, 1, 3, gpclist)
-    # prob = problem.multiplier.Multiplier(128, 6, 3, gpclist)
+    # prob = multiplier.Multiplier(4, 1, 2, gpclist)
+    # prob = rectangle.Rectangle(12, 32, 2, 2, gpclist)
+    # prob = rectangle.Rectangle(128, 12, 2, 5, gpclist)
+    # prob = multiplier.Multiplier(18, 2, 2, gpclist)
+    # prob = multiplier.Multiplier(32, 1, 4, gpclist)
+    prob = square.Square(7, 1, 3, gpclist)
+    # prob = multiplier.Multiplier(128, 6, 3, gpclist)
 
     opt = ChainedOptimizerLsb7(prob.get_dict(), objective='cost')
     sol = opt.solve()

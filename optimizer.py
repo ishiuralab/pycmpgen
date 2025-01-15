@@ -121,30 +121,30 @@ class Optimizer:
 
 
 if __name__ == '__main__':
-    import problem
+    from problem import multiplier, neuron, rectangle, popcounter
     import compressor
     import json
 
     with open('gpclist/noda_mt.json', 'r') as f:
         gpclist = json.loads(f.read())
 
-    # prob = problem.multiplier.Multiplier(8, 2, 1)
-    # prob = problem.multiplier.Multiplier(16, 6, 1)
-    # prob = problem.multiplier.Multiplier(32, 6, 2)
-    # prob = problem.multiplier.Multiplier(64, 6, 3)
-    # prob = problem.multiplier.Multiplier(128, 6, 3)
-    # prob = problem.multiplier.Multiplier(256, 6, 5)
+    # prob = multiplier.Multiplier(8, 2, 1)
+    # prob = multiplier.Multiplier(16, 6, 1)
+    # prob = multiplier.Multiplier(32, 6, 2)
+    # prob = multiplier.Multiplier(64, 6, 3)
+    # prob = multiplier.Multiplier(128, 6, 3)
+    # prob = multiplier.Multiplier(256, 6, 5)
 
-    # prob = problem.popcounter.Popcounter(32, 2, 6)
-    # prob = problem.popcounter.Popcounter(1024, 6, 4)
-    # prob = problem.popcounter.Popcounter(2048, 6, 5)
-    # prob = problem.popcounter.Popcounter(4096, 6, 6)
-    # prob = problem.popcounter.Popcounter(8192, 6, 6)
+    # prob = popcounter.Popcounter(32, 2, 6)
+    # prob = popcounter.Popcounter(1024, 6, 4)
+    # prob = popcounter.Popcounter(2048, 6, 5)
+    # prob = popcounter.Popcounter(4096, 6, 6)
+    # prob = popcounter.Popcounter(8192, 6, 6)
 
-    # prob = problem.neuron.Neuron(14, 2, 2)
-    prob = problem.rectangle.Rectangle(4, 4, 2, 1, gpclist)
+    # prob = neuron.Neuron(14, 2, 2)
+    prob = rectangle.Rectangle(4, 4, 2, 1, gpclist)
 
-    # prob = problem.neuron.Neuron(14, 2, 2, gpclist)
+    # prob = neuron.Neuron(14, 2, 2, gpclist)
 
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)

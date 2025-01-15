@@ -507,15 +507,15 @@ class ChainedCompressorLsb7(Compressor):
 
 
 if __name__ == '__main__':
-    import problem
+    from problem import popcounter, multiplier, square
     import json
 
     with open('gpclist/maximum.json', 'r') as f:
         gpclist = json.loads(f.read())
 
-    prob = problem.popcounter.Popcounter(1024, 1, 10, gpclist).get_dict()
-    # prob = problem.multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
-    # prob = problem.square.Square(54, 1, 4, gpclist).get_dict()
+    prob = popcounter.Popcounter(1024, 1, 10, gpclist).get_dict()
+    # prob = multiplier.Multiplier(32, 2, 3, gpclist).get_dict()
+    # prob = square.Square(54, 1, 4, gpclist).get_dict()
     opt = ChainedOptimizerLsb7(prob, objective='cost')
     sol = opt.solve(timelimit=120)
     comp = ChainedCompressorLsb7(prob, sol)
