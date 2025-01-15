@@ -17,7 +17,9 @@
 - コンプレッサツリーとは, GPC を用いた桁上げ保存加算器の木です.
 - 各段の入力を GPC に与え, それぞれの GPC は部分和を次の段に出力します. 
 - [optimizer.py](./optimizer.py)
+  - `Optimizer` クラス
 - [compressor.py](./compressor.py)
+  - `Compressor` クラス
 
 ### Rowadder Tree
 - rowadder とは, 2 つ以上の 2 進数を加算するキャリーチェーンをベースとした回路です.
@@ -25,27 +27,33 @@
 - これらの rowadder は GPC をキャリーチェーンで接続した回路とみなすことができます.
 - 2-1 rowadder は (3;2) のチェーンであり, 6-2 rowadder は (6,0,7;5) のチェーンを 2 本束ねたものです.
 - [rowadder.py](./rowadder.py)
+  - `RowAdderGen` クラス
 
 ### GPC Chain Tree
 - GPC Chain Tree は, コンプレッサツリーの GPC を rowadder のようにキャリーチェーンを使って接続した回路の木です.
 - 現状, 最も面積効率の良い多入力加算器を作れます.
 - [chained_optimizer](./chained_optimizer.py)
+  - `ChainedOptimizerLsb7`
 - [chained_compressor](./chained_compressor.py)
+  - `ChainedCompressorLsb7`
 
+`ChainedOptimizerLsb7` 及び `ChainedCompressorLsb7` は最下位が 7 入力の GPC が 1 スライス実装できないという問題を解決するためのものです.
+
+そのような問題が発生しない場合は, `ChainedOptimizer`, `ChainedCompressor` で問題ありません.
 
 ## Usage
 ### 1. 問題の定義 (Problem クラスの使い方/定義し方)
-ソルバー ([optimier.py](./optimizer.py) や [chained_optimizer.py](./chained_optimizer.py)) に与える問題 (定数群) は, Problem クラスを継承したクラスとして定義します.
+ソルバー (`Optimizer`, `ChainedOptimizer`, `ChainedOptimizerLsb7`) に与える問題 (定数群) は, `Problem` クラスを継承したクラスとして定義します.
 
-普通のコンプレッサツリーを作る場合でも, GPC chain tree を作る場合でも, Problem クラスは共通です.
+普通のコンプレッサツリーを作る場合でも, GPC Chain Tree を作る場合でも, `Problem` クラスは共通です.
 
-Problem クラスは以下のフィールドを持ちます.
-- stagenum (整数): ステージ数
-- colnum (整数): 列数
-- src (整数のリスト): 入力形状 (多入力加算器の入力の各列のビット数)
-- dst (整数のリスト): 出力形状 (多入力加算器の出力の各列のビット数)
-- gpclimit (整数): 各段, 各列の各 GPC の仕様数の上限
-- rowlimit (整数): 各段, 各列のビット数の上限
+`Problem` クラスは以下のフィールドを持ちます.
+- `stagenum` (整数): ステージ数
+- `colnum` (整数): 列数
+- `src` (整数のリスト): 入力形状 (多入力加算器の入力の各列のビット数)
+- `dst` (整数のリスト): 出力形状 (多入力加算器の出力の各列のビット数)
+- `gpclimit` (整数): 各段, 各列の各 GPC の仕様数の上限
+- `rowlimit` (整数): 各段, 各列のビット数の上限
 
 各フィールドは以下の関係を満たす必要があります.
 - `assert len(self.src) == self.colnum`
@@ -83,7 +91,7 @@ class Popcounter(problem.Problem):
 ```
 
 ### 2. 最適化 (Optimizer の使い方)
-定義した問題について, 最適な回路を計算します. [optimizer.py](./optimizer.py) と [chained_optimizer.py](./chained_optimizer.py) の使い方です.
+定義した問題について, 最適な回路を計算します. `Optimizer` ([optimizer.py](./optimizer.py)) と `ChainedOptimizer`, `ChainedOptimizerLsb7` ([chained_optimizer.py](./chained_optimizer.py)) の使い方です.
 
 #### 2.1 基本の使い方
 
@@ -96,7 +104,7 @@ class Popcounter(problem.Problem):
   - 'gpcnum': GPC の使用数を最小化 (GPC (1;1) は自動で除外)
 
 
-問題の辞書は, Problem クラスの `get_dict()` を呼ぶことで得られます.
+問題の辞書は, `Problem` クラスの `get_dict()` を呼ぶことで得られます.
 例えば, 128 ビットのポップカウンタは (先程定義したクラスを用いて) 以下のようにすると初期解 (最初の実行可能解) の探索が行われます.
 
 ```python
@@ -108,13 +116,13 @@ opt  = Optimizer(prob.get_dict(), objective=None)
 sol  = opt.solve()
 ```
 
-solve メソッドは以下を行います.
-- solve メソッドは解の探索を行い, 回路構成を格納した辞書として返します. (上記では, sol に解を代入しています.)
-- solve メソッドには探索の制限時間 (`timelimit`) を指定することができます (optional).
+`solve` メソッドは以下を行います.
+- 解の探索を行い, 回路構成を格納した辞書として返します. (上記では, `sol` に解を代入しています.)
+- 探索の制限時間 (`timelimit`) を指定することができます (optional).
   - 何も指定しない場合, 無制限となります.
-- solve メソッドにおいて, 解が存在しないことがわかった場合 `InfieasibleProblemError` を raise します.
+- 解が存在しないことがわかった場合 `InfieasibleProblemError` を raise します.
 
-Problem クラスで段数は固定なので, コンプレッサツリーを構成できる最小段数を得るには以下のように段数を小さい順に指定して探索を行います.
+`Problem` クラスで段数は固定なので, コンプレッサツリーを構成できる最小段数を得るには以下のように段数を小さい順に指定して探索を行います.
 
 ```python
 from problem.popcounter import Popcounter
@@ -134,8 +142,10 @@ for stage in range(maxstage + 1):
 ```
 
 - Compressor Tree
+  - `Optimizer` クラス
   - [optimizer.py](./optimizer.py)
 - GPC Chain Tree
+  - `Compressor` クラス
   - [chained_optimizer.py](./chained_optimizer.py)
 
 #### 2.1 初期解の設定
@@ -165,7 +175,7 @@ sol = opt.solve() # 最適化
 
 ### 3. 回路記述生成 (Compressor の使い方)
 
-解から実際に回路記述を生成します. [compressor.py](./compressor.py) と [chained_compressor.py](./chained_compressor.py) の使い方を解説します.
+解から実際に回路記述を生成します. `Compressor` ([compressor.py](./compressor.py)) と `ChainedCompressor`, `ChainedCompressorLsb7`([chained_compressor.py](./chained_compressor.py)) の使い方を解説します.
 
 `Compressor` クラスのコンストラクタは引数として以下を取ります.
 - 問題 (`prob`)
@@ -203,7 +213,7 @@ comp = Compressor(prob.get_dict(), sol)
 
 `Compressor.gen_module()` メソッドで, コンプレッサツリーの Verilog 記述を文字列として得られます.
 
-`gen_module()` は以下の引数を取ります.
+`gen_module` メソッドは以下の引数を取ります.
 - モジュール名 `name = 'compressor'`
 
 ```python
@@ -239,11 +249,11 @@ endmodule
 ```
 
 コンプレッサモジュールは以下のポートを持ちます.
-- 入力 `src{}` (wire)
+- 入力 `src{col}` (wire)
   - 0 桁目から順に, `src0`, `src1`... のように, `src` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
   - 長さは `Problem.src` の各要素と一致します.
   - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
-- 出力 `dst{}` (wire)
+- 出力 `dst{col}` (wire)
   - 0 桁目から順に, `dst0`, `dst1`... のように, `dst` に何桁目 (下から何列目) かを表す数字が 10 進数で付きます.
   - 各ワイヤは `Problem.dst` の各要素以下です. (一致するとは限らず)
   - 長さが 0 のワイヤがある場合, そのワイヤは削除されます.
@@ -261,14 +271,14 @@ print('PASS' if comp.randomtest(1 << 10) else 'FAIL', file=sys.stderr)
 
 ### 4. テストベンチの生成
 
-Compressor のインスタンス等を用いてテストベンチを自動生成することができます.
+`Compressor` のインスタンス等を用いてテストベンチを自動生成することができます.
 
 コンストラクタは以下の引数を取ります.
 - 入力形状 `src`
-  - Compressor.stages[0] 等
+  - `Compressor.stages[0]` 等
 - 出力形状 `dst`
-  - Compressor.stages[-1] 等
-  - Problem.dst とは必ずしも一致しません (最適化で減ることがある).
+  - `Compressor.stages[-1]` 等
+  - `Problem.dst` とは必ずしも一致しません (最適化で減ることがある).
 - テスト対象モジュールの名前 `name`
 - 繰り返し回数 `iteration = 100`
 
@@ -327,23 +337,23 @@ $
 - (Compressor Tree の場合) GPC (1;1) の設計記述 (単なるワイヤ)
 - LUT と CARRY4 の記述
 
-テストベンチの各出力の見方は以下です. test が全て 1 ならば成功, さもなくば失敗です.
-- srcsum: 入力の和
-- dstsum: 出力の和
-- test: srcsum == dstsum
+テストベンチの各出力の見方は以下です. `test` が全て 1 ならば成功, さもなくば失敗です.
+- `srcsum`: 入力の和
+- `dstsum`: 出力の和
+- `test`: `srcsum == dstsum`
 
 #### 5. 論理合成, 配置配線 (ShiftRegister の使い方)
 Vivado で配置配線を行うとき, 大規模な多入力加算器の場合は入出力ポートが多すぎて配線できないことがあります.
 そこで, 入力をシフトレジスタから供給することにより, 必要なポートを削減してこの問題をある程度解決できます.
 
-シフトレジスタモジュールの生成には [shift_register.py](./shift_register.py) を使います.
+シフトレジスタモジュールの生成には `ShiftRegister` ([shift_register.py](./shift_register.py)) を使います.
 
 `ShiftRegister` クラスのコンストラクタは以下の引数を取ります. (テストベンチとほぼ同じです.)
 - 入力形状 `src`
-  - Compressor.stages[0] 等
+  - `Compressor.stages[0]` 等
 - 出力形状 `dst`
-  - Compressor.stages[-1] 等
-  - Problem.dst とは必ずしも一致しません (最適化で減ることがある).
+  - `Compressor.stages[-1]` 等
+  - `Problem.dst` とは必ずしも一致しません (最適化で減ることがある).
 - テスト対象モジュールの名前 `name`
 
 ```python
@@ -420,14 +430,15 @@ endmodule
 6-2 rowadder と 2-1 rowadder の最適な組み合わせを自動的に求めます. (TODO: 最適になってないので直す)
 ソルバーは不要です.
 
-`RowAdder` クラスのコンストラクタは以下の引数を取ります.
+`RowAdderGen` クラスのコンストラクタは以下の引数を取ります.
 - 行数 `row`
 - 列数 `col`
 
 `RowAdderGen.gen_module()` で行加算器モジュールが生成できます. このメソッドは以下の引数を取ります.
-- モジュール名 `name`
+- モジュール名 `name = f'rowadder{row}_1_{col}'`
+  - `rowadder{入力の行数}_{出力の行数}_{列数}` を表します.
 
-`RowAdderGen.gen_testbench()` でテストベンチが生成できます. (TODO: iteration 回数設定)
+`RowAdderGen.gen_testbench()` でテストベンチが生成できます. (TODO: 回数設定)
 
 以下は 4 ビットの値を 8 個足し合わせる行加算器を得る例です.
 
@@ -442,7 +453,7 @@ print(ra.gen_testbench())
 生成されるモジュールは以下です.
 
 行加算器モジュールは以下のポートを持ちます.
-- 入力 `src{}` (wire)
+- 入力 `src{row}` (wire)
   - 各行の入力 (row 個)
   - 何行目かを表す数字が 10 進数で付きます.
 - 出力 `dst0` (wire)
@@ -518,6 +529,18 @@ endmodule
 | 入力   | 列ごと `src{col}` | 列ごと `src{col}` | 列ごと `src{col}_` | 行ごと `src{row}` |
 | 出力   | 列ごと `dst{col}` | 列ごと `dst{col}` | 列ごと `dst{col}`  | 行ごと  `dst0`    |
 | その他 |                   |                   | クロック `clk`     |                   |
+
+## See Also
+- [Advanced Generalized Parallel Counter Generator](https://github.com/ishiuralab/advgpcgen-rs)
+- [Rowadder Generatior](https://github.com/ishiuralab/rowadders) (to be appeared...?)
+
+## Related Publications
+- M.Noda and N.Ishiura: ''Enumeration of Generalized Parallel Counters for Multi-Input Adder Synthesis for FPGAs,'' in *Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2024)*, pp. 64-68 (Nov. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-11.pdf)
+- 野田麦, 叶亮, 石浦菜岐佐: ''一般化並列カウンタ (6,0,7;5) による多入力加算器の効率的 FPGA 実装,'' *電子情報通信学会ソサイエティ大会*, A-6-2, (Sept. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2024-09b.pdf)
+- 野田麦, 石浦菜岐佐: ''コンプレッサツリー生成のための一般化並列カウンタの網羅的探索,'' *情報通信学会 DA シンポジウム 2024*, pp. 106-112 (Aug. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2024-08.pdf)
+- T.Tanigawa, M.Noda and N.Ishiura: ''Efficient FPGA Implementation of Binarized Neural Networks Based on Generalized Parallel Counter Tree,'' in *Proc. the Workshop on Synthesis And System Integration of Mixed Information Techonologies (SASIMI 2024)*, pp. 32-37 (Mar. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-03a.pdf)
+- 谷川貴弘, 野田麦, 石浦菜岐佐: ''一般化並列カウンタ木に基づく2値化ニューラルネットワークの効率的FPGA実装,'' *電子情報通信学会技術研究報告* VLD2022-68, (Jan. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2023-01.pdf)
+- 野田麦, 石浦菜岐佐: ''一般化並列カウンタ追加によるコンプレッサツリーの効率的FPGA実装,'' *電子情報通信学会総合大会* A-6-3, (Mar. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2023-03a.pdf)
 
 ## Authors
 - Mugi Noda (void-hoge)
