@@ -533,13 +533,13 @@ endmodule
 - [Rowadder Generatior](https://github.com/ishiuralab/rowadders) (to be appeared...?)
 
 ## Related Publications
-- 野田麦, 石浦菜岐佐: ''一般化並列カウンタのチェーン状接続によるコンプレッサツリーの効率的FPGA実装'' *電子情報通信学会技術研究報告* VLD2024-84, (Jan. 2025). (to be appeared)
-- M.Noda and N.Ishiura: ''Enumeration of Generalized Parallel Counters for Multi-Input Adder Synthesis for FPGAs,'' in *Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2024)*, pp. 64-68 (Nov. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-11.pdf)
-- 野田麦, 叶亮, 石浦菜岐佐: ''一般化並列カウンタ (6,0,7;5) による多入力加算器の効率的 FPGA 実装,'' *電子情報通信学会ソサイエティ大会*, A-6-2, (Sept. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2024-09b.pdf)
+- 野田麦, 石浦菜岐佐: ''一般化並列カウンタのチェーン状接続によるコンプレッサツリーの効率的FPGA実装'' *電子情報通信学会技術研究報告* VLD2024-84, pp. 47-52 (Jan. 2025). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2025-01a.pdf)
+- M.Noda and N.Ishiura: ''Enumeration of Generalized Parallel Counters for Multi-Input Adder Synthesis for FPGAs,'' in *Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2024)*, pp. 64-68 (Nov. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-11.pdf) [IEEE Xplore](https://ieeexplore.ieee.org/document/10808619)
+- 野田麦, 叶亮, 石浦菜岐佐: ''一般化並列カウンタ (6,0,7;5) による多入力加算器の効率的 FPGA 実装,'' *電子情報通信学会ソサイエティ大会*, A-6-2 (Sept. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2024-09b.pdf)
 - 野田麦, 石浦菜岐佐: ''コンプレッサツリー生成のための一般化並列カウンタの網羅的探索,'' *情報通信学会 DA シンポジウム 2024*, pp. 106-112 (Aug. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2024-08.pdf)
 - T.Tanigawa, M.Noda and N.Ishiura: ''Efficient FPGA Implementation of Binarized Neural Networks Based on Generalized Parallel Counter Tree,'' in *Proc. the Workshop on Synthesis And System Integration of Mixed Information Techonologies (SASIMI 2024)*, pp. 32-37 (Mar. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-03a.pdf)
-- 谷川貴弘, 野田麦, 石浦菜岐佐: ''一般化並列カウンタ木に基づく2値化ニューラルネットワークの効率的FPGA実装,'' *電子情報通信学会技術研究報告* VLD2022-68, (Jan. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2023-01.pdf)
-- 野田麦, 石浦菜岐佐: ''一般化並列カウンタ追加によるコンプレッサツリーの効率的FPGA実装,'' *電子情報通信学会総合大会* A-6-3, (Mar. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2023-03a.pdf)
+- 谷川貴弘, 野田麦, 石浦菜岐佐: ''一般化並列カウンタ木に基づく2値化ニューラルネットワークの効率的FPGA実装,'' *電子情報通信学会技術研究報告* VLD2022-68, pp. 50-55 (Jan. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2023-01.pdf)
+- 野田麦, 石浦菜岐佐: ''一般化並列カウンタ追加によるコンプレッサツリーの効率的FPGA実装,'' *電子情報通信学会総合大会* A-6-3 (Mar. 2023). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2023-03a.pdf)
 
 ## Authors
 - Mugi Noda (void-hoge)
