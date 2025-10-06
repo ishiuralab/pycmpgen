@@ -1,6 +1,6 @@
 #!/usr/bin/env pyhtno3
 
-from . import problem
+from problem import problem
 
 
 class Neuron(problem.Problem):

@@ -1,8 +1,4 @@
-#!/usr/bin/env python3
-
-import json
-
-default_gpclist = [
+[
     {"src":[1],"dst":[1],"cost":0,"module":"gpc1_1"},
     {"src":[3],"dst":[1,1],"cost":1,"module":"gpc3_2"},
     {"src":[7],"dst":[1,1,1],"cost":1,"module":"gpc7_3"},
@@ -69,33 +65,3 @@ default_gpclist = [
     {"src":[3,0,1,3],"dst":[1,1,1,1,1],"cost":1,"module":"gpc3103_5"},
     {"src":[1,1,1,3],"dst":[1,1,1,1,1],"cost":1,"module":"gpc3111_5"}
 ]
-
-
-class Problem:
-    def __init__(self, gpclist=default_gpclist):
-        self.stagenum = 0
-        self.gpclist = gpclist
-        self.colnum = 0
-        self.src = []
-        self.dst = []
-        self.gpclimit = 0
-        self.rowlimit = 0
-
-    def get_dict(self):
-        return {
-            'stagenum': self.stagenum,
-            'gpclist': self.gpclist,
-            'colnum': self.colnum,
-            'src': self.src,
-            'dst': self.dst,
-            'gpclimit': self.gpclimit,
-            'rowlimit': self.rowlimit,
-        }
-
-    def validate(self):
-        assert len(self.src) == self.colnum
-        assert len(self.dst) == self.colnum
-        assert max(self.src) <= self.rowlimit
-        assert max(self.dst) <= self.rowlimit
-        assert max(self.src) <= self.gpclimit
-        assert max(self.dst) <= self.gpclimit

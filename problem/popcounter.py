@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import json
-from . import problem
+from problem import problem
 
 
 class Popcounter(problem.Problem):

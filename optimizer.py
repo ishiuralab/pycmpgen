@@ -10,10 +10,17 @@ class InfeasibleProblemError(RuntimeError):
     pass
 
 
+class InvalidProblemError(RuntimeError):
+    pass
+
+
 class Optimizer:
     def __init__(self, prob, objective=None):
         for key, value in prob.items():
             setattr(self, key, value)
+        self.build_model(objective)
+
+    def build_model(self, objective):
         self.model = Model(name='compressor')
         self.init_variables()
         self.add_constraint_src()
@@ -109,32 +116,35 @@ class Optimizer:
                                 expr += self.gpcusage[stg][col][idx]
             self.model.minimize(expr)
 
+    def end(self):
+        self.model.end()
+
 
 if __name__ == '__main__':
-    import problem
+    from problem import multiplier, neuron, rectangle, popcounter
     import compressor
     import json
 
     with open('gpclist/noda_mt.json', 'r') as f:
         gpclist = json.loads(f.read())
 
-    # prob = problem.multiplier.Multiplier(16, 6, 1)
-    # prob = problem.multiplier.Multiplier(32, 6, 2)
-    # prob = problem.multiplier.Multiplier(64, 6, 3)
-    # prob = problem.multiplier.Multiplier(128, 6, 4)
-    # prob = problem.multiplier.Multiplier(256, 6, 5)
+    # prob = multiplier.Multiplier(8, 2, 1)
+    # prob = multiplier.Multiplier(16, 6, 1)
+    # prob = multiplier.Multiplier(32, 6, 2)
+    # prob = multiplier.Multiplier(64, 6, 3)
+    # prob = multiplier.Multiplier(128, 6, 3)
+    # prob = multiplier.Multiplier(256, 6, 5)
 
-    # prob = problem.popcounter.Popcounter(32, 2, 6)
-    # prob = problem.popcounter.Popcounter(1024, 6, 4)
-    # prob = problem.popcounter.Popcounter(2048, 6, 5)
-    # prob = problem.popcounter.Popcounter(4096, 6, 6)
-    # prob = problem.popcounter.Popcounter(8192, 6, 6)
+    # prob = popcounter.Popcounter(32, 2, 6)
+    # prob = popcounter.Popcounter(1024, 6, 4)
+    # prob = popcounter.Popcounter(2048, 6, 5)
+    # prob = popcounter.Popcounter(4096, 6, 6)
+    # prob = popcounter.Popcounter(8192, 6, 6)
 
+    # prob = neuron.Neuron(14, 2, 2)
+    prob = rectangle.Rectangle(4, 4, 2, 1, gpclist)
 
-    # prob = problem.neuron.Neuron(14, 2, 2)
-    prob = problem.rectangle.Rectangle(128, 12, 2, 5, gpclist)
-
-    # prob = problem.neuron.Neuron(14, 2, 2, gpclist)
+    # prob = neuron.Neuron(14, 2, 2, gpclist)
 
     print(prob.get_dict())
     opt = Optimizer(prob.get_dict(), objective=None)
@@ -143,6 +153,7 @@ if __name__ == '__main__':
     opt = Optimizer(prob.get_dict(), objective='cost')
     opt.add_mip_start(sol)
     sol = opt.solve(120)
+    opt.end()
     comp = compressor.Compressor(prob.get_dict(), sol)
     print(json.dumps(comp.netlist))
     print('PASS' if comp.randomtest(1 << 10) else 'FAIL')
