@@ -533,6 +533,8 @@ endmodule
 - [Rowadder Generatior](https://github.com/ishiuralab/rowadders) (to be appeared...?)
 
 ## Related Publications
+- M. Noda and N. Ishiura: "Efficient FPGA Implementation of Compressor Trees Based on Generalized Parallel Counter Chains," in Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2025), PS-45, (Oct. 2025). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2025-10d.pdf)
+- M. Noda, R. Kanai, and N. Ishiura: "Efficitent FPGA Implementation of Multiple-Input Adders Using Generalized Parallel Counter (6,0,7;5)", in Proc. the Workshop on Synthesis And System Integration of Mixed Information Technologies (SASIMI 2025), pp. 179-184 (Oct. 2025). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2025-10c.pdf)
 - 野田麦, 石浦菜岐佐: ''一般化並列カウンタのチェーン状接続によるコンプレッサツリーの効率的FPGA実装'' *電子情報通信学会技術研究報告* VLD2024-84, pp. 47-52 (Jan. 2025). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/T2025-01a.pdf)
 - M.Noda and N.Ishiura: ''Enumeration of Generalized Parallel Counters for Multi-Input Adder Synthesis for FPGAs,'' in *Proc. Asia and Pacific Conference on Circuits and Systems (APCCAS 2024)*, pp. 64-68 (Nov. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/C2024-11.pdf) [IEEE Xplore](https://ieeexplore.ieee.org/document/10808619)
 - 野田麦, 叶亮, 石浦菜岐佐: ''一般化並列カウンタ (6,0,7;5) による多入力加算器の効率的 FPGA 実装,'' *電子情報通信学会ソサイエティ大会*, A-6-2 (Sept. 2024). [pdf](https://cs.kwansei.ac.jp/~ishiura/publications/M2024-09b.pdf)
